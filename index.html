@@ -342,7 +342,47 @@
       border: 1px solid rgba(168,201,127,0.4);
       border-radius: 20px;
     }
+
+    /* Rating Stars UI */
+    .sh-stars {
+      display: flex;
+      gap: 4px;
+      margin-top: 5px;
+    }
+    .star-btn {
+      font-size: 14px;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.15s, transform 0.1s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .star-btn.active {
+      color: #ffb74d; /* Golden orange */
+    }
+    .star-btn:hover {
+      transform: scale(1.2);
+    }
+    .btn-export {
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: background 0.2s;
+    }
+    .btn-export:hover {
+      background: var(--green-dk);
+    }
   </style>
+  <script src="ratings.js"></script>
 </head>
 <body>
 
@@ -371,6 +411,7 @@
     <div class="welcome-emoji">🌿</div>
     <h2>Bienvenida</h2>
     <p>Sara, aqui puedes ver los diferentes diseños, podemos crear mas o combinar varios, si me dices cuales te gustan mas vamos descartando y ajustando para que elijas uno con el que te sientes comoda</p>
+    <p style="margin-top: 10px; max-width: 320px; text-align: center;"><strong>Puedes compartir este link con quien quieras y pedir que te voten los que mas gustan, recopilaremos y ordenamos por los mas votados</strong></p>
     <button class="welcome-cta" onclick="openSheet()">
       📋 Ver diseños
     </button>
@@ -391,8 +432,15 @@
 <div class="sheet" id="sheet">
   <div class="sheet-handle"></div>
   <div class="sheet-header">
-    <h2>Selecciona un diseño</h2>
-    <p>12 propuestas HTML · 2 cartas PDF originales</p>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+      <div>
+        <h2>Selecciona un diseño</h2>
+        <p>12 propuestas HTML · 2 cartas PDF originales</p>
+      </div>
+      <button class="btn-export" onclick="exportRatings()" style="flex-shrink: 0; margin-left: 10px;">
+        💾 Exportar notas
+      </button>
+    </div>
   </div>
   <div class="sheet-body">
 
