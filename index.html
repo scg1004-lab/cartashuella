@@ -1248,7 +1248,7 @@
     }
 
     // ── CLOUD DATABASE SYNC ──
-    const DB_ENDPOINT = "https://kvdb.io/HuellaVeganaVotes2026/ratings";
+    const DB_ENDPOINT = "https://kvdb.io/89Brwmm4YdB1bgmqRyapwz/ratings";
 
     async function loadRatingsFromDB() {
       try {
@@ -1535,6 +1535,12 @@ const initialRatings = ${JSON.stringify(ratings, null, 2)};
 
     /* ── DASHBOARD LOGIC ── */
     async function openDashboard() {
+      const pin = prompt("Introduce el PIN de acceso al Dashboard:");
+      if (pin === null) return; // Cancelado por el usuario
+      if (pin !== "6505") {
+        alert("PIN de seguridad incorrecto. Acceso denegado.");
+        return;
+      }
       document.getElementById('dashboardModal').classList.add('open');
       document.body.style.cursor = 'wait';
       ratings = await loadRatingsFromDB();
