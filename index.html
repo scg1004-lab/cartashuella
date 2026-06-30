@@ -343,26 +343,76 @@
       border-radius: 20px;
     }
 
-    /* Rating Stars UI */
-    .sh-stars {
+    /* Rating Stars UI (Pill container and dynamic color coding) */
+    .sh-stars-container {
       display: flex;
-      gap: 4px;
-      margin-top: 5px;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
     }
+    
+    .sh-stars-pill {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    
+    .sh-stars-pill:hover {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    
     .star-btn {
-      font-size: 14px;
-      color: #ccc;
+      font-size: 20px; /* Larger tap targets */
+      color: #d8d8d8;
       cursor: pointer;
       transition: color 0.15s, transform 0.1s;
       user-select: none;
       -webkit-user-select: none;
+      display: inline-block;
+      padding: 2px;
     }
+    
     .star-btn.active {
-      color: #ffb74d; /* Golden orange */
+      color: #ffb74d; /* Default active gold */
     }
-    .star-btn:hover {
+    
+    .star-btn.hover-active {
+      color: #ffd54f !important; /* Brighter yellow gold during hover preview */
       transform: scale(1.2);
     }
+    
+    /* Dynamically colored pills based on rating value */
+    .sh-stars-pill[data-rating="5"] { background: rgba(76, 175, 80, 0.06); border-color: rgba(76, 175, 80, 0.2); }
+    .sh-stars-pill[data-rating="4"] { background: rgba(76, 175, 80, 0.04); border-color: rgba(76, 175, 80, 0.15); }
+    .sh-stars-pill[data-rating="3"] { background: rgba(188, 160, 116, 0.08); border-color: rgba(188, 160, 116, 0.2); }
+    .sh-stars-pill[data-rating="2"] { background: rgba(204, 92, 92, 0.06); border-color: rgba(204, 92, 92, 0.2); }
+    .sh-stars-pill[data-rating="1"] { background: rgba(204, 92, 92, 0.08); border-color: rgba(204, 92, 92, 0.25); }
+    
+    .sh-stars-pill[data-rating="5"] .star-btn.active { color: #2e7d32; }
+    .sh-stars-pill[data-rating="4"] .star-btn.active { color: #4caf50; }
+    .sh-stars-pill[data-rating="3"] .star-btn.active { color: #c29a67; }
+    .sh-stars-pill[data-rating="2"] .star-btn.active { color: #d32f2f; }
+    .sh-stars-pill[data-rating="1"] .star-btn.active { color: #c62828; }
+    
+    .sh-rating-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    
+    .sh-rating-label[data-rating="5"] { color: #2e7d32; }
+    .sh-rating-label[data-rating="4"] { color: #4caf50; }
+    .sh-rating-label[data-rating="3"] { color: #c29a67; }
+    .sh-rating-label[data-rating="2"] { color: #d32f2f; }
+    .sh-rating-label[data-rating="1"] { color: #c62828; }
     .btn-export {
       font-size: 11px;
       font-weight: 700;
@@ -981,6 +1031,15 @@
   let currentSrc = null;
   let ratings = {};
 
+  const ratingLabels = {
+    5: "😍 ¡Me encanta!",
+    4: "👍 Muy buena",
+    3: "🤔 Aceptable",
+    2: "👎 Regular",
+    1: "❌ Descartar",
+    0: "☆ Sin votar"
+  };
+
   function initRatings() {
     // Load from localStorage or fallback to ratings.js (initialRatings)
     let stored = localStorage.getItem('huella_vegana_ratings');
@@ -999,21 +1058,64 @@
       
       // Create stars container
       const starsContainer = document.createElement('div');
-      starsContainer.className = 'sh-stars';
+      starsContainer.className = 'sh-stars-container';
       starsContainer.onclick = function(e) { e.stopPropagation(); }; // Prevent selectItem
+      
+      // Create pill
+      const pill = document.createElement('div');
+      pill.className = 'sh-stars-pill';
+      pill.dataset.rating = rating;
+      
+      // Create label
+      const label = document.createElement('span');
+      label.className = 'sh-rating-label';
+      label.dataset.rating = rating;
+      label.textContent = ratingLabels[rating];
+      label.style.cursor = 'pointer';
+      label.title = 'Haz clic para borrar tu voto';
+      label.onclick = function(e) {
+        e.stopPropagation();
+        setRating(src, 0); // Reset rating to 0
+      };
       
       for (let i = 1; i <= 5; i++) {
         const star = document.createElement('span');
         star.className = 'star-btn' + (i <= rating ? ' active' : '');
         star.innerHTML = '★';
         star.dataset.value = i;
+        
         star.onclick = function(e) {
           e.stopPropagation();
           setRating(src, i);
         };
-        starsContainer.appendChild(star);
+        
+        star.onmouseenter = function() {
+          const val = parseInt(this.dataset.value);
+          const siblingStars = pill.querySelectorAll('.star-btn');
+          siblingStars.forEach((s, idx) => {
+            if (idx < val) {
+              s.classList.add('hover-active');
+            } else {
+              s.classList.remove('hover-active');
+            }
+          });
+          label.textContent = ratingLabels[val];
+          label.dataset.rating = val;
+        };
+        
+        star.onmouseleave = function() {
+          const siblingStars = pill.querySelectorAll('.star-btn');
+          siblingStars.forEach(s => s.classList.remove('hover-active'));
+          const currentRating = ratings[src] || 0;
+          label.textContent = ratingLabels[currentRating];
+          label.dataset.rating = currentRating;
+        };
+        
+        pill.appendChild(star);
       }
       
+      starsContainer.appendChild(pill);
+      starsContainer.appendChild(label);
       info.appendChild(starsContainer);
     });
     
@@ -1029,14 +1131,26 @@
     
     // Re-render stars for this item
     document.querySelectorAll(`.sh-item[data-src="${src}"]`).forEach(item => {
-      const stars = item.querySelectorAll('.star-btn');
-      stars.forEach((star, idx) => {
-        if (idx < val) {
-          star.classList.add('active');
-        } else {
-          star.classList.remove('active');
+      const container = item.querySelector('.sh-stars-container');
+      if (container) {
+        const pill = container.querySelector('.sh-stars-pill');
+        const label = container.querySelector('.sh-rating-label');
+        
+        if (pill) pill.dataset.rating = val;
+        if (label) {
+          label.dataset.rating = val;
+          label.textContent = ratingLabels[val];
         }
-      });
+        
+        const stars = container.querySelectorAll('.star-btn');
+        stars.forEach((star, idx) => {
+          if (idx < val) {
+            star.classList.add('active');
+          } else {
+            star.classList.remove('active');
+          }
+        });
+      }
     });
     
     // Sort items list
