@@ -381,6 +381,306 @@
     .btn-export:hover {
       background: var(--green-dk);
     }
+
+    .btn-dashboard {
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .btn-dashboard:hover {
+      background: #c29a67;
+      transform: scale(1.05);
+    }
+
+    /* Switch toggle */
+    .switch-container {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+    .switch-container input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #ccc;
+      transition: .2s;
+      border-radius: 20px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--green);
+    }
+    input:checked + .slider:before {
+      transform: translateX(16px);
+    }
+    
+    /* Hide items */
+    .sh-item.discarded-hidden {
+      display: none !important;
+    }
+
+    /* ── DASHBOARD MODAL ── */
+    .db-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 18, 15, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .db-modal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .db-modal-content {
+      background: #ffffff;
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+      overflow: hidden;
+      border: 1px solid var(--green-lt);
+      animation: modalSlide 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes modalSlide {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .db-modal-header {
+      padding: 20px 24px;
+      background: var(--green-dk);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .db-modal-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+    }
+    
+    .db-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .db-close-btn:hover { opacity: 1; }
+    
+    .db-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: #fafbfa;
+    }
+    
+    /* Summary Grid */
+    .db-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .db-summary-grid { grid-template-columns: 1fr; }
+    }
+    
+    .db-summary-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid #eee;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    
+    .card-winners { border-top: 4px solid var(--green); }
+    .card-neutrals { border-top: 4px solid var(--accent); }
+    .card-discarded { border-top: 4px solid #cc5c5c; }
+    
+    .db-summary-card h3 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    
+    .db-count {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 4px 0;
+      line-height: 1;
+    }
+    .card-winners .db-count { color: var(--green); }
+    .card-neutrals .db-count { color: #c29a67; }
+    .card-discarded .db-count { color: #cc5c5c; }
+    
+    .db-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    
+    /* Sections Grid */
+    .db-sections-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .db-sections-grid { grid-template-columns: 1fr; }
+    }
+    
+    .db-ranking-section, .db-status-section {
+      background: #ffffff;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    
+    .db-ranking-section h3, .db-status-section h3 {
+      font-size: 15px;
+      color: var(--green-dk);
+      margin-bottom: 16px;
+      font-weight: 700;
+      text-align: left;
+    }
+    
+    .db-ranking-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    
+    /* Progress bar item */
+    .db-progress-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .db-progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .db-progress-bg {
+      height: 8px;
+      background: #f0f0f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .db-progress-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+    .bar-gold { background: #ffb74d; }
+    
+    /* Status columns */
+    .db-status-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 480px) {
+      .db-status-section { grid-template-columns: 1fr; }
+    }
+    
+    .db-status-column h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--green-dk);
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+    
+    .db-status-column:last-child h4 {
+      color: #cc5c5c;
+    }
+    
+    .db-status-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+      padding-left: 0;
+    }
+    
+    .db-status-list li {
+      font-size: 11px;
+      padding: 6px 10px;
+      background: #e8f5ec;
+      color: #2b5938;
+      border-radius: 6px;
+      font-weight: 500;
+      border-left: 3px solid var(--green);
+    }
+    
+    .db-status-list.list-red li {
+      background: #fdf0f0;
+      color: #cc5c5c;
+      border-left: 3px solid #cc5c5c;
+    }
   </style>
   <script src="ratings.js"></script>
 </head>
@@ -395,7 +695,10 @@
       <p>Portal de diseños de carta</p>
     </div>
   </div>
-  <span class="badge">Vista privada</span>
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <button class="btn-dashboard" onclick="openDashboard()">📊 Dashboard</button>
+    <span class="badge">Vista privada</span>
+  </div>
 </header>
 
 <!-- CURRENT SELECTION BAR -->
@@ -440,6 +743,13 @@
       <button class="btn-export" onclick="exportRatings()" style="flex-shrink: 0; margin-left: 10px;">
         💾 Exportar notas
       </button>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; border-top: 1px solid #eee; padding-top: 10px; width: 100%;">
+      <span style="font-size: 11px; color: var(--muted); font-weight: 600;">Ocultar diseños descartados (0-2 ★)</span>
+      <label class="switch-container">
+        <input type="checkbox" id="hideDiscardedToggle" onchange="toggleHideDiscarded(this.checked)">
+        <span class="slider"></span>
+      </label>
     </div>
   </div>
   <div class="sheet-body">
@@ -616,6 +926,57 @@
   </div>
 </div>
 
+<!-- DASHBOARD MODAL -->
+<div class="db-modal" id="dashboardModal">
+  <div class="db-modal-content">
+    <div class="db-modal-header">
+      <h2>📊 Panel de Votos & Descarte</h2>
+      <button class="db-close-btn" onclick="closeDashboard()">✕</button>
+    </div>
+    <div class="db-modal-body">
+      
+      <!-- Summary boxes -->
+      <div class="db-summary-grid">
+        <div class="db-summary-card card-winners">
+          <h3>🏆 Favoritas / Ganadoras</h3>
+          <p class="db-count" id="count-winners">0</p>
+          <p class="db-note">Diseños con 4 o 5 estrellas</p>
+        </div>
+        <div class="db-summary-card card-neutrals">
+          <h3>⚖️ En Evaluación</h3>
+          <p class="db-count" id="count-neutrals">0</p>
+          <p class="db-note">Diseños con 3 estrellas</p>
+        </div>
+        <div class="db-summary-card card-discarded">
+          <h3>🗑️ Descartadas</h3>
+          <p class="db-count" id="count-discarded">0</p>
+          <p class="db-note">Diseños con 1 o 2 estrellas</p>
+        </div>
+      </div>
+      
+      <!-- Chart and columns -->
+      <div class="db-sections-grid">
+        <div class="db-ranking-section">
+          <h3>Clasificación por Votos</h3>
+          <div class="db-ranking-list" id="dbRankingList"></div>
+        </div>
+        
+        <div class="db-status-section">
+          <div class="db-status-column">
+            <h4>🏆 Ganando (4-5 ★)</h4>
+            <ul id="list-db-winners" class="db-status-list"></ul>
+          </div>
+          <div class="db-status-column">
+            <h4>🗑️ Descartar (0-2 ★)</h4>
+            <ul id="list-db-discarded" class="db-status-list list-red"></ul>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 <script>
   let currentSrc = null;
   let ratings = {};
@@ -658,6 +1019,8 @@
     
     // Initial sort
     sortMenuItems();
+    // Set initial filter state
+    updateDiscardedVisibility();
   }
 
   function setRating(src, val) {
@@ -678,6 +1041,8 @@
     
     // Sort items list
     sortMenuItems();
+    // Update filter visibility in case rating went low/high
+    updateDiscardedVisibility();
   }
 
   function sortMenuItems() {
@@ -690,7 +1055,7 @@
         const ratingB = ratings[srcB] || 0;
         
         if (ratingB !== ratingA) {
-          return ratingB - ratingA; // Descending order
+          return ratingB - ratingA; // Descending
         }
         
         // Secondary sort: alphabetical
@@ -758,7 +1123,113 @@ const initialRatings = ${JSON.stringify(ratings, null, 2)};
     closeSheet();
   }
 
-  // Initialize on DOM load
+  /* ── DASHBOARD LOGIC ── */
+  function openDashboard() {
+    renderDashboard();
+    document.getElementById('dashboardModal').classList.add('open');
+  }
+
+  function closeDashboard() {
+    document.getElementById('dashboardModal').classList.remove('open');
+  }
+
+  function renderDashboard() {
+    let countWinners = 0;
+    let countNeutrals = 0;
+    let countDiscarded = 0;
+    
+    const winnersList = document.getElementById('list-db-winners');
+    const discardedList = document.getElementById('list-db-discarded');
+    const rankingList = document.getElementById('dbRankingList');
+    
+    winnersList.innerHTML = '';
+    discardedList.innerHTML = '';
+    rankingList.innerHTML = '';
+    
+    // Group all items from DOM to rank them
+    const allItems = Array.from(document.querySelectorAll('.sh-item'));
+    
+    // Sort items by rating
+    const sorted = [...allItems].sort((a, b) => {
+      const srcA = a.dataset.src;
+      const srcB = b.dataset.src;
+      const rA = ratings[srcA] || 0;
+      const rB = ratings[srcB] || 0;
+      return rB - rA;
+    });
+    
+    sorted.forEach(item => {
+      const src = item.dataset.src;
+      const name = item.dataset.name;
+      const rating = ratings[src] || 0;
+      const percentage = (rating / 5) * 100;
+      
+      // Categorize
+      if (rating >= 4) {
+        countWinners++;
+        const li = document.createElement('li');
+        li.textContent = `${name} (${rating} ★)`;
+        winnersList.appendChild(li);
+      } else if (rating === 3) {
+        countNeutrals++;
+      } else {
+        countDiscarded++;
+        const li = document.createElement('li');
+        li.textContent = `${name} (${rating} ★)`;
+        discardedList.appendChild(li);
+      }
+      
+      // Add to progress bar ranking
+      const pItem = document.createElement('div');
+      pItem.className = 'db-progress-item';
+      
+      const label = document.createElement('div');
+      label.className = 'db-progress-label';
+      
+      let starStr = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+      label.innerHTML = `<span>${name}</span> <span style="color: #ffb74d;">${starStr}</span>`;
+      
+      const pBg = document.createElement('div');
+      pBg.className = 'db-progress-bg';
+      
+      const pBar = document.createElement('div');
+      pBar.className = 'db-progress-bar bar-gold';
+      pBar.style.width = `${percentage}%`;
+      
+      pBg.appendChild(pBar);
+      pItem.appendChild(label);
+      pItem.appendChild(pBg);
+      rankingList.appendChild(pItem);
+    });
+    
+    // Update count labels
+    document.getElementById('count-winners').textContent = countWinners;
+    document.getElementById('count-neutrals').textContent = countNeutrals;
+    document.getElementById('count-discarded').textContent = countDiscarded;
+  }
+
+  function toggleHideDiscarded(checked) {
+    localStorage.setItem('huella_vegana_hide_discarded', checked ? 'true' : 'false');
+    updateDiscardedVisibility();
+  }
+
+  function updateDiscardedVisibility() {
+    const hide = localStorage.getItem('huella_vegana_hide_discarded') === 'true';
+    const toggleInput = document.getElementById('hideDiscardedToggle');
+    if (toggleInput) toggleInput.checked = hide;
+    
+    document.querySelectorAll('.sh-item').forEach(item => {
+      const src = item.dataset.src;
+      const rating = ratings[src] || 0;
+      if (hide && rating <= 2) {
+        item.classList.add('discarded-hidden');
+      } else {
+        item.classList.remove('discarded-hidden');
+      }
+    });
+  }
+
+  // Initialize on load
   document.addEventListener('DOMContentLoaded', initRatings);
 </script>
 
