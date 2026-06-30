@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>La Huella Vegana — Cartas</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --green:    #3d7a4f;
-      --green-dk: #2b5938;
-      --green-lt: #e8f5ec;
-      --accent:   #a8c97f;
-      --text:     #1a2e1f;
-      --muted:    #6b8f74;
-      --white:    #ffffff;
-      --header-h: 52px;
-      --fab-h:    72px;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html, body {
+    :root {
+      --green: #3d7a4f;
+      --green-dk: #2b5938;
+      --green-lt: #e8f5ec;
+      --accent: #a8c97f;
+      --text: #1a2e1f;
+      --muted: #6b8f74;
+      --white: #ffffff;
+      --header-h: 52px;
+      --fab-h: 72px;
+    }
+
+    html,
+    body {
       height: 100%;
       overflow: hidden;
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -30,7 +38,9 @@
     /* ── HEADER ── */
     header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: var(--header-h);
       background: var(--green-dk);
       display: flex;
@@ -38,7 +48,7 @@
       justify-content: space-between;
       padding: 0 16px;
       z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
     }
 
     .header-left {
@@ -47,7 +57,9 @@
       gap: 10px;
     }
 
-    .logo { font-size: 20px; }
+    .logo {
+      font-size: 20px;
+    }
 
     .header-text h1 {
       font-size: 15px;
@@ -63,8 +75,8 @@
 
     .badge {
       font-size: 10px;
-      background: rgba(168,201,127,0.15);
-      border: 1px solid rgba(168,201,127,0.4);
+      background: rgba(168, 201, 127, 0.15);
+      border: 1px solid rgba(168, 201, 127, 0.4);
       color: var(--accent);
       padding: 3px 8px;
       border-radius: 20px;
@@ -74,7 +86,8 @@
     .iframe-wrapper {
       position: fixed;
       top: var(--header-h);
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       bottom: 0;
       background: #f5f5f5;
     }
@@ -101,7 +114,9 @@
       z-index: 1;
     }
 
-    .welcome-emoji { font-size: 60px; }
+    .welcome-emoji {
+      font-size: 60px;
+    }
 
     .welcome h2 {
       font-size: 20px;
@@ -129,7 +144,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 16px rgba(61,122,79,0.35);
+      box-shadow: 0 4px 16px rgba(61, 122, 79, 0.35);
     }
 
     /* ── FAB ── */
@@ -149,19 +164,21 @@
       display: none;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
       z-index: 99;
       white-space: nowrap;
       letter-spacing: 0.01em;
     }
 
-    .fab.visible { display: flex; }
+    .fab.visible {
+      display: flex;
+    }
 
     /* ── BOTTOM SHEET OVERLAY ── */
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0, 0, 0, 0.55);
       z-index: 200;
       opacity: 0;
       pointer-events: none;
@@ -176,7 +193,9 @@
     /* ── BOTTOM SHEET ── */
     .sheet {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       background: var(--white);
       border-radius: 20px 20px 0 0;
       z-index: 201;
@@ -185,7 +204,7 @@
       max-height: 85vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.25);
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.25);
     }
 
     .sheet.open {
@@ -248,7 +267,9 @@
       transition: background 0.1s;
     }
 
-    .sh-item:active { background: var(--green-lt); }
+    .sh-item:active {
+      background: var(--green-lt);
+    }
 
     .sh-item.active {
       background: var(--green-lt);
@@ -270,7 +291,9 @@
       background: var(--green);
     }
 
-    .sh-info { flex: 1; }
+    .sh-info {
+      flex: 1;
+    }
 
     .sh-name {
       font-size: 14px;
@@ -279,7 +302,9 @@
       line-height: 1.3;
     }
 
-    .sh-item.active .sh-name { color: var(--green-dk); }
+    .sh-item.active .sh-name {
+      color: var(--green-dk);
+    }
 
     .sh-desc {
       font-size: 11px;
@@ -295,8 +320,15 @@
       flex-shrink: 0;
     }
 
-    .tag-html { background: #e3f2fd; color: #1565c0; }
-    .tag-pdf  { background: #fce4ec; color: #c62828; }
+    .tag-html {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .tag-pdf {
+      background: #fce4ec;
+      color: #c62828;
+    }
 
     /* active check */
     .sh-check {
@@ -306,17 +338,22 @@
       opacity: 0;
     }
 
-    .sh-item.active .sh-check { opacity: 1; }
+    .sh-item.active .sh-check {
+      opacity: 1;
+    }
 
     /* scrollbar */
-    .sheet-body::-webkit-scrollbar { display: none; }
+    .sheet-body::-webkit-scrollbar {
+      display: none;
+    }
 
     /* current label bar */
     .current-bar {
       position: fixed;
       top: var(--header-h);
-      left: 0; right: 0;
-      background: rgba(43,89,56,0.95);
+      left: 0;
+      right: 0;
+      background: rgba(43, 89, 56, 0.95);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       padding: 8px 16px;
@@ -326,7 +363,9 @@
       z-index: 50;
     }
 
-    .current-bar.visible { display: flex; }
+    .current-bar.visible {
+      display: flex;
+    }
 
     .current-name {
       font-size: 12px;
@@ -339,7 +378,7 @@
       color: var(--accent);
       text-decoration: none;
       padding: 4px 10px;
-      border: 1px solid rgba(168,201,127,0.4);
+      border: 1px solid rgba(168, 201, 127, 0.4);
       border-radius: 20px;
     }
 
@@ -351,7 +390,7 @@
       margin-top: 8px;
       flex-wrap: wrap;
     }
-    
+
     .sh-stars-pill {
       background: rgba(0, 0, 0, 0.03);
       border: 1px solid rgba(0, 0, 0, 0.06);
@@ -362,14 +401,15 @@
       gap: 4px;
       transition: background-color 0.2s, border-color 0.2s;
     }
-    
+
     .sh-stars-pill:hover {
       background: rgba(0, 0, 0, 0.06);
       border-color: rgba(0, 0, 0, 0.1);
     }
-    
+
     .star-btn {
-      font-size: 20px; /* Larger tap targets */
+      font-size: 20px;
+      /* Larger tap targets */
       color: #d8d8d8;
       cursor: pointer;
       transition: color 0.15s, transform 0.1s;
@@ -378,41 +418,91 @@
       display: inline-block;
       padding: 2px;
     }
-    
+
     .star-btn.active {
-      color: #ffb74d; /* Default active gold */
+      color: #ffb74d;
+      /* Default active gold */
     }
-    
+
     .star-btn.hover-active {
-      color: #ffd54f !important; /* Brighter yellow gold during hover preview */
+      color: #ffd54f !important;
+      /* Brighter yellow gold during hover preview */
       transform: scale(1.2);
     }
-    
+
     /* Dynamically colored pills based on rating value */
-    .sh-stars-pill[data-rating="5"] { background: rgba(76, 175, 80, 0.06); border-color: rgba(76, 175, 80, 0.2); }
-    .sh-stars-pill[data-rating="4"] { background: rgba(76, 175, 80, 0.04); border-color: rgba(76, 175, 80, 0.15); }
-    .sh-stars-pill[data-rating="3"] { background: rgba(188, 160, 116, 0.08); border-color: rgba(188, 160, 116, 0.2); }
-    .sh-stars-pill[data-rating="2"] { background: rgba(204, 92, 92, 0.06); border-color: rgba(204, 92, 92, 0.2); }
-    .sh-stars-pill[data-rating="1"] { background: rgba(204, 92, 92, 0.08); border-color: rgba(204, 92, 92, 0.25); }
-    
-    .sh-stars-pill[data-rating="5"] .star-btn.active { color: #2e7d32; }
-    .sh-stars-pill[data-rating="4"] .star-btn.active { color: #4caf50; }
-    .sh-stars-pill[data-rating="3"] .star-btn.active { color: #c29a67; }
-    .sh-stars-pill[data-rating="2"] .star-btn.active { color: #d32f2f; }
-    .sh-stars-pill[data-rating="1"] .star-btn.active { color: #c62828; }
-    
+    .sh-stars-pill[data-rating="5"] {
+      background: rgba(76, 175, 80, 0.06);
+      border-color: rgba(76, 175, 80, 0.2);
+    }
+
+    .sh-stars-pill[data-rating="4"] {
+      background: rgba(76, 175, 80, 0.04);
+      border-color: rgba(76, 175, 80, 0.15);
+    }
+
+    .sh-stars-pill[data-rating="3"] {
+      background: rgba(188, 160, 116, 0.08);
+      border-color: rgba(188, 160, 116, 0.2);
+    }
+
+    .sh-stars-pill[data-rating="2"] {
+      background: rgba(204, 92, 92, 0.06);
+      border-color: rgba(204, 92, 92, 0.2);
+    }
+
+    .sh-stars-pill[data-rating="1"] {
+      background: rgba(204, 92, 92, 0.08);
+      border-color: rgba(204, 92, 92, 0.25);
+    }
+
+    .sh-stars-pill[data-rating="5"] .star-btn.active {
+      color: #2e7d32;
+    }
+
+    .sh-stars-pill[data-rating="4"] .star-btn.active {
+      color: #4caf50;
+    }
+
+    .sh-stars-pill[data-rating="3"] .star-btn.active {
+      color: #c29a67;
+    }
+
+    .sh-stars-pill[data-rating="2"] .star-btn.active {
+      color: #d32f2f;
+    }
+
+    .sh-stars-pill[data-rating="1"] .star-btn.active {
+      color: #c62828;
+    }
+
     .sh-rating-label {
       font-size: 11px;
       font-weight: 700;
       color: var(--muted);
       transition: color 0.2s;
     }
-    
-    .sh-rating-label[data-rating="5"] { color: #2e7d32; }
-    .sh-rating-label[data-rating="4"] { color: #4caf50; }
-    .sh-rating-label[data-rating="3"] { color: #c29a67; }
-    .sh-rating-label[data-rating="2"] { color: #d32f2f; }
-    .sh-rating-label[data-rating="1"] { color: #c62828; }
+
+    .sh-rating-label[data-rating="5"] {
+      color: #2e7d32;
+    }
+
+    .sh-rating-label[data-rating="4"] {
+      color: #4caf50;
+    }
+
+    .sh-rating-label[data-rating="3"] {
+      color: #c29a67;
+    }
+
+    .sh-rating-label[data-rating="2"] {
+      color: #d32f2f;
+    }
+
+    .sh-rating-label[data-rating="1"] {
+      color: #c62828;
+    }
+
     .btn-export {
       font-size: 11px;
       font-weight: 700;
@@ -425,9 +515,10 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
       transition: background 0.2s;
     }
+
     .btn-export:hover {
       background: var(--green-dk);
     }
@@ -444,9 +535,10 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       transition: transform 0.2s, background-color 0.2s;
     }
+
     .btn-dashboard:hover {
       background: #c29a67;
       transform: scale(1.05);
@@ -459,11 +551,13 @@
       width: 36px;
       height: 20px;
     }
+
     .switch-container input {
       opacity: 0;
       width: 0;
       height: 0;
     }
+
     .slider {
       position: absolute;
       cursor: pointer;
@@ -472,6 +566,7 @@
       transition: .2s;
       border-radius: 20px;
     }
+
     .slider:before {
       position: absolute;
       content: "";
@@ -483,13 +578,15 @@
       transition: .2s;
       border-radius: 50%;
     }
-    input:checked + .slider {
+
+    input:checked+.slider {
       background-color: var(--green);
     }
-    input:checked + .slider:before {
+
+    input:checked+.slider:before {
       transform: translateX(16px);
     }
-    
+
     /* Hide items */
     .sh-item.discarded-hidden {
       display: none !important;
@@ -511,12 +608,12 @@
       justify-content: center;
       padding: 20px;
     }
-    
+
     .db-modal.open {
       opacity: 1;
       pointer-events: all;
     }
-    
+
     .db-modal-content {
       background: #ffffff;
       width: 100%;
@@ -525,17 +622,24 @@
       border-radius: 20px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
       overflow: hidden;
       border: 1px solid var(--green-lt);
       animation: modalSlide 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     @keyframes modalSlide {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
-    
+
     .db-modal-header {
       padding: 20px 24px;
       background: var(--green-dk);
@@ -544,7 +648,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    
+
     .db-modal-header h2 {
       font-size: 18px;
       font-weight: 700;
@@ -554,7 +658,7 @@
       gap: 8px;
       color: var(--white);
     }
-    
+
     .db-close-btn {
       background: transparent;
       border: none;
@@ -564,8 +668,11 @@
       opacity: 0.8;
       transition: opacity 0.2s;
     }
-    .db-close-btn:hover { opacity: 1; }
-    
+
+    .db-close-btn:hover {
+      opacity: 1;
+    }
+
     .db-modal-body {
       padding: 24px;
       overflow-y: auto;
@@ -575,30 +682,41 @@
       gap: 24px;
       background: #fafbfa;
     }
-    
+
     /* Summary Grid */
     .db-summary-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
+
     @media (max-width: 600px) {
-      .db-summary-grid { grid-template-columns: 1fr; }
+      .db-summary-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    
+
     .db-summary-card {
       background: #ffffff;
       border-radius: 16px;
       padding: 18px;
       text-align: center;
       border: 1px solid #eee;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     }
-    
-    .card-winners { border-top: 4px solid var(--green); }
-    .card-neutrals { border-top: 4px solid var(--accent); }
-    .card-discarded { border-top: 4px solid #cc5c5c; }
-    
+
+    .card-winners {
+      border-top: 4px solid var(--green);
+    }
+
+    .card-neutrals {
+      border-top: 4px solid var(--accent);
+    }
+
+    .card-discarded {
+      border-top: 4px solid #cc5c5c;
+    }
+
     .db-summary-card h3 {
       font-size: 13px;
       text-transform: uppercase;
@@ -606,92 +724,112 @@
       color: var(--muted);
       margin-bottom: 6px;
     }
-    
+
     .db-count {
       font-size: 32px;
       font-weight: 800;
       margin: 4px 0;
       line-height: 1;
     }
-    .card-winners .db-count { color: var(--green); }
-    .card-neutrals .db-count { color: #c29a67; }
-    .card-discarded .db-count { color: #cc5c5c; }
-    
+
+    .card-winners .db-count {
+      color: var(--green);
+    }
+
+    .card-neutrals .db-count {
+      color: #c29a67;
+    }
+
+    .card-discarded .db-count {
+      color: #cc5c5c;
+    }
+
     .db-note {
       font-size: 11px;
       color: var(--muted);
     }
-    
+
     /* Sections Grid */
     .db-sections-grid {
       display: grid;
       grid-template-columns: 1.2fr 1fr;
       gap: 24px;
     }
+
     @media (max-width: 768px) {
-      .db-sections-grid { grid-template-columns: 1fr; }
+      .db-sections-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    
-    .db-ranking-section, .db-status-section {
+
+    .db-ranking-section,
+    .db-status-section {
       background: #ffffff;
       border: 1px solid #eee;
       border-radius: 16px;
       padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
     }
-    
-    .db-ranking-section h3, .db-status-section h3 {
+
+    .db-ranking-section h3,
+    .db-status-section h3 {
       font-size: 15px;
       color: var(--green-dk);
       margin-bottom: 16px;
       font-weight: 700;
       text-align: left;
     }
-    
+
     .db-ranking-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
-    
+
     /* Progress bar item */
     .db-progress-item {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-    
+
     .db-progress-label {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
       font-weight: 600;
     }
-    
+
     .db-progress-bg {
       height: 8px;
       background: #f0f0f0;
       border-radius: 4px;
       overflow: hidden;
     }
-    
+
     .db-progress-bar {
       height: 100%;
       border-radius: 4px;
       transition: width 0.4s ease;
     }
-    .bar-gold { background: #ffb74d; }
-    
+
+    .bar-gold {
+      background: #ffb74d;
+    }
+
     /* Status columns */
     .db-status-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
+
     @media (max-width: 480px) {
-      .db-status-section { grid-template-columns: 1fr; }
+      .db-status-section {
+        grid-template-columns: 1fr;
+      }
     }
-    
+
     .db-status-column h4 {
       font-size: 12px;
       text-transform: uppercase;
@@ -702,11 +840,11 @@
       border-bottom: 1px solid #eee;
       text-align: left;
     }
-    
+
     .db-status-column:last-child h4 {
       color: #cc5c5c;
     }
-    
+
     .db-status-list {
       list-style: none;
       display: flex;
@@ -715,7 +853,7 @@
       text-align: left;
       padding-left: 0;
     }
-    
+
     .db-status-list li {
       font-size: 11px;
       padding: 6px 10px;
@@ -725,7 +863,7 @@
       font-weight: 500;
       border-left: 3px solid var(--green);
     }
-    
+
     .db-status-list.list-red li {
       background: #fdf0f0;
       color: #cc5c5c;
@@ -734,618 +872,855 @@
   </style>
   <script src="ratings.js"></script>
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-left">
-    <span class="logo">🌿</span>
-    <div class="header-text">
-      <h1>La Huella Vegana</h1>
-      <p>Portal de diseños de carta</p>
-    </div>
-  </div>
-  <div style="display: flex; align-items: center; gap: 12px;">
-    <button class="btn-dashboard" onclick="openDashboard()">📊 Dashboard</button>
-    <span class="badge">Vista privada</span>
-  </div>
-</header>
-
-<!-- CURRENT SELECTION BAR -->
-<div class="current-bar" id="currentBar">
-  <span class="current-name" id="currentName"></span>
-  <a class="btn-newtab" id="btnNewTab" href="#" target="_blank">↗ Nueva pestaña</a>
-</div>
-
-<!-- IFRAME AREA -->
-<div class="iframe-wrapper">
-  <!-- WELCOME -->
-  <div class="welcome" id="welcome">
-    <div class="welcome-emoji">🌿</div>
-    <h2>Bienvenida</h2>
-    <p>Sara, aqui puedes ver los diferentes diseños, podemos crear mas o combinar varios, si me dices cuales te gustan mas vamos descartando y ajustando para que elijas uno con el que te sientes comoda</p>
-    <p style="margin-top: 10px; max-width: 320px; text-align: center;"><strong>Puedes compartir este link con quien quieras y pedir que te voten los que mas gustan, recopilaremos y ordenamos por los mas votados</strong></p>
-    <button class="welcome-cta" onclick="openSheet()">
-      📋 Ver diseños
-    </button>
-  </div>
-
-  <iframe id="mainFrame" src="" title="Carta" style="display:none;"></iframe>
-</div>
-
-<!-- FAB -->
-<button class="fab" id="fab" onclick="openSheet()">
-  📋 Cambiar carta
-</button>
-
-<!-- OVERLAY -->
-<div class="overlay" id="overlay" onclick="closeSheet()"></div>
-
-<!-- BOTTOM SHEET -->
-<div class="sheet" id="sheet">
-  <div class="sheet-handle"></div>
-  <div class="sheet-header">
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-      <div>
-        <h2>Selecciona un diseño</h2>
-        <p>12 propuestas HTML · 2 cartas PDF originales</p>
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <span class="logo">🌿</span>
+      <div class="header-text">
+        <h1>La Huella Vegana</h1>
+        <p>Portal de diseños de carta</p>
       </div>
-      <button class="btn-export" onclick="exportRatings()" style="flex-shrink: 0; margin-left: 10px;">
-        💾 Exportar notas
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button class="btn-dashboard" onclick="openDashboard()">📊 Dashboard</button>
+      <span class="badge">Vista privada</span>
+    </div>
+  </header>
+
+  <!-- CURRENT SELECTION BAR -->
+  <div class="current-bar" id="currentBar">
+    <span class="current-name" id="currentName"></span>
+    <a class="btn-newtab" id="btnNewTab" href="#" target="_blank">↗ Nueva pestaña</a>
+  </div>
+
+  <!-- IFRAME AREA -->
+  <div class="iframe-wrapper">
+    <!-- WELCOME -->
+    <div class="welcome" id="welcome">
+      <div class="welcome-emoji">🌿</div>
+      <h2>Bienvenida</h2>
+      <p>Sara, aqui puedes ver los diferentes diseños, podemos crear mas o combinar varios, ves votando gustan mas vamos
+        descartando y ajustando para que elijas uno con el que te sientes comoda</p>
+      <p style="margin-top: 10px; max-width: 320px; text-align: center;"><strong>Puedes compartir este link con quien
+          quieras y pedir que te voten los que mas gustan, recopilaremos y ordenamos por los mas votados</strong></p>
+      <button class="welcome-cta" onclick="openSheet()">
+        📋 Ver diseños
       </button>
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; border-top: 1px solid #eee; padding-top: 10px; width: 100%;">
-      <span style="font-size: 11px; color: var(--muted); font-weight: 600;">Ocultar diseños descartados (0-2 ★)</span>
-      <label class="switch-container">
-        <input type="checkbox" id="hideDiscardedToggle" onchange="toggleHideDiscarded(this.checked)">
-        <span class="slider"></span>
-      </label>
+
+    <iframe id="mainFrame" src="" title="Carta" style="display:none;"></iframe>
+  </div>
+
+  <!-- FAB -->
+  <button class="fab" id="fab" onclick="openSheet()">
+    📋 Cambiar carta
+  </button>
+
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay" onclick="closeSheet()"></div>
+
+  <!-- BOTTOM SHEET -->
+  <div class="sheet" id="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+        <div>
+          <h2>Selecciona un diseño</h2>
+          <p>12 propuestas HTML · 2 cartas PDF originales</p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-export" onclick="sharePortalLink()" style="flex-shrink: 0; background: var(--accent); color: var(--text);">
+            🔗 Compartir enlace
+          </button>
+          <button class="btn-export" onclick="exportRatings()" style="flex-shrink: 0;">
+            💾 Exportar notas
+          </button>
+        </div>
+      </div>
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; border-top: 1px solid #eee; padding-top: 10px; width: 100%;">
+        <span style="font-size: 11px; color: var(--muted); font-weight: 600;">Ocultar diseños descartados (0-2 ★)</span>
+        <label class="switch-container">
+          <input type="checkbox" id="hideDiscardedToggle" onchange="toggleHideDiscarded(this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="sheet-body">
+
+      <div class="sh-label" style="color: var(--accent); font-weight: 800; font-size: 11px;">Modelos de Alta Conversión
+        (Neuromarketing)</div>
+      <div class="sh-items-list" id="list-neuro">
+        <div class="sh-item" data-src="men_neuromarketing_precios.html" data-name="Neuromenú Persuasivo"
+          data-type="html" onclick="selectItem(this)">
+          <div class="sh-icon">🧠</div>
+          <div class="sh-info">
+            <div class="sh-name">Neuromenú Persuasivo</div>
+            <div class="sh-desc">Precios integrados sin €, diseño limpio en rejilla y platos estrella destacados</div>
+          </div>
+          <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Económico</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_triangulo_maridaje.html" data-name="Triángulo Dorado y Maridaje"
+          data-type="html" onclick="selectItem(this)">
+          <div class="sh-icon">🍷</div>
+          <div class="sh-info">
+            <div class="sh-name">Triángulo Dorado y Maridaje</div>
+            <div class="sh-desc">Diseñado para la mirada del comensal, con sugerencias cruzadas y ancla de precio</div>
+          </div>
+          <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Maridaje</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_premium_street_food.html" data-name="Premium Street-Food y Upgrades"
+          data-type="html" onclick="selectItem(this)">
+          <div class="sh-icon">🍔</div>
+          <div class="sh-info">
+            <div class="sh-name">Premium Street-Food y Upgrades</div>
+            <div class="sh-desc">Modo oscuro premium, copy descriptivo sensorial y bloque llamativo de extras</div>
+          </div>
+          <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Munchies</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_storytelling_chef.html" data-name="Storytelling y Selección del Chef"
+          data-type="html" onclick="selectItem(this)">
+          <div class="sh-icon">📖</div>
+          <div class="sh-info">
+            <div class="sh-name">Storytelling y Selección del Chef</div>
+            <div class="sh-desc">Estilo editorial con manifiesto de marca y notas explicativas firmadas por la chef
+            </div>
+          </div>
+          <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Autor</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_botanico_editorial.html" data-name="Botánico y Editorial" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🌿</div>
+          <div class="sh-info">
+            <div class="sh-name">Botánico y Editorial</div>
+            <div class="sh-desc">Fondo off-white, trazados botánicos finos, marcos geométricos dobles y simetría romana
+            </div>
+          </div>
+          <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Premium</span>
+          <span class="sh-check">✓</span>
+        </div>
+      </div>
+
+      <div class="sh-label">Propuestas de diseño</div>
+      <div class="sh-items-list" id="list-diseno">
+        <div class="sh-item" data-src="men_minimalista_y_moderno.html" data-name="Minimalista y Moderno"
+          data-type="html" onclick="selectItem(this)">
+          <div class="sh-icon">⬜</div>
+          <div class="sh-info">
+            <div class="sh-name">Minimalista y Moderno</div>
+            <div class="sh-desc">Limpio, espacioso, elegante</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_r_stico_y_ecol_gico.html" data-name="Rústico y Ecológico" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🌾</div>
+          <div class="sh-info">
+            <div class="sh-name">Rústico y Ecológico</div>
+            <div class="sh-desc">Natural, cálido, orgánico</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_galer_a_gastron_mica.html" data-name="Galería Gastronómica" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🖼️</div>
+          <div class="sh-info">
+            <div class="sh-name">Galería Gastronómica</div>
+            <div class="sh-desc">Visual, con protagonismo de imagen</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_creativo_nocturno.html" data-name="Creativo Nocturno" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🌙</div>
+          <div class="sh-info">
+            <div class="sh-name">Creativo Nocturno</div>
+            <div class="sh-desc">Dark mode, atmósfera íntima</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_fino_rock_and_roll.html" data-name="Fino Rock & Roll" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🎸</div>
+          <div class="sh-info">
+            <div class="sh-name">Fino Rock &amp; Roll</div>
+            <div class="sh-desc">Sofisticado con actitud</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_c_mic_neo_brutalista.html" data-name="Cómic Neo Brutalista" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">💥</div>
+          <div class="sh-info">
+            <div class="sh-name">Cómic Neo Brutalista</div>
+            <div class="sh-desc">Atrevido, gráfico, diferente</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_vanguardia_y_premios.html" data-name="Vanguardia y Premios" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🏆</div>
+          <div class="sh-info">
+            <div class="sh-name">Vanguardia y Premios</div>
+            <div class="sh-desc">Premium, con distinción</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_editorial_premium.html" data-name="Editorial Premium" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🌿</div>
+          <div class="sh-info">
+            <div class="sh-name">Editorial Premium</div>
+            <div class="sh-desc">Geométrico, tipografía serif, paleta crema y tierra</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="men_fluido_terracota.html" data-name="Fluido Terracota" data-type="html"
+          onclick="selectItem(this)">
+          <div class="sh-icon">🫧</div>
+          <div class="sh-info">
+            <div class="sh-name">Fluido Terracota</div>
+            <div class="sh-desc">Formas líquidas abstractas, sage green y terracota</div>
+          </div>
+          <span class="sh-tag tag-html">HTML</span>
+          <span class="sh-check">✓</span>
+        </div>
+      </div>
+
+      <div class="sh-label">Cartas originales</div>
+      <div class="sh-items-list" id="list-pdf">
+        <div class="sh-item" data-src="Carta La Huella Vegana.pdf" data-name="Carta La Huella Vegana" data-type="pdf"
+          onclick="selectItem(this)">
+          <div class="sh-icon">📄</div>
+          <div class="sh-info">
+            <div class="sh-name">Carta La Huella Vegana</div>
+            <div class="sh-desc">Carta original en PDF</div>
+          </div>
+          <span class="sh-tag tag-pdf">PDF</span>
+          <span class="sh-check">✓</span>
+        </div>
+
+        <div class="sh-item" data-src="CARTA HUELLA 2026-3.pdf" data-name="Carta Huella 2026" data-type="pdf"
+          onclick="selectItem(this)">
+          <div class="sh-icon">📄</div>
+          <div class="sh-info">
+            <div class="sh-name">Carta Huella 2026</div>
+            <div class="sh-desc">Versión actualizada 2026</div>
+          </div>
+          <span class="sh-tag tag-pdf">PDF</span>
+          <span class="sh-check">✓</span>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div class="sheet-body">
 
-    <div class="sh-label" style="color: var(--accent); font-weight: 800; font-size: 11px;">Modelos de Alta Conversión (Neuromarketing)</div>
-    <div class="sh-items-list" id="list-neuro">
-      <div class="sh-item" data-src="men_neuromarketing_precios.html" data-name="Neuromenú Persuasivo" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🧠</div>
-        <div class="sh-info">
-          <div class="sh-name">Neuromenú Persuasivo</div>
-          <div class="sh-desc">Precios integrados sin €, diseño limpio en rejilla y platos estrella destacados</div>
-        </div>
-        <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Económico</span>
-        <span class="sh-check">✓</span>
+  <!-- DASHBOARD MODAL -->
+  <div class="db-modal" id="dashboardModal">
+    <div class="db-modal-content">
+      <div class="db-modal-header">
+        <h2>📊 Panel de Votos & Descarte</h2>
+        <button class="db-close-btn" onclick="closeDashboard()">✕</button>
       </div>
+      <div class="db-modal-body">
+        
+        <!-- Summary boxes -->
+        <div class="db-summary-grid">
+          <div class="db-summary-card card-winners">
+            <h3>🏆 Favoritas / Ganadoras</h3>
+            <p class="db-count" id="count-winners">0</p>
+            <p class="db-note">Promedio de 4 o 5 estrellas</p>
+          </div>
+          <div class="db-summary-card card-neutrals">
+            <h3>⚖️ En Evaluación</h3>
+            <p class="db-count" id="count-neutrals">0</p>
+            <p class="db-note">Promedio de 3 estrellas o sin votos</p>
+          </div>
+          <div class="db-summary-card card-discarded">
+            <h3>🗑️ Descartadas</h3>
+            <p class="db-count" id="count-discarded">0</p>
+            <p class="db-note">Promedio de 1 o 2 estrellas</p>
+          </div>
+        </div>
 
-      <div class="sh-item" data-src="men_triangulo_maridaje.html" data-name="Triángulo Dorado y Maridaje" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🍷</div>
-        <div class="sh-info">
-          <div class="sh-name">Triángulo Dorado y Maridaje</div>
-          <div class="sh-desc">Diseñado para la mirada del comensal, con sugerencias cruzadas y ancla de precio</div>
-        </div>
-        <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Maridaje</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_premium_street_food.html" data-name="Premium Street-Food y Upgrades" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🍔</div>
-        <div class="sh-info">
-          <div class="sh-name">Premium Street-Food y Upgrades</div>
-          <div class="sh-desc">Modo oscuro premium, copy descriptivo sensorial y bloque llamativo de extras</div>
-        </div>
-        <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Munchies</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_storytelling_chef.html" data-name="Storytelling y Selección del Chef" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">📖</div>
-        <div class="sh-info">
-          <div class="sh-name">Storytelling y Selección del Chef</div>
-          <div class="sh-desc">Estilo editorial con manifiesto de marca y notas explicativas firmadas por la chef</div>
-        </div>
-        <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Autor</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_botanico_editorial.html" data-name="Botánico y Editorial" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🌿</div>
-        <div class="sh-info">
-          <div class="sh-name">Botánico y Editorial</div>
-          <div class="sh-desc">Fondo off-white, trazados botánicos finos, marcos geométricos dobles y simetría romana</div>
-        </div>
-        <span class="sh-tag tag-html" style="background: #e8f5e9; color: #2d5a3f;">Premium</span>
-        <span class="sh-check">✓</span>
-      </div>
-    </div>
-
-    <div class="sh-label">Propuestas de diseño</div>
-    <div class="sh-items-list" id="list-diseno">
-      <div class="sh-item" data-src="men_minimalista_y_moderno.html" data-name="Minimalista y Moderno" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">⬜</div>
-        <div class="sh-info">
-          <div class="sh-name">Minimalista y Moderno</div>
-          <div class="sh-desc">Limpio, espacioso, elegante</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_r_stico_y_ecol_gico.html" data-name="Rústico y Ecológico" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🌾</div>
-        <div class="sh-info">
-          <div class="sh-name">Rústico y Ecológico</div>
-          <div class="sh-desc">Natural, cálido, orgánico</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_galer_a_gastron_mica.html" data-name="Galería Gastronómica" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🖼️</div>
-        <div class="sh-info">
-          <div class="sh-name">Galería Gastronómica</div>
-          <div class="sh-desc">Visual, con protagonismo de imagen</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_creativo_nocturno.html" data-name="Creativo Nocturno" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🌙</div>
-        <div class="sh-info">
-          <div class="sh-name">Creativo Nocturno</div>
-          <div class="sh-desc">Dark mode, atmósfera íntima</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_fino_rock_and_roll.html" data-name="Fino Rock & Roll" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🎸</div>
-        <div class="sh-info">
-          <div class="sh-name">Fino Rock &amp; Roll</div>
-          <div class="sh-desc">Sofisticado con actitud</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_c_mic_neo_brutalista.html" data-name="Cómic Neo Brutalista" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">💥</div>
-        <div class="sh-info">
-          <div class="sh-name">Cómic Neo Brutalista</div>
-          <div class="sh-desc">Atrevido, gráfico, diferente</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_vanguardia_y_premios.html" data-name="Vanguardia y Premios" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🏆</div>
-        <div class="sh-info">
-          <div class="sh-name">Vanguardia y Premios</div>
-          <div class="sh-desc">Premium, con distinción</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_editorial_premium.html" data-name="Editorial Premium" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🌿</div>
-        <div class="sh-info">
-          <div class="sh-name">Editorial Premium</div>
-          <div class="sh-desc">Geométrico, tipografía serif, paleta crema y tierra</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="men_fluido_terracota.html" data-name="Fluido Terracota" data-type="html" onclick="selectItem(this)">
-        <div class="sh-icon">🫧</div>
-        <div class="sh-info">
-          <div class="sh-name">Fluido Terracota</div>
-          <div class="sh-desc">Formas líquidas abstractas, sage green y terracota</div>
-        </div>
-        <span class="sh-tag tag-html">HTML</span>
-        <span class="sh-check">✓</span>
-      </div>
-    </div>
-
-    <div class="sh-label">Cartas originales</div>
-    <div class="sh-items-list" id="list-pdf">
-      <div class="sh-item" data-src="Carta La Huella Vegana.pdf" data-name="Carta La Huella Vegana" data-type="pdf" onclick="selectItem(this)">
-        <div class="sh-icon">📄</div>
-        <div class="sh-info">
-          <div class="sh-name">Carta La Huella Vegana</div>
-          <div class="sh-desc">Carta original en PDF</div>
-        </div>
-        <span class="sh-tag tag-pdf">PDF</span>
-        <span class="sh-check">✓</span>
-      </div>
-
-      <div class="sh-item" data-src="CARTA HUELLA 2026-3.pdf" data-name="Carta Huella 2026" data-type="pdf" onclick="selectItem(this)">
-        <div class="sh-icon">📄</div>
-        <div class="sh-info">
-          <div class="sh-name">Carta Huella 2026</div>
-          <div class="sh-desc">Versión actualizada 2026</div>
-        </div>
-        <span class="sh-tag tag-pdf">PDF</span>
-        <span class="sh-check">✓</span>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- DASHBOARD MODAL -->
-<div class="db-modal" id="dashboardModal">
-  <div class="db-modal-content">
-    <div class="db-modal-header">
-      <h2>📊 Panel de Votos & Descarte</h2>
-      <button class="db-close-btn" onclick="closeDashboard()">✕</button>
-    </div>
-    <div class="db-modal-body">
-      
-      <!-- Summary boxes -->
-      <div class="db-summary-grid">
-        <div class="db-summary-card card-winners">
-          <h3>🏆 Favoritas / Ganadoras</h3>
-          <p class="db-count" id="count-winners">0</p>
-          <p class="db-note">Diseños con 4 o 5 estrellas</p>
-        </div>
-        <div class="db-summary-card card-neutrals">
-          <h3>⚖️ En Evaluación</h3>
-          <p class="db-count" id="count-neutrals">0</p>
-          <p class="db-note">Diseños con 3 estrellas</p>
-        </div>
-        <div class="db-summary-card card-discarded">
-          <h3>🗑️ Descartadas</h3>
-          <p class="db-count" id="count-discarded">0</p>
-          <p class="db-note">Diseños con 1 o 2 estrellas</p>
-        </div>
-      </div>
-      
-      <!-- Chart and columns -->
-      <div class="db-sections-grid">
-        <div class="db-ranking-section">
-          <h3>Clasificación por Votos</h3>
-          <div class="db-ranking-list" id="dbRankingList"></div>
+        <!-- Cloud Sync Status block -->
+        <div style="background: rgba(168, 201, 127, 0.08); border: 1px solid rgba(168, 201, 127, 0.2); border-radius: 16px; padding: 16px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div style="text-align: left;">
+            <h3 style="font-size: 14px; color: var(--green-dk); margin: 0; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+              <span style="display:inline-block; width: 8px; height: 8px; background: #4caf50; border-radius: 50%; box-shadow: 0 0 8px #4caf50;"></span>
+              Sincronización en la Nube Activa
+            </h3>
+            <p style="font-size: 11px; color: var(--muted); margin: 4px 0 0 0;">Los votos de todos se guardan y actualizan automáticamente en internet.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button onclick="resetImportedVotes()" style="font-size: 11px; font-weight: 700; background: #eee; color: #555; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; transition: background 0.2s;">🧹 Reiniciar Nube a Cero</button>
+            <button onclick="refreshCloudVotes()" style="font-size: 11px; font-weight: 700; background: var(--green); color: var(--white); border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 4px; transition: background 0.2s;">🔄 Actualizar Votos</button>
+          </div>
         </div>
         
-        <div class="db-status-section">
-          <div class="db-status-column">
-            <h4>🏆 Ganando (4-5 ★)</h4>
-            <ul id="list-db-winners" class="db-status-list"></ul>
+        <!-- Chart and columns -->
+        <div class="db-sections-grid">
+          <div class="db-ranking-section">
+            <h3>Clasificación por Votos</h3>
+            <div class="db-ranking-list" id="dbRankingList"></div>
           </div>
-          <div class="db-status-column">
-            <h4>🗑️ Descartar (0-2 ★)</h4>
-            <ul id="list-db-discarded" class="db-status-list list-red"></ul>
+
+          <div class="db-status-section">
+            <div class="db-status-column">
+              <h4>🏆 Ganando (4-5 ★)</h4>
+              <ul id="list-db-winners" class="db-status-list"></ul>
+            </div>
+            <div class="db-status-column">
+              <h4>🗑️ Descartar (0-2 ★)</h4>
+              <ul id="list-db-discarded" class="db-status-list list-red"></ul>
+            </div>
           </div>
         </div>
+
       </div>
-      
     </div>
   </div>
-</div>
 
-<script>
-  let currentSrc = null;
-  let ratings = {};
+  <script>
+    let currentSrc = null;
+    let ratings = {};
 
-  const ratingLabels = {
-    5: "😍 ¡Me encanta!",
-    4: "👍 Muy buena",
-    3: "🤔 Aceptable",
-    2: "👎 Regular",
-    1: "❌ Descartar",
-    0: "☆ Sin votar"
-  };
+    const ratingLabels = {
+      5: "😍 ¡Me encanta!",
+      4: "👍 Muy buena",
+      3: "🤔 Aceptable",
+      2: "👎 Regular",
+      1: "❌ Descartar",
+      0: "☆ Sin votar"
+    };
 
-  function initRatings() {
-    // Load from localStorage or fallback to ratings.js (initialRatings)
-    let stored = localStorage.getItem('huella_vegana_ratings');
-    if (stored) {
-      ratings = JSON.parse(stored);
-    } else {
-      ratings = typeof initialRatings !== 'undefined' ? initialRatings : {};
+    function getVoteHistory(src) {
+      let history = localStorage.getItem(`huella_vegana_history_${src}`);
+      return history ? JSON.parse(history) : [];
+    }
+    
+    function pushVoteHistory(src, val) {
+      let history = getVoteHistory(src);
+      history.push(val);
+      localStorage.setItem(`huella_vegana_history_${src}`, JSON.stringify(history));
+    }
+    
+    function popVoteHistory(src) {
+      let history = getVoteHistory(src);
+      if (history.length === 0) return null;
+      const lastVote = history.pop();
+      localStorage.setItem(`huella_vegana_history_${src}`, JSON.stringify(history));
+      return lastVote;
     }
 
-    // Inject stars into each sh-item
-    document.querySelectorAll('.sh-item').forEach(item => {
-      const src = item.dataset.src;
-      const rating = ratings[src] || 0;
-      
-      const info = item.querySelector('.sh-info');
-      
-      // Create stars container
-      const starsContainer = document.createElement('div');
-      starsContainer.className = 'sh-stars-container';
-      starsContainer.onclick = function(e) { e.stopPropagation(); }; // Prevent selectItem
-      
-      // Create pill
-      const pill = document.createElement('div');
-      pill.className = 'sh-stars-pill';
-      pill.dataset.rating = rating;
-      
-      // Create label
-      const label = document.createElement('span');
-      label.className = 'sh-rating-label';
-      label.dataset.rating = rating;
-      label.textContent = ratingLabels[rating];
-      label.style.cursor = 'pointer';
-      label.title = 'Haz clic para borrar tu voto';
-      label.onclick = function(e) {
-        e.stopPropagation();
-        setRating(src, 0); // Reset rating to 0
-      };
-      
-      for (let i = 1; i <= 5; i++) {
-        const star = document.createElement('span');
-        star.className = 'star-btn' + (i <= rating ? ' active' : '');
-        star.innerHTML = '★';
-        star.dataset.value = i;
-        
-        star.onclick = function(e) {
-          e.stopPropagation();
-          setRating(src, i);
-        };
-        
-        star.onmouseenter = function() {
-          const val = parseInt(this.dataset.value);
-          const siblingStars = pill.querySelectorAll('.star-btn');
-          siblingStars.forEach((s, idx) => {
-            if (idx < val) {
-              s.classList.add('hover-active');
-            } else {
-              s.classList.remove('hover-active');
-            }
-          });
-          label.textContent = ratingLabels[val];
-          label.dataset.rating = val;
-        };
-        
-        star.onmouseleave = function() {
-          const siblingStars = pill.querySelectorAll('.star-btn');
-          siblingStars.forEach(s => s.classList.remove('hover-active'));
-          const currentRating = ratings[src] || 0;
-          label.textContent = ratingLabels[currentRating];
-          label.dataset.rating = currentRating;
-        };
-        
-        pill.appendChild(star);
+    function updateStatsText(element, votes, points) {
+      if (votes === 0) {
+        element.textContent = "☆ Sin votos";
+      } else {
+        const avg = (points / votes).toFixed(1);
+        element.textContent = `Votos: ${votes} · Media: ${avg}★`;
       }
-      
-      starsContainer.appendChild(pill);
-      starsContainer.appendChild(label);
-      info.appendChild(starsContainer);
-    });
-    
-    // Initial sort
-    sortMenuItems();
-    // Set initial filter state
-    updateDiscardedVisibility();
-  }
+    }
 
-  function setRating(src, val) {
-    ratings[src] = val;
-    localStorage.setItem('huella_vegana_ratings', JSON.stringify(ratings));
-    
-    // Re-render stars for this item
-    document.querySelectorAll(`.sh-item[data-src="${src}"]`).forEach(item => {
-      const container = item.querySelector('.sh-stars-container');
-      if (container) {
-        const pill = container.querySelector('.sh-stars-pill');
-        const label = container.querySelector('.sh-rating-label');
-        
-        if (pill) pill.dataset.rating = val;
-        if (label) {
-          label.dataset.rating = val;
-          label.textContent = ratingLabels[val];
+    // ── CLOUD DATABASE SYNC ──
+    const DB_ENDPOINT = "https://kvdb.io/HuellaVeganaVotes2026/ratings";
+
+    async function loadRatingsFromDB() {
+      try {
+        const res = await fetch(DB_ENDPOINT);
+        if (res.status === 404) {
+          // Initialize DB on first load
+          await saveRatingsToDB(initialRatings);
+          return initialRatings;
         }
-        
-        const stars = container.querySelectorAll('.star-btn');
-        stars.forEach((star, idx) => {
-          if (idx < val) {
-            star.classList.add('active');
-          } else {
-            star.classList.remove('active');
-          }
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      } catch(e) {
+        console.warn("DB offline, falling back to localStorage or ratings.js:", e);
+        let stored = localStorage.getItem('huella_vegana_ratings');
+        return stored ? JSON.parse(stored) : initialRatings;
+      }
+    }
+
+    async function saveRatingsToDB(data) {
+      try {
+        await fetch(DB_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
         });
+      } catch(e) {
+        console.error("Failed to write to DB:", e);
       }
-    });
-    
-    // Sort items list
-    sortMenuItems();
-    // Update filter visibility in case rating went low/high
-    updateDiscardedVisibility();
-  }
+      // Always cache locally as fallback
+      localStorage.setItem('huella_vegana_ratings', JSON.stringify(data));
+    }
 
-  function sortMenuItems() {
-    document.querySelectorAll('.sh-items-list').forEach(listContainer => {
-      const items = Array.from(listContainer.querySelectorAll('.sh-item'));
-      items.sort((a, b) => {
-        const srcA = a.dataset.src;
-        const srcB = b.dataset.src;
-        const ratingA = ratings[srcA] || 0;
-        const ratingB = ratings[srcB] || 0;
+    async function initRatings() {
+      // Temporary loading state
+      document.querySelectorAll('.sh-item').forEach(item => {
+        const src = item.dataset.src;
+        const info = item.querySelector('.sh-info');
         
-        if (ratingB !== ratingA) {
-          return ratingB - ratingA; // Descending
+        let starsContainer = info.querySelector('.sh-stars-container');
+        if (!starsContainer) {
+          starsContainer = document.createElement('div');
+          starsContainer.className = 'sh-stars-container';
+          starsContainer.onclick = function(e) { e.stopPropagation(); };
+          
+          const statsBadge = document.createElement('span');
+          statsBadge.className = 'sh-stars-stats';
+          statsBadge.id = `stats-${src}`;
+          statsBadge.textContent = "⏳ Cargando...";
+          starsContainer.appendChild(statsBadge);
+          info.appendChild(starsContainer);
+        } else {
+          const badge = starsContainer.querySelector('.sh-stars-stats');
+          if (badge) badge.textContent = "⏳ Cargando...";
+        }
+      });
+
+      // Fetch from Cloud DB
+      ratings = await loadRatingsFromDB();
+
+      // Render stars and controls
+      document.querySelectorAll('.sh-item').forEach(item => {
+        const src = item.dataset.src;
+        const data = ratings[src] || { votes: 0, points: 0 };
+        const info = item.querySelector('.sh-info');
+        
+        const starsContainer = info.querySelector('.sh-stars-container');
+        starsContainer.innerHTML = ''; // Clear loading content
+        
+        // Stats badge
+        const statsBadge = document.createElement('span');
+        statsBadge.className = 'sh-stars-stats';
+        statsBadge.id = `stats-${src}`;
+        updateStatsText(statsBadge, data.votes, data.points);
+        
+        // Stars pill
+        const pill = document.createElement('div');
+        pill.className = 'sh-stars-pill';
+        
+        for (let i = 1; i <= 5; i++) {
+          const star = document.createElement('span');
+          star.className = 'star-btn';
+          star.innerHTML = '★';
+          star.dataset.value = i;
+          
+          star.onclick = function(e) {
+            e.stopPropagation();
+            this.classList.add('popping');
+            setTimeout(() => this.classList.remove('popping'), 300);
+            addVote(src, i);
+          };
+          
+          star.onmouseenter = function() {
+            const val = parseInt(this.dataset.value);
+            const siblingStars = pill.querySelectorAll('.star-btn');
+            siblingStars.forEach((s, idx) => {
+              if (idx < val) {
+                s.classList.add('hover-active');
+              } else {
+                s.classList.remove('hover-active');
+              }
+            });
+          };
+          
+          star.onmouseleave = function() {
+            const siblingStars = pill.querySelectorAll('.star-btn');
+            siblingStars.forEach(s => s.classList.remove('hover-active'));
+          };
+          
+          pill.appendChild(star);
         }
         
-        // Secondary sort: alphabetical
-        const nameA = a.dataset.name || '';
-        const nameB = b.dataset.name || '';
-        return nameA.localeCompare(nameB);
+        // Undo button
+        const undoBtn = document.createElement('button');
+        undoBtn.className = 'sh-undo-btn';
+        undoBtn.id = `undo-${src}`;
+        undoBtn.textContent = '↩ Deshacer';
+        undoBtn.title = 'Deshacer tu último voto para esta carta';
+        
+        const voteHistory = getVoteHistory(src);
+        if (voteHistory.length > 0) undoBtn.classList.add('visible');
+        
+        undoBtn.onclick = function(e) {
+          e.stopPropagation();
+          undoVote(src);
+        };
+        
+        starsContainer.appendChild(statsBadge);
+        starsContainer.appendChild(pill);
+        starsContainer.appendChild(undoBtn);
       });
       
-      // Clear and append in sorted order
-      items.forEach(item => listContainer.appendChild(item));
-    });
-  }
+      sortMenuItems();
+      updateDiscardedVisibility();
+    }
 
-  function exportRatings() {
-    const content = `// Valoraciones iniciales predeterminadas para las cartas
+    async function addVote(src, val) {
+      document.body.style.cursor = 'wait';
+      try {
+        const latestRatings = await loadRatingsFromDB();
+        if (!latestRatings[src]) {
+          latestRatings[src] = { votes: 0, points: 0 };
+        }
+        latestRatings[src].votes += 1;
+        latestRatings[src].points += val;
+        
+        await saveRatingsToDB(latestRatings);
+        ratings = latestRatings;
+        
+        pushVoteHistory(src, val);
+        
+        const badge = document.getElementById(`stats-${src}`);
+        if (badge) updateStatsText(badge, ratings[src].votes, ratings[src].points);
+        
+        const undoBtn = document.getElementById(`undo-${src}`);
+        if (undoBtn) undoBtn.classList.add('visible');
+        
+        sortMenuItems();
+        updateDiscardedVisibility();
+      } catch(e) {
+        alert("Error de conexión. No se pudo guardar tu voto en la nube.");
+      } finally {
+        document.body.style.cursor = 'default';
+      }
+    }
+
+    async function undoVote(src) {
+      if (!ratings[src]) return;
+      const lastVote = popVoteHistory(src);
+      if (lastVote !== null) {
+        document.body.style.cursor = 'wait';
+        try {
+          const latestRatings = await loadRatingsFromDB();
+          if (latestRatings[src]) {
+            latestRatings[src].votes = Math.max(0, latestRatings[src].votes - 1);
+            latestRatings[src].points = Math.max(0, latestRatings[src].points - lastVote);
+          }
+          await saveRatingsToDB(latestRatings);
+          ratings = latestRatings;
+          
+          const badge = document.getElementById(`stats-${src}`);
+          if (badge) updateStatsText(badge, ratings[src].votes, ratings[src].points);
+          
+          const history = getVoteHistory(src);
+          const undoBtn = document.getElementById(`undo-${src}`);
+          if (undoBtn && history.length === 0) {
+            undoBtn.classList.remove('visible');
+          }
+          
+          sortMenuItems();
+          updateDiscardedVisibility();
+        } catch(e) {
+          alert("Error de conexión. No se pudo deshacer tu voto en la nube.");
+        } finally {
+          document.body.style.cursor = 'default';
+        }
+      }
+    }
+
+    function sortMenuItems() {
+      document.querySelectorAll('.sh-items-list').forEach(listContainer => {
+        const items = Array.from(listContainer.querySelectorAll('.sh-item'));
+        items.sort((a, b) => {
+          const srcA = a.dataset.src;
+          const srcB = b.dataset.src;
+          const dataA = ratings[srcA] || { votes: 0, points: 0 };
+          const dataB = ratings[srcB] || { votes: 0, points: 0 };
+          
+          if (dataB.points !== dataA.points) {
+            return dataB.points - dataA.points;
+          }
+          const avgA = dataA.votes > 0 ? (dataA.points / dataA.votes) : 0;
+          const avgB = dataB.votes > 0 ? (dataB.points / dataB.votes) : 0;
+          if (avgB !== avgA) {
+            return avgB - avgA;
+          }
+          const nameA = a.dataset.name || '';
+          const nameB = b.dataset.name || '';
+          return nameA.localeCompare(nameB);
+        });
+        items.forEach(item => listContainer.appendChild(item));
+      });
+    }
+
+    function exportRatings() {
+      const content = `// Valoraciones iniciales predeterminadas para las cartas
 const initialRatings = ${JSON.stringify(ratings, null, 2)};
 `;
-    const blob = new Blob([content], { type: 'text/javascript' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ratings.js';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
+      const blob = new Blob([content], { type: 'text/javascript' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ratings.js';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
 
-  function openSheet() {
-    document.getElementById('overlay').classList.add('open');
-    document.getElementById('sheet').classList.add('open');
-  }
+    function sharePortalLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("¡Enlace del portal copiado! Compártelo con tus amigos por WhatsApp para recibir sus votos.");
+      }).catch(err => {
+        alert("Copia este enlace para compartir: " + url);
+      });
+    }
 
-  function closeSheet() {
-    document.getElementById('overlay').classList.remove('open');
-    document.getElementById('sheet').classList.remove('open');
-  }
+    function openSheet() {
+      document.getElementById('overlay').classList.add('open');
+      document.getElementById('sheet').classList.add('open');
+    }
 
-  function selectItem(el) {
-    const src  = el.dataset.src;
-    const name = el.dataset.name;
+    function closeSheet() {
+      document.getElementById('overlay').classList.remove('open');
+      document.getElementById('sheet').classList.remove('open');
+    }
 
-    // active state in sheet
-    document.querySelectorAll('.sh-item').forEach(i => i.classList.remove('active'));
-    el.classList.add('active');
+    function selectItem(el) {
+      const src  = el.dataset.src;
+      const name = el.dataset.name;
 
-    // load iframe
-    const frame = document.getElementById('mainFrame');
-    const welcome = document.getElementById('welcome');
-    const currentBar = document.getElementById('currentBar');
-    const currentName = document.getElementById('currentName');
-    const btnNewTab = document.getElementById('btnNewTab');
-    const fab = document.getElementById('fab');
+      document.querySelectorAll('.sh-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
 
-    const encoded = encodeURIComponent(src);
-    frame.src = encoded;
-    frame.style.display = 'block';
-    welcome.style.display = 'none';
-    currentBar.classList.add('visible');
-    currentName.textContent = name;
-    btnNewTab.href = encoded;
-    fab.classList.add('visible');
+      const frame = document.getElementById('mainFrame');
+      const welcome = document.getElementById('welcome');
+      const currentBar = document.getElementById('currentBar');
+      const currentName = document.getElementById('currentName');
+      const btnNewTab = document.getElementById('btnNewTab');
+      const fab = document.getElementById('fab');
 
-    currentSrc = src;
-    closeSheet();
-  }
+      const encoded = encodeURIComponent(src);
+      frame.src = encoded;
+      frame.style.display = 'block';
+      welcome.style.display = 'none';
+      currentBar.classList.add('visible');
+      currentName.textContent = name;
+      btnNewTab.href = encoded;
+      fab.classList.add('visible');
 
-  /* ── DASHBOARD LOGIC ── */
-  function openDashboard() {
-    renderDashboard();
-    document.getElementById('dashboardModal').classList.add('open');
-  }
+      currentSrc = src;
+      closeSheet();
+    }
 
-  function closeDashboard() {
-    document.getElementById('dashboardModal').classList.remove('open');
-  }
+    /* ── DASHBOARD LOGIC ── */
+    async function openDashboard() {
+      document.getElementById('dashboardModal').classList.add('open');
+      document.body.style.cursor = 'wait';
+      ratings = await loadRatingsFromDB();
+      document.body.style.cursor = 'default';
+      renderDashboard();
+    }
 
-  function renderDashboard() {
-    let countWinners = 0;
-    let countNeutrals = 0;
-    let countDiscarded = 0;
-    
-    const winnersList = document.getElementById('list-db-winners');
-    const discardedList = document.getElementById('list-db-discarded');
-    const rankingList = document.getElementById('dbRankingList');
-    
-    winnersList.innerHTML = '';
-    discardedList.innerHTML = '';
-    rankingList.innerHTML = '';
-    
-    // Group all items from DOM to rank them
-    const allItems = Array.from(document.querySelectorAll('.sh-item'));
-    
-    // Sort items by rating
-    const sorted = [...allItems].sort((a, b) => {
-      const srcA = a.dataset.src;
-      const srcB = b.dataset.src;
-      const rA = ratings[srcA] || 0;
-      const rB = ratings[srcB] || 0;
-      return rB - rA;
-    });
-    
-    sorted.forEach(item => {
-      const src = item.dataset.src;
-      const name = item.dataset.name;
-      const rating = ratings[src] || 0;
-      const percentage = (rating / 5) * 100;
+    function closeDashboard() {
+      document.getElementById('dashboardModal').classList.remove('open');
+    }
+
+    function renderDashboard() {
+      let countWinners = 0;
+      let countNeutrals = 0;
+      let countDiscarded = 0;
       
-      // Categorize
-      if (rating >= 4) {
-        countWinners++;
-        const li = document.createElement('li');
-        li.textContent = `${name} (${rating} ★)`;
-        winnersList.appendChild(li);
-      } else if (rating === 3) {
-        countNeutrals++;
-      } else {
-        countDiscarded++;
-        const li = document.createElement('li');
-        li.textContent = `${name} (${rating} ★)`;
-        discardedList.appendChild(li);
+      const winnersList = document.getElementById('list-db-winners');
+      const discardedList = document.getElementById('list-db-discarded');
+      const rankingList = document.getElementById('dbRankingList');
+      
+      winnersList.innerHTML = '';
+      discardedList.innerHTML = '';
+      rankingList.innerHTML = '';
+      
+      const allItems = Array.from(document.querySelectorAll('.sh-item'));
+      
+      const sorted = [...allItems].sort((a, b) => {
+        const srcA = a.dataset.src;
+        const srcB = b.dataset.src;
+        const dataA = ratings[srcA] || { votes: 0, points: 0 };
+        const dataB = ratings[srcB] || { votes: 0, points: 0 };
+        
+        if (dataB.points !== dataA.points) {
+          return dataB.points - dataA.points;
+        }
+        const avgA = dataA.votes > 0 ? (dataA.points / dataA.votes) : 0;
+        const avgB = dataB.votes > 0 ? (dataB.points / dataB.votes) : 0;
+        return avgB - avgA;
+      });
+      
+      sorted.forEach(item => {
+        const src = item.dataset.src;
+        const name = item.dataset.name;
+        const data = ratings[src] || { votes: 0, points: 0 };
+        const avg = data.votes > 0 ? (data.points / data.votes) : 0;
+        const percentage = (avg / 5) * 100;
+        
+        if (data.votes > 0) {
+          if (avg >= 4.0) {
+            countWinners++;
+            const li = document.createElement('li');
+            li.textContent = `${name} (${avg.toFixed(1)} ★ - ${data.votes} v)`;
+            winnersList.appendChild(li);
+          } else if (avg >= 3.0) {
+            countNeutrals++;
+          } else {
+            countDiscarded++;
+            const li = document.createElement('li');
+            li.textContent = `${name} (${avg.toFixed(1)} ★ - ${data.votes} v)`;
+            discardedList.appendChild(li);
+          }
+        } else {
+          countNeutrals++;
+        }
+        
+        const pItem = document.createElement('div');
+        pItem.className = 'db-progress-item';
+        
+        const label = document.createElement('div');
+        label.className = 'db-progress-label';
+        
+        let starStr = '';
+        if (data.votes === 0) {
+          starStr = 'Sin votos';
+        } else {
+          const roundedAvg = Math.round(avg);
+          starStr = '★'.repeat(roundedAvg) + '☆'.repeat(5 - roundedAvg) + ` (${avg.toFixed(1)}★)`;
+        }
+        
+        label.innerHTML = `<span>${name} <small style="color:var(--muted)">(${data.votes} votos, ${data.points} pts)</small></span> <span style="color: #ffb74d;">${starStr}</span>`;
+        
+        const pBg = document.createElement('div');
+        pBg.className = 'db-progress-bg';
+        
+        const pBar = document.createElement('div');
+        pBar.className = 'db-progress-bar bar-gold';
+        pBar.style.width = `${percentage}%`;
+        
+        pBg.appendChild(pBar);
+        pItem.appendChild(label);
+        pItem.appendChild(pBg);
+        rankingList.appendChild(pItem);
+      });
+      
+      document.getElementById('count-winners').textContent = countWinners;
+      document.getElementById('count-neutrals').textContent = countNeutrals;
+      document.getElementById('count-discarded').textContent = countDiscarded;
+    }
+
+    async function refreshCloudVotes() {
+      document.body.style.cursor = 'wait';
+      try {
+        ratings = await loadRatingsFromDB();
+        document.querySelectorAll('.sh-item').forEach(item => {
+          const src = item.dataset.src;
+          const data = ratings[src] || { votes: 0, points: 0 };
+          const badge = document.getElementById(`stats-${src}`);
+          if (badge) updateStatsText(badge, data.votes, data.points);
+        });
+        sortMenuItems();
+        updateDiscardedVisibility();
+        renderDashboard();
+        alert("¡Votos actualizados con éxito desde la nube!");
+      } catch(e) {
+        alert("Error de conexión al actualizar los votos.");
+      } finally {
+        document.body.style.cursor = 'default';
       }
-      
-      // Add to progress bar ranking
-      const pItem = document.createElement('div');
-      pItem.className = 'db-progress-item';
-      
-      const label = document.createElement('div');
-      label.className = 'db-progress-label';
-      
-      let starStr = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-      label.innerHTML = `<span>${name}</span> <span style="color: #ffb74d;">${starStr}</span>`;
-      
-      const pBg = document.createElement('div');
-      pBg.className = 'db-progress-bg';
-      
-      const pBar = document.createElement('div');
-      pBar.className = 'db-progress-bar bar-gold';
-      pBar.style.width = `${percentage}%`;
-      
-      pBg.appendChild(pBar);
-      pItem.appendChild(label);
-      pItem.appendChild(pBg);
-      rankingList.appendChild(pItem);
-    });
-    
-    // Update count labels
-    document.getElementById('count-winners').textContent = countWinners;
-    document.getElementById('count-neutrals').textContent = countNeutrals;
-    document.getElementById('count-discarded').textContent = countDiscarded;
-  }
+    }
 
-  function toggleHideDiscarded(checked) {
-    localStorage.setItem('huella_vegana_hide_discarded', checked ? 'true' : 'false');
-    updateDiscardedVisibility();
-  }
-
-  function updateDiscardedVisibility() {
-    const hide = localStorage.getItem('huella_vegana_hide_discarded') === 'true';
-    const toggleInput = document.getElementById('hideDiscardedToggle');
-    if (toggleInput) toggleInput.checked = hide;
-    
-    document.querySelectorAll('.sh-item').forEach(item => {
-      const src = item.dataset.src;
-      const rating = ratings[src] || 0;
-      if (hide && rating <= 2) {
-        item.classList.add('discarded-hidden');
-      } else {
-        item.classList.remove('discarded-hidden');
+    async function resetImportedVotes() {
+      if (confirm("⚠️ ¡ATENCIÓN! Esta acción borrará de forma permanente TODOS los votos y puntuaciones acumuladas en internet por todos tus amigos. Esta acción NO se puede deshacer.\n\n¿Estás completamente segura de que quieres reiniciar la base de datos a cero?")) {
+        document.body.style.cursor = 'wait';
+        try {
+          const cleanRatings = {};
+          for (let k in initialRatings) {
+            cleanRatings[k] = { votes: 0, points: 0 };
+          }
+          await saveRatingsToDB(cleanRatings);
+          ratings = cleanRatings;
+          
+          for (let k in initialRatings) {
+            localStorage.removeItem(`huella_vegana_history_${k}`);
+          }
+          
+          document.querySelectorAll('.sh-item').forEach(item => {
+            const src = item.dataset.src;
+            const badge = document.getElementById(`stats-${src}`);
+            if (badge) updateStatsText(badge, 0, 0);
+            
+            const undoBtn = document.getElementById(`undo-${src}`);
+            if (undoBtn) undoBtn.classList.remove('visible');
+          });
+          
+          sortMenuItems();
+          updateDiscardedVisibility();
+          renderDashboard();
+          
+          alert("Se han restablecido todas las votaciones en la nube a cero.");
+        } catch(e) {
+          alert("Error de conexión al restablecer las votaciones en la nube.");
+        } finally {
+          document.body.style.cursor = 'default';
+        }
       }
-    });
-  }
+    }
 
-  // Initialize on load
-  document.addEventListener('DOMContentLoaded', initRatings);
-</script>
+    function toggleHideDiscarded(checked) {
+      localStorage.setItem('huella_vegana_hide_discarded', checked ? 'true' : 'false');
+      updateDiscardedVisibility();
+    }
+
+    function updateDiscardedVisibility() {
+      const hide = localStorage.getItem('huella_vegana_hide_discarded') === 'true';
+      const toggleInput = document.getElementById('hideDiscardedToggle');
+      if (toggleInput) toggleInput.checked = hide;
+      
+      document.querySelectorAll('.sh-item').forEach(item => {
+        const src = item.dataset.src;
+        const data = ratings[src] || { votes: 0, points: 0 };
+        const avg = data.votes > 0 ? (data.points / data.votes) : 0;
+        
+        if (hide && data.votes > 0 && avg <= 2.0) {
+          item.classList.add('discarded-hidden');
+        } else {
+          item.classList.remove('discarded-hidden');
+        }
+      });
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', initRatings);
+  </script>
 
 </body>
+
 </html>
