@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Menú Botánico y Editorial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #fcfbfa;
+            --text-dark: #262c28;
+            --text-muted: #5e6b62;
+            --sage: #607d6b;
+            --gold: #bca074;
+            --border-line: rgba(96, 125, 107, 0.25);
+            --gold-light: rgba(188, 160, 116, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            font-family: 'Lora', serif;
+            line-height: 1.6;
+            padding: 4rem 2rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ── FINE-LINE BOTANICAL DRAWINGS (SVG BACKGROUNDS) ── */
+        .botanical-bg {
+            position: absolute;
+            pointer-events: none;
+            color: var(--sage);
+            opacity: 0.12;
+            z-index: 1;
+        }
+
+        .botanical-top-left {
+            top: 20px;
+            left: 20px;
+            width: 250px;
+            height: 250px;
+            transform: rotate(-10deg);
+        }
+
+        .botanical-bottom-right {
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            height: 280px;
+            transform: scaleX(-1) rotate(-15deg);
+        }
+
+        .botanical-top-right {
+            top: 30px;
+            right: 30px;
+            width: 200px;
+            height: 200px;
+            transform: scaleY(-1) rotate(45deg);
+        }
+
+        /* ── GEOMETRIC BORDER FRAME ── */
+        .menu-border-frame {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid var(--sage);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .menu-border-frame-inner {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px double var(--gold);
+        }
+
+        .corner-diamond {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--bg-canvas);
+            border: 1px solid var(--gold);
+            transform: rotate(45deg);
+            z-index: 11;
+        }
+        .cd-tl { top: -6px; left: -6px; }
+        .cd-tr { top: -6px; right: -6px; }
+        .cd-bl { bottom: -6px; left: -6px; }
+        .cd-br { bottom: -6px; right: -6px; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            margin-bottom: 4.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Blank header area framed for the logo */
+        .logo-frame {
+            width: 130px;
+            height: 130px;
+            border: 1px solid var(--border-line);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 1.8rem;
+            background: var(--bg-canvas);
+        }
+
+        .logo-frame::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
+            border: 1px dashed var(--gold);
+            border-radius: 50%;
+        }
+
+        .logo-brand-icon {
+            font-size: 2.2rem;
+            color: var(--sage);
+            z-index: 3;
+        }
+
+        .logo-brand-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: -0.5rem;
+        }
+
+        .menu-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-top: 0.5rem;
+        }
+
+        .editorial-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            margin: 1.5rem 0;
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        .editorial-divider::before,
+        .editorial-divider::after {
+            content: '';
+            height: 1px;
+            width: 60px;
+            background: var(--gold);
+            opacity: 0.5;
+        }
+
+        .tagline {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            line-height: 1.5;
+        }
+
+        /* Allergen Guide */
+        .allergen-guide {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .a-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .c-gl { background-color: #bfa574; }
+        .c-so { background-color: #8fa89b; }
+        .c-fs { background-color: #a38ba8; }
+        .c-mo { background-color: #d1c080; }
+        .c-se { background-color: #c79898; }
+
+        .tag-gf {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            border: 1px solid var(--sage);
+            color: var(--sage);
+            padding: 1px 4px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── SYMMETRICAL COLUMNS ── */
+        .menu-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 800px) {
+            .menu-columns {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .category {
+            margin-bottom: 2rem;
+        }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--sage);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            margin-bottom: 2.2rem;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '♦';
+            display: block;
+            font-size: 0.65rem;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        /* ── FOOD ITEMS ── */
+        .dish {
+            margin-bottom: 2rem;
+            page-break-inside: avoid;
+        }
+
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.4rem;
+        }
+
+        .dish-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+            padding-right: 0.8rem;
+        }
+
+        .dish-price {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .dish-desc {
+            font-family: 'Lora', serif;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            text-align: justify;
+        }
+
+        .dish-allergens {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        /* ── FOOTER EXTRAS ── */
+        .menu-footer {
+            border-top: 1px solid var(--border-line);
+            padding-top: 2.5rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .kids-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            color: var(--sage);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .kids-desc {
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--text-muted);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .extras-line {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .extras-line span {
+            color: var(--gold);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GEOMETRIC BORDER FRAME -->
+    <div class="menu-border-frame">
+        <div class="menu-border-frame-inner">
+            <div class="corner-diamond cd-tl"></div>
+            <div class="corner-diamond cd-tr"></div>
+            <div class="corner-diamond cd-bl"></div>
+            <div class="corner-diamond cd-br"></div>
+        </div>
+    </div>
+
+    <!-- FINE-LINE BOTANICAL DRAWINGS BACKGROUNDS -->
+    <!-- Top-left botanical branch -->
+    <svg class="botanical-bg botanical-top-left" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+        <path d="M5,10 C25,15 45,35 60,65" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M60,65 C70,78 78,92 80,95" stroke-width="0.6" stroke-linecap="round"/>
+        <!-- leaves -->
+        <path d="M20,18 Q12,25 15,35 Q22,30 20,18" stroke-width="0.5" fill="none"/>
+        <path d="M32,28 Q24,38 29,48 Q37,42 32,28" stroke-width="0.5" fill="none"/>
+        <path d="M45,43 Q40,55 45,63 Q52,55 45,43" stroke-width="0.5" fill="none"/>
+        <path d="M52,55 Q62,60 65,70 Q58,68 52,55" stroke-width="0.5" fill="none"/>
+        <!-- opposite leaves -->
+        <path d="M12,14 Q2,10 6,2 Q15,8 12,14" stroke-width="0.5" fill="none"/>
+        <path d="M25,23 Q18,16 20,8 Q30,17 25,23" stroke-width="0.5" fill="none"/>
+        <path d="M37,34 Q32,25 35,16 Q45,28 37,34" stroke-width="0.5" fill="none"/>
+    </svg>
+
+    <!-- Bottom-right botanical branch -->
+    <svg class="botanical-bg botanical-bottom-right" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+        <path d="M10,10 C30,30 40,60 70,85" stroke-width="0.8" stroke-linecap="round"/>
+        <path d="M25,22 Q15,32 20,40 C28,38 28,28 25,22" stroke-width="0.5" fill="none"/>
+        <path d="M35,38 Q25,48 30,55 C38,53 38,43 35,38" stroke-width="0.5" fill="none"/>
+        <path d="M48,55 Q42,68 47,75 C54,72 52,62 48,55" stroke-width="0.5" fill="none"/>
+        <path d="M18,14 Q8,10 12,2 C22,6 22,12 18,14" stroke-width="0.5" fill="none"/>
+        <path d="M28,27 Q18,20 22,12 C32,16 32,22 28,27" stroke-width="0.5" fill="none"/>
+    </svg>
+
+    <!-- Top-right fern frond -->
+    <svg class="botanical-bg botanical-top-right" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+        <path d="M90,5 Q50,45 10,95" stroke-width="0.8" stroke-linecap="round"/>
+        <!-- fronds -->
+        <path d="M78,17 Q58,15 48,22" stroke-width="0.5"/>
+        <path d="M68,27 Q48,25 38,32" stroke-width="0.5"/>
+        <path d="M58,37 Q38,35 28,42" stroke-width="0.5"/>
+        <path d="M48,47 Q28,45 18,52" stroke-width="0.5"/>
+        <!-- opposite fronds -->
+        <path d="M78,17 Q88,27 82,37" stroke-width="0.5"/>
+        <path d="M68,27 Q78,37 72,47" stroke-width="0.5"/>
+        <path d="M58,37 Q68,47 62,57" stroke-width="0.5"/>
+        <path d="M48,47 Q58,57 52,67" stroke-width="0.5"/>
+    </svg>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <!-- CABECERA -->
+        <header class="header">
+            <!-- Logo Blank Area Symmetrical Frame -->
+            <div class="logo-frame">
+                <div class="logo-brand-text">
+                    <span style="font-size:1.1rem; display:block; margin-top:-0.4rem; letter-spacing:2px; font-family:'Cinzel', serif;">la</span>
+                    Huella
+                    <span style="font-size:0.7rem; display:block; margin-top:-0.8rem; letter-spacing:4px; font-family:'Cinzel', serif; font-weight:bold;">vegana</span>
+                </div>
+            </div>
+            
+            <h1 class="menu-title">Carta General</h1>
+            <div class="editorial-divider">♦</div>
+            <p class="tagline">Una propuesta gastronómica concienzuda y ética. Elaborada artesanalmente con amor, respeto a los animales y compromiso local.</p>
+            
+            <div class="allergen-guide">
+                <div class="a-item"><span class="dot c-gl"></span> Gluten</div>
+                <div class="a-item"><span class="dot c-so"></span> Soja</div>
+                <div class="a-item"><span class="dot c-fs"></span> Frutos Secos</div>
+                <div class="a-item"><span class="dot c-mo"></span> Mostaza</div>
+                <div class="a-item"><span class="dot c-se"></span> Sésamo</div>
+            </div>
+        </header>
+
+        <!-- TWO COLUMN LAYOUT -->
+        <div class="menu-columns">
+            
+            <!-- SECCIÓN COMPARTIR -->
+            <div class="category">
+                <h2 class="category-title">Para Compartir</h2>
+                
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Patatas Gauchas</h3>
+                        <span class="dish-price">11,90€</span>
+                    </div>
+                    <p class="dish-desc">Fuente abundante de patatas fritas doradas acompañadas de salsa Gaucha de la casa y mozzarella vegetal fundida.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Patatas Tex Mex</h3>
+                        <span class="dish-price">11,50€</span>
+                    </div>
+                    <p class="dish-desc">Deliciosas patatas gratinadas con cheddar vegano fundido, cebolla picada, pimiento verde y bacon ahumado vegetal.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Gyozas Crujientes</h3>
+                        <span class="dish-price">12,60€</span>
+                    </div>
+                    <p class="dish-desc">Empanadillas finas rellenas de verduras frescas acompañadas con salsa agridulce tradicional y crema ligera de soja y mostaza.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Pad Thai Satay</h3>
+                        <span class="dish-price">14,40€</span>
+                    </div>
+                    <p class="dish-desc">Tallarines de arroz tierno salteados con verduras del huerto, dados de tofu marinado y salsa satay de cacahuete.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                        <span class="dot c-fs"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Croquetas de Mijo</h3>
+                        <span class="dish-price">11,50€</span>
+                    </div>
+                    <p class="dish-desc">Ocho croquetas de mijo orgánico con pulpa de calabaza asada al pimentón de la Vera.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE AUTOR Y ENSALADAS -->
+            <div class="category">
+                <h2 class="category-title">Especiales & Ensaladas</h2>
+                
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Ceviche de Mango</h3>
+                        <span class="dish-price">13,60€</span>
+                    </div>
+                    <p class="dish-desc">Nuestra versión aliñada con lima y aceite de oliva virgen extra, con base de tofu, mango maduro, cebolla morada y cilantro fresco con un toque picante.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Poke de Quinoa</h3>
+                        <span class="dish-price">13,90€</span>
+                    </div>
+                    <p class="dish-desc">Ensalada fresca de quinoa orgánica, dados de mango fresco, anacardos, alga wakame, edamame y tofu fresco marinado en cítricos.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-se"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">El Lattrey Brioche</h3>
+                        <span class="dish-price">14,20€</span>
+                    </div>
+                    <p class="dish-desc">Brioche de pulled de soja guisado lentamente en salsa barbacoa de cerveza negra irlandesa, pepinillo en rodajas y veganesa de kimchi.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Focaccia Portobello</h3>
+                        <span class="dish-price">13,90€</span>
+                    </div>
+                    <p class="dish-desc">Sándwich de champiñón portobello a la plancha, guacamole de la casa, cebolla morada y mozzarella vegana fundida en pan focaccia.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN HAMBURGUESAS -->
+            <div class="category">
+                <h2 class="category-title">Hamburguesas Rústicas</h2>
+                
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Hamburguesa Huella</h3>
+                        <span class="dish-price">14,90€</span>
+                    </div>
+                    <p class="dish-desc">Filete de avena y verduras con tomate, lechuga, pepinillo, cebolla caramelizada, cheddar vegetal fundido y salsa Huella de la casa.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Mac Fly y Vacon</h3>
+                        <span class="dish-price">15,50€</span>
+                    </div>
+                    <p class="dish-desc">Filete de Heura con lechuga, tomate fresco, pepinillos encurtidos, tiras de vacon ahumado vegetal y salsa rosa casera con toque de mostaza.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Happy Chicken</h3>
+                        <span class="dish-price">15,50€</span>
+                    </div>
+                    <p class="dish-desc">Filete de No-Pollo crujiente al estilo tradicional, ensalada coleslaw cremosa de col, zanahoria y manzana, y queso cheddar fundido.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DULCES -->
+            <div class="category">
+                <h2 class="category-title">Dulce Final</h2>
+                
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Sweet Jarama</h3>
+                        <span class="dish-price">7,90€</span>
+                    </div>
+                    <p class="dish-desc">Nuestra tarta artesana premiada en el Concurso de Rivas, de bizcocho esponjoso de cacao con delicioso helado de avellanas.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Brownie Soul</h3>
+                        <span class="dish-price">8,50€</span>
+                    </div>
+                    <p class="dish-desc">Bizcocho templado de chocolate fudge con nueces, dos bolas de helado de cacahuete, chispas de chocolate belga y granola crujiente.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-header">
+                        <h3 class="dish-name">Gin Cheesecake</h3>
+                        <span class="dish-price">6,50€</span>
+                    </div>
+                    <p class="dish-desc">Cheesecake cremosa de anacardos fría, con frutos del bosque macerados en gel aromatizado de ginebra.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MENU INFANTIL Y EXTRAS -->
+        <footer class="menu-footer">
+            <h3 class="kids-title">Menú Infantil</h3>
+            <p class="kids-desc">Para los más pequeños: 3 croquetas caseras de mijo, 4 nuggets de proteína vegetal crujientes, patatas fritas cortadas a mano y postre a elegir · 11,90€</p>
+            
+            <div class="extras-line">
+                <div>Ración de Pan Artesano <span>1,50€</span></div>
+                <div>Suplemento Boniato Frito <span>1,75€</span></div>
+                <div>Ingrediente Extra <span>1,50€</span></div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

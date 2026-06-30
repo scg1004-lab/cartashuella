@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Premium Street Food</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0e110f;
+            --card-dark: #161a17;
+            --text-bright: #f3f6f4;
+            --text-dim: #94a398;
+            --neon-green: #39ff14;
+            --electric-orange: #ff5e00;
+            --border: #222924;
+            --glass: rgba(22, 26, 23, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-bright);
+            font-family: 'Outfit', sans-serif;
+            padding: 2.5rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .typo-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            margin-bottom: 1.2rem;
+        }
+
+        .typo-la {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--text-bright);
+            margin-bottom: -1.2rem;
+            margin-left: -3rem;
+            z-index: 2;
+        }
+
+        .typo-huella {
+            font-family: 'Dancing Script', cursive;
+            font-size: 6rem;
+            color: var(--text-bright);
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+        }
+
+        .typo-vegana {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.6rem;
+            color: var(--neon-green);
+            letter-spacing: 4px;
+            margin-top: -0.5rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--text-dim);
+            max-width: 480px;
+            margin-top: 1rem;
+        }
+
+        /* Allergen Tags */
+        .allergen-pills {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .allergen-pill {
+            background: var(--card-dark);
+            border: 1px solid var(--border);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .c-gl { background-color: #ff9800; }
+        .c-so { background-color: #4caf50; }
+        .c-fs { background-color: #9c27b0; }
+        .c-mo { background-color: #ffc107; }
+        .c-se { background-color: #f44336; }
+
+        .tag-gf {
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ── UPGRADE/EXTRA AREA (PSYCHOLOGICAL UPSELL) ── */
+        .upsell-banner {
+            background: linear-gradient(135deg, rgba(255, 94, 0, 0.15) 0%, rgba(22, 26, 23, 0.9) 100%);
+            border: 2px dashed var(--electric-orange);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 10px 25px rgba(255, 94, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .upsell-header {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            color: var(--electric-orange);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .upsell-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .upsell-item span {
+            color: var(--neon-green);
+        }
+
+        /* ── CATEGORIES ── */
+        .grid-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-categories {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .cat-block {
+            background: var(--card-dark);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .cat-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            right: 2rem;
+            height: 3px;
+            background: var(--neon-green);
+            border-radius: 0 0 3px 3px;
+        }
+
+        .cat-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            color: var(--text-bright);
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cat-emoji {
+            font-size: 1.6rem;
+        }
+
+        /* ── FOOD ITEMS ── */
+        .food-item {
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .food-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .food-item:hover {
+            transform: scale(1.01);
+        }
+
+        .food-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .food-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-bright);
+            letter-spacing: -0.3px;
+        }
+
+        .food-price {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.1rem;
+            color: var(--electric-orange);
+            background: rgba(255, 94, 0, 0.1);
+            padding: 2px 10px;
+            border-radius: 6px;
+        }
+
+        .food-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.45;
+            margin-bottom: 0.8rem;
+        }
+
+        .food-allergens {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* ── DESSERTS SECTION ── */
+        .dessert-grid {
+            grid-column: span 2;
+            background: linear-gradient(180deg, var(--card-dark) 0%, #111 100%);
+        }
+
+        @media (max-width: 768px) {
+            .dessert-grid {
+                grid-column: span 1;
+            }
+        }
+
+        /* ── KIDS & FOOTER ── */
+        .kids-footer {
+            background: linear-gradient(135deg, #18221b 0%, #0d120f 100%);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            margin-top: 3rem;
+        }
+
+        .kids-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-desc {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- CABECERA -->
+        <header class="header">
+            <div class="typo-logo">
+                <span class="typo-la">la</span>
+                <span class="typo-huella">Huella</span>
+                <span class="typo-vegana">STREET FOOD</span>
+            </div>
+            <p class="tagline">Cocina callejera 100% vegetal. Auténticas explosiones de sabor, texturas brutales e ingredientes para flipar.</p>
+            
+            <div class="allergen-pills">
+                <div class="allergen-pill"><span class="dot c-gl"></span> Gluten</div>
+                <div class="allergen-pill"><span class="dot c-so"></span> Soja</div>
+                <div class="allergen-pill"><span class="dot c-fs"></span> Frutos Secos</div>
+                <div class="allergen-pill"><span class="dot c-mo"></span> Mostaza</div>
+                <div class="allergen-pill"><span class="dot c-se"></span> Sésamo</div>
+            </div>
+        </header>
+
+        <!-- PSYCHOLOGICAL UPSELL BANNER -->
+        <div class="upsell-banner">
+            <h2 class="upsell-header">💥 ¡Haz tu plato Épico! 💥</h2>
+            <div class="upsell-options">
+                <div class="upsell-item">Extra de Bacon Vegano <span>+1.5</span></div>
+                <div class="upsell-item">Queso Cheddar Fundido <span>+1.5</span></div>
+                <div class="upsell-item">Cambio a Patatas Boniato <span>+1.75</span></div>
+            </div>
+        </div>
+
+        <!-- MAIN LAYOUT -->
+        <div class="grid-categories">
+            
+            <!-- ENTRANTES (PARA COMPARTIR) -->
+            <div class="cat-block">
+                <h2 class="cat-title">Munchies para Compartir <span class="cat-emoji">🍟</span></h2>
+                
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Patatas Tex Mex</h3>
+                        <span class="food-price">11.5</span>
+                    </div>
+                    <p class="food-desc">Auténtica fuente de patatas crujientes gratinadas con queso cheddar fundido y burbujeante, cebolla fresca, pimiento verde picado y trozos de vacon crujiente de la casa.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Patatas Gauchas</h3>
+                        <span class="food-price">11.9</span>
+                    </div>
+                    <p class="food-desc">Patatas doradas y crujientes cubiertas con una generosa capa de salsa Gaucha especiada y mozzarella vegetal hilada fundida al horno.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Chilaquiles Huella</h3>
+                        <span class="food-price">14.8</span>
+                    </div>
+                    <p class="food-desc">Base crujiente de totopos de maíz bañados en nuestro guiso casero de frijoles negros y proteína de soja texturizada, pimientos, cebolla y maíz dulce, coronado con cremosa crema agria, guacamole fresco hecho a mano y jalapeños.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Sticky's Teriyaki</h3>
+                        <span class="food-price">14.6</span>
+                    </div>
+                    <p class="food-desc">Tiernas costillas de seitán de trigo artesanal, glaseadas y caramelizadas en salsa teriyaki dulce, acompañadas con bastoncitos de boniato dulce frito.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-se"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STREET FOOD (SANDWICHES & BAOS) -->
+            <div class="cat-block">
+                <h2 class="cat-title">Street Sandwiches <span class="cat-emoji">🌯</span></h2>
+                
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Qué Vap Durum</h3>
+                        <span class="food-price">13.9</span>
+                    </div>
+                    <p class="food-desc">Durum gigante relleno de seitán artesano mechado y sazonado al estilo marroquí, lechuga fresca, rodajas de tomate y cebolla, con salsa de yogur de soja fresca al toque de pepino y hierbabuena. Acompañado de patatas fritas.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">El Lattrey Brioche</h3>
+                        <span class="food-price">14.2</span>
+                    </div>
+                    <p class="food-desc">Exquisito pan de brioche dulce tostado, relleno de pulled pork vegetal cocido a fuego lento en reducción de cerveza negra irlandesa, pepinillos en vinagre agridulce y toque picante de veganesa de kimchi. Con patatas fritas.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Baos Pato Ramírez</h3>
+                        <span class="food-price">14.5</span>
+                    </div>
+                    <p class="food-desc">Dos jugosos panes bao al vapor, rellenos de pulled "duck" vegetal glaseado estilo pibil con toque cítrico refrescante y finas tiras de cebolla morada encurtida.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Burrito BBQ</h3>
+                        <span class="food-price">14.5</span>
+                    </div>
+                    <p class="food-desc">Tortilla gigante de trigo rellena de jugosa proteína de soja salteada en salsa barbacoa ahumada, lombarda crujiente, cebolla y aguacate guacamole de la casa.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BURGERS (HAMBURGUESAS) -->
+            <div class="cat-block">
+                <h2 class="cat-title">Epic Burgers <span class="cat-emoji">🍔</span></h2>
+                
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Mac Fly y Vacon</h3>
+                        <span class="food-price">15.5</span>
+                    </div>
+                    <p class="food-desc">Espectacular filete de Heura a la plancha, lechuga, tomate fresco, cebolla, pepinillos en rodajas y tiras crujientes de vacon ahumado, todo bañado en nuestra salsa rosa especiada con toque de mostaza. Con patatas.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Happy Chicken</h3>
+                        <span class="food-price">15.5</span>
+                    </div>
+                    <p class="food-desc">Crujiente y jugosa pechuga de No-Pollo frita, cubierta con una refrescante ensalada coleslaw artesanal de col rallada, manzana verde, zanahoria y aderezo de mostaza dulce, sobre queso cheddar fundido, lechuga y tomate. Con patatas.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h3 class="food-name">Hamburguesa Huella</h3>
+                        <span class="food-price">14.9</span>
+                    </div>
+                    <p class="food-desc">El clásico de la casa. Filete artesanal de avena sazonado con lechuga, rodajas de tomate, pepinillos, cebolla dulce caramelizada, queso cheddar fundido y nuestra exclusiva salsa Huella. Con patatas.</p>
+                    <div class="food-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POSTRES (DULCES) -->
+            <div class="cat-block dessert-grid">
+                <h2 class="cat-title">Munchies Dulces <span class="cat-emoji">🍰</span></h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="food-item">
+                        <div class="food-header">
+                            <h3 class="food-name">Brownie Soul</h3>
+                            <span class="food-price">8.5</span>
+                        </div>
+                        <p class="food-desc">Bizcocho templado y denso de chocolate fundido y nueces crujientes, servido con dos generosas bolas de helado de cacahuete, chips de chocolate belga y granola crujiente de avena.</p>
+                        <div class="food-allergens">
+                            <span class="dot c-gl"></span>
+                            <span class="dot c-fs"></span>
+                            <span class="dot c-so"></span>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-header">
+                            <h3 class="food-name">Sweet Jarama</h3>
+                            <span class="food-price">7.9</span>
+                        </div>
+                        <p class="food-desc">Nuestra tarta de cacao artesano superventas y galardonada en Rivas, con una textura increíble, acompañada de helado artesano premium de avellanas tostadas.</p>
+                        <div class="food-allergens">
+                            <span class="dot c-gl"></span>
+                            <span class="dot c-fs"></span>
+                            <span class="dot c-so"></span>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-header">
+                            <h3 class="food-name">Goloso en Llamas</h3>
+                            <span class="food-price">8.2</span>
+                        </div>
+                        <p class="food-desc">Una crujiente tulipa de galleta rellena con cremoso helado artesano de doble chocolate belga, hilos de sirope de chocolate negro, pepitas crujientes y nata montada de soja.</p>
+                        <div class="food-allergens">
+                            <span class="dot c-gl"></span>
+                            <span class="dot c-so"></span>
+                            <span class="tag-gf">Opc. Sin Gluten</span>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-header">
+                            <h3 class="food-name">Tarta de Zanahoria</h3>
+                            <span class="food-price">6.7</span>
+                        </div>
+                        <p class="food-desc">Tarta casera jugosa y especiada de zanahoria, cubierta de glaseado, hilos de caramelo líquido tostado, granillo crujiente de almendra y nata.</p>
+                        <div class="food-allergens">
+                            <span class="dot c-gl"></span>
+                            <span class="dot c-fs"></span>
+                            <span class="dot c-so"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MENU INFANTIL -->
+        <footer class="kids-footer">
+            <h2 class="kids-title">👦 Menú Infantil Street · 11.5 👧</h2>
+            <p class="kids-desc">Hecho para los más pequeños: 3 croquetas caseras de mijo, 4 nuggets crujientes de proteína vegetal, patatas fritas cortadas a mano con salsa ketchup y postre dulce.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

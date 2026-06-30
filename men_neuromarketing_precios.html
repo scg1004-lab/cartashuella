@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Neuromenú Persuasivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-neutral: #fbfbf9;
+            --text-dark: #1e2d24;
+            --text-muted: #6b7c72;
+            --primary: #2d5a3f;
+            --accent: #dcae5f;
+            --card-bg: #ffffff;
+            --highlight-bg: rgba(220, 174, 95, 0.07);
+            --border-color: #e5ece8;
+            --glow: 0 8px 30px rgba(45, 90, 63, 0.05);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-neutral);
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .typo-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .typo-la {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: -1.2rem;
+            margin-left: -3rem;
+            z-index: 2;
+        }
+
+        .typo-huella {
+            font-family: 'Dancing Script', cursive;
+            font-size: 6rem;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+        }
+
+        .typo-vegana {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: #7cb342;
+            letter-spacing: 6px;
+            margin-top: -0.5rem;
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 450px;
+            margin: 1rem auto 0;
+            line-height: 1.4;
+        }
+
+        /* Allergen Bar */
+        .allergen-bar {
+            background-color: var(--card-bg);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--glow);
+        }
+
+        .allergen-key {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .c-gl { background-color: #ff9800; }
+        .c-so { background-color: #4caf50; }
+        .c-fs { background-color: #9c27b0; }
+        .c-mo { background-color: #ffc107; }
+        .c-se { background-color: #f44336; }
+
+        .tag-gf {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        /* ── GRID SYSTEM ── */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--glow);
+            transition: transform 0.3s ease;
+        }
+
+        .category:hover {
+            transform: translateY(-4px);
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        /* ── ITEMS ── */
+        .item {
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed var(--border-color);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* Highlights for high-margin items (Stars) */
+        .item.star {
+            background-color: var(--highlight-bg);
+            border: 1px solid rgba(220, 174, 95, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+
+        .badge-star {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: var(--accent);
+            color: var(--card-bg);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        /* No currency symbols & same font style as description to avoid scanning */
+        .item-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-left: auto;
+        }
+
+        .item-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            line-height: 1.5;
+            max-width: 92%;
+        }
+
+        .item-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ── FOOTER SECTIONS ── */
+        .menu-extra-info {
+            background: var(--primary);
+            color: var(--bg-neutral);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(45, 90, 63, 0.15);
+        }
+
+        .kids-menu-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .kids-menu-desc {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .extras-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .extra-price {
+            color: var(--accent);
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- CABECERA -->
+        <header class="header">
+            <div class="typo-logo">
+                <span class="typo-la">la</span>
+                <span class="typo-huella">Huella</span>
+                <span class="typo-vegana">· VEGANA ·</span>
+            </div>
+            <p class="tagline">Sabor ético, ingredientes locales y recetas artesanales para disfrutar sin prisa.</p>
+            
+            <div class="allergen-bar">
+                <div class="allergen-key"><span class="dot c-gl"></span> Gluten</div>
+                <div class="allergen-key"><span class="dot c-so"></span> Soja</div>
+                <div class="allergen-key"><span class="dot c-fs"></span> Frutos Secos</div>
+                <div class="allergen-key"><span class="dot c-mo"></span> Mostaza</div>
+                <div class="allergen-key"><span class="dot c-se"></span> Sésamo</div>
+            </div>
+        </header>
+
+        <!-- CUADRÍCULA DE CARTAS -->
+        <div class="menu-grid">
+            
+            <!-- PARA COMPARTIR -->
+            <section class="category">
+                <h2 class="category-title">Para compartir... o no</h2>
+                
+                <div class="item star">
+                    <span class="badge-star">Favorito</span>
+                    <div class="item-header">
+                        <h3 class="item-name">Patatas Gauchas</h3>
+                        <span class="item-price">11,9</span>
+                    </div>
+                    <p class="item-desc">Generosa fuente de patatas crujientes bañadas en nuestra salsa Gaucha artesanal con mozzarella fundida.</p>
+                    <div class="item-footer">
+                        <span class="dot c-so" title="Soja"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Pad Thai</h3>
+                        <span class="item-price">14,4</span>
+                    </div>
+                    <p class="item-desc">Fideos de arroz salteados con cremosa salsa satay de cacahuete, verduras crujientes y tofu marinado.</p>
+                    <div class="item-footer">
+                        <span class="dot c-so"></span>
+                        <span class="dot c-fs"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Gyozas Crujientes</h3>
+                        <span class="item-price">12,6</span>
+                    </div>
+                    <p class="item-desc">Empanadillas japonesas tostadas rellenas de verduras finas con salsa agridulce y emulsión suave de soja y mostaza.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Lentacos</h3>
+                        <span class="item-price">14,6</span>
+                    </div>
+                    <p class="item-desc">Tres tacos de maíz tierno rellenos de nuestro guiso especial de lentejas enchiladas, pico de gallo fresco y aguacate.</p>
+                    <div class="item-footer">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="item star">
+                    <span class="badge-star">Especialidad</span>
+                    <div class="item-header">
+                        <h3 class="item-name">Sticky's Teriyaki</h3>
+                        <span class="item-price">14,6</span>
+                    </div>
+                    <p class="item-desc">Costillas de seitán caramelizadas en salsa teriyaki de la casa, acompañadas de bastones de boniato asado.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-se"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ENSALADAS Y SÁNDWICHES -->
+            <section class="category">
+                <h2 class="category-title">Frescos e Inusuales</h2>
+                
+                <div class="item star">
+                    <span class="badge-star">Recomendado</span>
+                    <div class="item-header">
+                        <h3 class="item-name">Poke, en plan... Poke</h3>
+                        <span class="item-price">13,9</span>
+                    </div>
+                    <p class="item-desc">Ensalada de quinoa orgánica, dados de mango fresco, anacardos tostados, alga wakame, edamame y tofu suave.</p>
+                    <div class="item-footer">
+                        <span class="dot c-so"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-se"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Portobello Focaccia</h3>
+                        <span class="item-price">13,9</span>
+                    </div>
+                    <p class="item-desc">Sándwich de champiñones portobello salteados, guacamole cremoso, tomate y mozzarella fundida en pan focaccia crujiente.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="item star">
+                    <span class="badge-star">Estrella</span>
+                    <div class="item-header">
+                        <h3 class="item-name">El Lattrey</h3>
+                        <span class="item-price">14,2</span>
+                    </div>
+                    <p class="item-desc">Pan brioche artesano con jugoso pulled cocido en reducción de cerveza negra irlandesa, pepinillos y un toque de veganesa de kimchi.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Arepas Andresinas</h3>
+                        <span class="item-price">14,5</span>
+                    </div>
+                    <p class="item-desc">Arepas colombianas de maíz blanco hechas al momento, rellenas de heura mechada, sofrito tradicional de cebolla y tomate y cilantro fresco.</p>
+                    <div class="item-footer">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HAMBURGUESAS -->
+            <section class="category">
+                <h2 class="category-title">Nuestras Hamburguesas</h2>
+                
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Hamburguesa Huella</h3>
+                        <span class="item-price">14,9</span>
+                    </div>
+                    <p class="item-desc">Filete artesanal de avena especiada con lechuga, tomate fresco, pepinillos, cebolla caramelizada, cheddar fundido y salsa Huella secreta.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Pancho Villa</h3>
+                        <span class="item-price">14,9</span>
+                    </div>
+                    <p class="item-desc">Filete de alubia roja y arroz integral con guacamole fresco, crema agria vegetal, pico de gallo, jalapeños picantes y queso cheddar fundido.</p>
+                    <div class="item-footer">
+                        <span class="dot c-so"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="item star">
+                    <span class="badge-star">Más Vendido</span>
+                    <div class="item-header">
+                        <h3 class="item-name">Mac Fly y Vacon</h3>
+                        <span class="item-price">15,5</span>
+                    </div>
+                    <p class="item-desc">Jugoso filete de Heura con tomate, lechuga, cebolla y vacon crujiente, aderezado con salsa rosa casera y mostaza suave.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Happy Chicken</h3>
+                        <span class="item-price">15,5</span>
+                    </div>
+                    <p class="item-desc">Bocado crujiente estilo No-Pollo cubierto de nuestra ensalada coleslaw de manzana verde, zanahoria y mostaza dulce con cheddar fundido.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- POSTRES -->
+            <section class="category">
+                <h2 class="category-title">Momentos Dulces</h2>
+                
+                <div class="item star">
+                    <span class="badge-star">Imprescindible</span>
+                    <div class="item-header">
+                        <h3 class="item-name">Sweet Jarama</h3>
+                        <span class="item-price">7,9</span>
+                    </div>
+                    <p class="item-desc">Nuestra tarta de cacao artesano galardonada en el concurso local de Rivas, servida con bola de helado de avellanas cremoso.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Brownie Soul</h3>
+                        <span class="item-price">8,5</span>
+                    </div>
+                    <p class="item-desc">Bizcocho de chocolate y nueces templado, coronado con dos bolas de helado de cacahuete, chips de chocolate y granola crujiente.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Tarta de Zanahoria</h3>
+                        <span class="item-price">6,7</span>
+                    </div>
+                    <p class="item-desc">Bizcocho húmedo de zanahoria especiada, servido con hilos de caramelo, granillo de almendra y nata montada de soja.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-header">
+                        <h3 class="item-name">Gin Cheesecake</h3>
+                        <span class="item-price">6,5</span>
+                    </div>
+                    <p class="item-desc">Tarta fría cremosa a base de anacardos, cubierta con frambuesas silvestres maceradas en gelatina fina de ginebra.</p>
+                    <div class="item-footer">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- SECCIÓN MENÚ INFANTIL Y EXTRAS -->
+        <footer class="menu-extra-info">
+            <h3 class="kids-menu-title">Menú Infantil · 11,9</h3>
+            <p class="kids-menu-desc">Para los más peques de la casa: 3 Croquetas caseras de mijo, 4 nuggets de proteína vegetal, patatas fritas crujientes y postre a elegir.</p>
+            
+            <div class="extras-grid">
+                <div>Ración de Pan Artesano <span class="extra-price">1,5</span></div>
+                <div>Suplemento de Boniato Asado <span class="extra-price">1,75</span></div>
+                <div>Cualquier Ingrediente Extra <span class="extra-price">1,5</span></div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Storytelling y Selección del Chef</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-linen: #f9f7f3;
+            --text-main: #2b3a32;
+            --text-light: #5e6f64;
+            --forest: #1e3527;
+            --sage: #7a9a86;
+            --terracotta: #c87a53;
+            --border: rgba(30, 53, 39, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-linen);
+            color: var(--text-main);
+            font-family: 'Cormorant Garamond', serif;
+            padding: 3rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .typo-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .typo-la {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: var(--forest);
+            margin-bottom: -1rem;
+            margin-left: -2.5rem;
+            z-index: 2;
+        }
+
+        .typo-huella {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5rem;
+            color: var(--forest);
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+        }
+
+        .typo-vegana {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            color: var(--sage);
+            letter-spacing: 10px;
+            margin-top: -0.5rem;
+            font-weight: 500;
+        }
+
+        /* ── STORYTELLING INTRO ── */
+        .story-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 2rem auto;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .story-intro::before {
+            content: '“';
+            position: absolute;
+            font-size: 5rem;
+            color: rgba(122, 154, 134, 0.15);
+            top: -40px;
+            left: 20px;
+        }
+
+        .story-intro::after {
+            content: '”';
+            position: absolute;
+            font-size: 5rem;
+            color: rgba(122, 154, 134, 0.15);
+            bottom: -80px;
+            right: 20px;
+        }
+
+        .line-separator {
+            width: 150px;
+            height: 1px;
+            background-color: var(--sage);
+            margin: 2rem auto;
+            opacity: 0.5;
+        }
+
+        /* Allergen Key */
+        .allergen-key {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 3.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+
+        .allergen-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .c-gl { background-color: #e5a93c; }
+        .c-so { background-color: #72a76d; }
+        .c-fs { background-color: #a46db5; }
+        .c-mo { background-color: #d1b838; }
+        .c-se { background-color: #cc5c5c; }
+
+        .tag-gf {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            color: var(--terracotta);
+            border: 1px solid var(--terracotta);
+            padding: 1px 5px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* ── SECTIONS ── */
+        .menu-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--forest);
+            letter-spacing: 1px;
+        }
+
+        .section-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        /* ── DISH CARDS ── */
+        .dish-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+
+        .dish {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .dish:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .dish-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.4rem;
+        }
+
+        .dish-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dish-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: var(--forest);
+        }
+
+        .dish-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--terracotta);
+        }
+
+        .dish-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 0.6rem;
+            max-width: 90%;
+        }
+
+        .dish-allergens {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* ── CHEF'S CHOICE (STORYTELLING ANCHOR) ── */
+        .chef-selection {
+            background-color: rgba(122, 154, 134, 0.07);
+            border-left: 2px solid var(--sage);
+            padding: 1.5rem 2rem;
+            margin: 1.5rem -1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .chef-badge {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--sage);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .chef-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.08rem;
+            font-style: italic;
+            color: var(--forest);
+            margin-top: 0.6rem;
+            padding-left: 1rem;
+            border-left: 1px italic var(--sage);
+            opacity: 0.95;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .chef-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.25rem;
+            color: var(--sage);
+            margin-top: 4px;
+            align-self: flex-end;
+        }
+
+        /* ── FOOTER / INFO ── */
+        .footer-info {
+            border-top: 1px solid var(--sage);
+            padding-top: 3rem;
+            margin-top: 4rem;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--forest);
+        }
+
+        .footer-info p {
+            margin-bottom: 0.8rem;
+        }
+
+        .kids-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--forest);
+            margin-bottom: 0.4rem;
+        }
+
+        .kids-desc {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-light);
+            max-width: 550px;
+            margin: 0 auto 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- CABECERA -->
+        <header class="header">
+            <div class="typo-logo">
+                <span class="typo-la">la</span>
+                <span class="typo-huella">Huella</span>
+                <span class="typo-vegana">· VEGANA ·</span>
+            </div>
+            
+            <p class="story-intro">
+                Creemos en una cocina consciente. Cada plato es un tributo a la tierra, elaborado pacientemente con ingredientes de agricultores locales, de temporada y 100% vegetales. Cocina honesta, con huella en el alma pero no en el planeta.
+            </p>
+            
+            <div class="line-separator"></div>
+
+            <div class="allergen-key">
+                <div class="allergen-item"><span class="dot c-gl"></span> Gluten</div>
+                <div class="allergen-item"><span class="dot c-so"></span> Soja</div>
+                <div class="allergen-item"><span class="dot c-fs"></span> Frutos Secos</div>
+                <div class="allergen-item"><span class="dot c-mo"></span> Mostaza</div>
+                <div class="allergen-item"><span class="dot c-se"></span> Sésamo</div>
+            </div>
+        </header>
+
+        <!-- CATEGORÍA: COMPARTIR -->
+        <section class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">Para Empezar y Compartir</h2>
+                <p class="section-desc">Bocados pensados para abrir boca en buena compañía</p>
+            </div>
+
+            <div class="dish-list">
+                
+                <!-- Croquetas (Chef Selection) -->
+                <div class="dish chef-selection">
+                    <span class="chef-badge">Selección de Autor</span>
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Croquetas de Semilla de Mijo</h3>
+                        </div>
+                        <span class="dish-price">11,5</span>
+                    </div>
+                    <p class="dish-desc">Ocho croquetas crujientes elaboradas con semillas de mijo orgánico, calabaza dulce asada a la leña y un toque ahumado de pimentón de la Vera.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                    <div class="chef-note">
+                        "Asamos la calabaza lentamente en nuestro horno para caramelizar sus azúcares naturales. Es una receta que me recuerda a los otoños de mi infancia."
+                        <span class="chef-signature">— Chef Carmen</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Patatas Gauchas</h3>
+                        </div>
+                        <span class="dish-price">11,9</span>
+                    </div>
+                    <p class="dish-desc">Fuente abundante de patatas tiernas por dentro y doradas por fuera, aderezadas con nuestra salsa Gaucha artesanal y queso mozzarella gratinado.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Gyozas al Vapor y Plancha</h3>
+                        </div>
+                        <span class="dish-price">12,6</span>
+                    </div>
+                    <p class="dish-desc">Empanadillas japonesas rellenas de verduras seleccionadas del huerto, acompañadas de salsa agridulce y una suave crema de soja y mostaza antigua.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Paté de Alubias Blancas</h3>
+                        </div>
+                        <span class="dish-price">12,3</span>
+                    </div>
+                    <p class="dish-desc">Untuoso paté de alubias blancas del país, queso feta vegano desmigado y zanahoria asada al horno, acompañado de totopos crujientes de maíz.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORÍA: ESPECIALES -->
+        <section class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">Especialidades de la Cocina</h2>
+                <p class="section-desc">Creaciones únicas que definen nuestra identidad culinaria</p>
+            </div>
+
+            <div class="dish-list">
+                
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Ceviche de Mango y Tofu</h3>
+                        </div>
+                        <span class="dish-price">13,6</span>
+                    </div>
+                    <p class="dish-desc">Nuestra fresca interpretación del ceviche tradicional, marinado en jugo de lima fresca y aceite de oliva virgen extra, con base de tofu firme, mango maduro, pimientos, cebolla morada, cilantro y un sutil toque picante.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <!-- El Lattrey (Chef Selection) -->
+                <div class="dish chef-selection">
+                    <span class="chef-badge">Favorito del Chef</span>
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">El Lattrey Pulled Brioche</h3>
+                        </div>
+                        <span class="dish-price">14,2</span>
+                    </div>
+                    <p class="dish-desc">Pan brioche tierno de panadería artesanal relleno de pulled vegetal guisado pacientemente en salsa de cerveza negra irlandesa, acompañado de pepinillos agridulces y veganesa de kimchi.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                    <div class="chef-note">
+                        "La reducción de cerveza negra aporta una profundidad de sabor espectacular que contrasta de maravilla con la frescura picante del kimchi. Es nuestro sándwich más atrevido."
+                        <span class="chef-signature">— Chef Carmen</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Sándwich Portobello</h3>
+                        </div>
+                        <span class="dish-price">13,9</span>
+                    </div>
+                    <p class="dish-desc">Champiñones portobello grandes salteados a la plancha con ajo y perejil, acompañados de guacamole fresco, rodajas de tomate y queso mozzarella fundido en pan de focaccia artesana.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Arepas Andresinas de Heura</h3>
+                        </div>
+                        <span class="dish-price">14,5</span>
+                    </div>
+                    <p class="dish-desc">Arepas colombianas de maíz blanco moldeadas y asadas al momento, rellenas de Heura mechada, sofrito tradicional y hojas de cilantro fresco.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORÍA: HAMBURGUESAS -->
+        <section class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">Hamburguesas con Alma</h2>
+                <p class="section-desc">Recetas caseras en pan rústico con patatas fritas cortadas a mano</p>
+            </div>
+
+            <div class="dish-list">
+                
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">La Hamburguesa Huella</h3>
+                        </div>
+                        <span class="dish-price">14,9</span>
+                    </div>
+                    <p class="dish-desc">Nuestra receta original con filete casero de avena, rodajas de tomate, lechuga, pepinillo, cebolla caramelizada artesanalmente, queso cheddar vegetal y salsa Huella.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                        <span class="tag-gf">Opc. Sin Gluten</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Happy Chicken Burger</h3>
+                        </div>
+                        <span class="dish-price">15,5</span>
+                    </div>
+                    <p class="dish-desc">Filete de No-Pollo crujiente al estilo sureño con ensalada coleslaw de col blanca, manzana verde y zanahoria, sobre una base de tomate fresco y queso fundido.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                        <span class="dot c-mo"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORÍA: POSTRES -->
+        <section class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">Postres de Creador</h2>
+                <p class="section-desc">El broche de oro final, elaborados con endulzantes naturales y mucho cariño</p>
+            </div>
+
+            <div class="dish-list">
+                
+                <!-- Sweet Jarama (Chef Selection) -->
+                <div class="dish chef-selection">
+                    <span class="chef-badge">Tarta de Autor Premiada</span>
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Sweet Jarama</h3>
+                        </div>
+                        <span class="dish-price">7,9</span>
+                    </div>
+                    <p class="dish-desc">Espectacular tarta de mousse de cacao y bizcocho húmedo galardonada en el Concurso Gastronómico local de Rivas, servida con helado artesanal de avellana.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                    <div class="chef-note">
+                        "Diseñamos esta tarta buscando el equilibrio perfecto del cacao sin refinar y la untuosidad del fruto seco. Fue un honor recibir el premio local por ella."
+                        <span class="chef-signature">— Chef Carmen</span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Tarta de Zanahoria Casera</h3>
+                        </div>
+                        <span class="dish-price">6,7</span>
+                    </div>
+                    <p class="dish-desc">Un clásico de la Huella. Bizcocho jugoso de zanahoria y especias, cubierto con frosting de soja, caramelo líquido y almendra tostada.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-fs"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+
+                <div class="dish">
+                    <div class="dish-meta">
+                        <div class="dish-title-group">
+                            <h3 class="dish-name">Gin Cheesecake</h3>
+                        </div>
+                        <span class="dish-price">6,5</span>
+                    </div>
+                    <p class="dish-desc">Cheesecake fría y sedosa a base de anacardos, cubierta con compota de frambuesa en gel de ginebra aromática.</p>
+                    <div class="dish-allergens">
+                        <span class="dot c-gl"></span>
+                        <span class="dot c-so"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN MENÚ INFANTIL Y EXTRAS -->
+        <footer class="footer-info">
+            <h3 class="kids-title">Menú Infantil · 11,9</h3>
+            <p class="kids-desc">Tres croquetas caseras de mijo, cuatro nuggets crujientes, patatas fritas y un postre artesano a elegir.</p>
+            
+            <p style="font-size: 1.05rem; color: var(--text-light);">
+                Ración de Pan Artesano: 1,5 &nbsp;·&nbsp; Suplemento de Boniato Asado: 1,75 &nbsp;·&nbsp; Ingrediente Extra: 1,5
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>

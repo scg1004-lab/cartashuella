@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Huella Vegana — Fluido Terracota</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --offwhite:    #f8f4ee;
+      --offwhite-dk: #ede8df;
+      --sage:        #7a9e82;
+      --sage-lt:     #b4cdb8;
+      --sage-pale:   #e4eeе6;
+      --terra:       #c4694a;
+      --terra-lt:    #e8a08a;
+      --terra-pale:  #f5e0d8;
+      --text:        #1e1e1e;
+      --text-mid:    #4a4a4a;
+      --text-muted:  #888;
+      --white:       #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--offwhite);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── BLOBS SVG ── */
+    .blob-top {
+      position: fixed;
+      top: -80px; right: -80px;
+      width: 480px; height: 480px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .blob-mid {
+      position: fixed;
+      top: 45%; left: -120px;
+      width: 380px; height: 380px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    .blob-bot {
+      position: fixed;
+      bottom: -100px; right: -60px;
+      width: 420px; height: 420px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    .blob-accent {
+      position: fixed;
+      top: 30%; right: -40px;
+      width: 180px; height: 260px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+    }
+
+    /* ── PAGE ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      padding: 64px 0 52px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--terra-pale);
+      border: 1px solid var(--terra-lt);
+      color: var(--terra);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .logo-block {
+      margin-bottom: 16px;
+    }
+
+    .logo-la {
+      display: block;
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--sage);
+      letter-spacing: 0.08em;
+      margin-bottom: -10px;
+      margin-left: -80px;
+    }
+
+    .logo-huella {
+      display: block;
+      font-family: 'DM Serif Display', serif;
+      font-size: 6rem;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-vegana {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .logo-vegana span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .logo-vegana::before,
+    .logo-vegana::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--offwhite-dk);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ALLERGENS ── */
+    .allergens {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .al-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--white);
+      border: 1px solid var(--offwhite-dk);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-mid);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .al-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section {
+      margin-top: 60px;
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--text);
+      margin-bottom: 32px;
+    }
+
+    .sec-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .sec-count {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      padding-bottom: 4px;
+    }
+
+    /* ── TWO-COLUMN GRID ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--offwhite-dk);
+      border: 1px solid var(--offwhite-dk);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .grid-item {
+      background: var(--offwhite);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .grid-item:hover { background: var(--white); }
+
+    .gi-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .gi-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--text);
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .gi-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--terra);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .gi-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .gi-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .gi-tag {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--offwhite-dk);
+      color: var(--text-muted);
+    }
+
+    /* FEATURED: full width + terracota accent */
+    .grid-item.full {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      background: var(--terra-pale);
+      border-left: 4px solid var(--terra);
+    }
+
+    .grid-item.full:hover { background: var(--terra-pale); }
+
+    .grid-item.full .gi-top { flex: 1; }
+
+    .full-badge {
+      background: var(--terra);
+      color: var(--white);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* SAGE FEATURED */
+    .grid-item.sage {
+      background: #e8f0ea;
+      border-left: 4px solid var(--sage);
+    }
+
+    .grid-item.sage:hover { background: #e0eae2; }
+
+    /* ── SINGLE LIST (postres) ── */
+    .list-single {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--offwhite-dk);
+    }
+
+    .list-item:last-child { border-bottom: none; }
+
+    .li-num {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--offwhite-dk);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 32px;
+      text-align: right;
+    }
+
+    .li-body { flex: 1; }
+
+    .li-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .li-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .li-price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--terra);
+      white-space: nowrap;
+    }
+
+    .li-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .li-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .li-tag {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: var(--offwhite-dk);
+      color: var(--text-muted);
+    }
+
+    /* ── CALLOUT BAND ── */
+    .callout {
+      margin: 56px 0 0;
+      background: var(--sage);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .callout-text h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .callout-text p {
+      font-size: 13px;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    .callout-badge {
+      background: var(--white);
+      color: var(--sage);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 56px;
+      padding: 36px;
+      background: var(--text);
+      color: var(--white);
+      border-radius: 10px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      background: var(--terra);
+      border-radius: 50%;
+      opacity: 0.12;
+    }
+
+    footer::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: var(--sage);
+      border-radius: 50%;
+      opacity: 0.1;
+    }
+
+    .ft-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin: 4px 0;
+      position: relative;
+    }
+
+    footer p.ft-note {
+      margin-top: 14px;
+      color: var(--sage-lt);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<!-- BLOBS -->
+<svg class="blob-top" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240,20 C320,0 430,60 460,150 C490,240 440,360 350,420 C260,480 120,460 60,370 C0,280 10,140 80,70 C130,20 180,38 240,20Z" fill="#c4694a" opacity="0.18"/>
+  <path d="M240,60 C300,44 390,90 420,170 C450,250 410,350 330,400 C250,450 130,430 80,350 C30,270 40,150 100,90 C145,50 190,74 240,60Z" fill="#7a9e82" opacity="0.22"/>
+</svg>
+
+<svg class="blob-mid" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+  <path d="M190,30 C260,10 340,70 360,150 C380,230 340,320 260,360 C180,400 80,370 40,290 C0,210 20,100 90,50 C130,20 150,48 190,30Z" fill="#7a9e82" opacity="0.25"/>
+</svg>
+
+<svg class="blob-bot" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+  <path d="M210,20 C300,0 400,70 420,170 C440,270 380,370 290,410 C200,450 90,420 40,330 C-10,240 10,110 80,50 C130,5 150,38 210,20Z" fill="#c4694a" opacity="0.15"/>
+  <path d="M210,60 C280,45 360,100 380,190 C400,280 350,360 270,395 C190,430 90,400 50,320 C10,240 30,130 90,75 C135,35 160,73 210,60Z" fill="#7a9e82" opacity="0.12"/>
+</svg>
+
+<svg class="blob-accent" viewBox="0 0 180 260" xmlns="http://www.w3.org/2000/svg">
+  <path d="M90,20 C140,0 180,60 170,130 C160,200 120,260 70,250 C20,240 -10,170 10,100 C28,40 50,38 90,20Z" fill="#c4694a" opacity="0.3"/>
+</svg>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="hero">
+    <div class="hero-tag">🌱 100% Vegano · Rivas Vaciamadrid</div>
+
+    <div class="logo-block">
+      <span class="logo-la">la</span>
+      <span class="logo-huella">Huella</span>
+      <div class="logo-vegana"><span>Vegana</span></div>
+    </div>
+
+    <p class="hero-sub">Cocina de autor con sabores del mundo · Sin compromiso animal</p>
+
+    <div class="allergens">
+      <div class="al-pill"><span class="al-dot" style="background:#e07b39"></span>Gluten</div>
+      <div class="al-pill"><span class="al-dot" style="background:#4caf50"></span>Soja</div>
+      <div class="al-pill"><span class="al-dot" style="background:#7b52ab"></span>Frutos Secos</div>
+      <div class="al-pill"><span class="al-dot" style="background:#e0b800"></span>Mostaza</div>
+      <div class="al-pill"><span class="al-dot" style="background:#c0392b"></span>Sésamo</div>
+    </div>
+  </header>
+
+
+  <!-- 01 PARA COMPARTIR -->
+  <section class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">Para Compartir</h2>
+      <span class="sec-count">11 platos</span>
+    </div>
+
+    <div class="grid-2">
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Patatas Gauchas</div>
+          <div class="gi-price">11,90€</div>
+        </div>
+        <div class="gi-desc">Patatas con salsa Gaucha y mozzarella fundida.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Patatas Tex Mex</div>
+          <div class="gi-price">11,50€</div>
+        </div>
+        <div class="gi-desc">Patatas gratinadas con queso, cebolla, pimiento verde y vacon.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Pad Thai</div>
+          <div class="gi-price">14,40€</div>
+        </div>
+        <div class="gi-desc">Fideos de arroz con salsa satay, verduritas salteadas y tofu.</div>
+        <div class="gi-tags"><span class="gi-tag">Soja</span></div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Gyozas</div>
+          <div class="gi-price">12,60€</div>
+        </div>
+        <div class="gi-desc">Empanadillas japonesas de verduras con salsa agridulce y crema de soja y mostaza.</div>
+        <div class="gi-tags"><span class="gi-tag">Gluten</span><span class="gi-tag">Soja</span></div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Croquetas de Mijo</div>
+          <div class="gi-price">11,50€</div>
+        </div>
+        <div class="gi-desc">8 croquetas de semillas de mijo con calabaza asada y pimentón de la Vera.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Paté de Alubias Blancas</div>
+          <div class="gi-price">12,30€</div>
+        </div>
+        <div class="gi-desc">Con queso feta y zanahoria asada, acompañado de totopos.</div>
+      </div>
+
+      <div class="grid-item full">
+        <div class="gi-top">
+          <div>
+            <div class="gi-name">Chilaquiles</div>
+            <div class="gi-desc" style="margin-top:6px">Base de totopos con guiso de frijoles negros, proteína de soja, pimientos, cebolla y maíz, con crema agria, guacamole y jalapeños.</div>
+          </div>
+          <div class="gi-price">14,80€</div>
+        </div>
+        <span class="full-badge">⭐ Favorito</span>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Lentacos</div>
+          <div class="gi-price">14,60€</div>
+        </div>
+        <div class="gi-desc">Tres tacos de maíz con lentejas enchiladas, pico de gallo y aguacate.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Costillas de Maíz</div>
+          <div class="gi-price">11,90€</div>
+        </div>
+        <div class="gi-desc">Maíz asado en tiras con salsas para dipear.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Sticky's</div>
+          <div class="gi-price">14,60€</div>
+        </div>
+        <div class="gi-desc">Costillas de seitán en salsa teriyaki con boniato.</div>
+        <div class="gi-tags"><span class="gi-tag">Gluten</span><span class="gi-tag">Soja</span></div>
+      </div>
+
+      <div class="grid-item full">
+        <div class="gi-top">
+          <div>
+            <div class="gi-name">Onion Bhaji</div>
+            <div class="gi-desc" style="margin-top:6px">Buñuelos hindúes de cebolla, harina de garbanzos y especias, con salsa de yogur.</div>
+            <div class="gi-tags" style="margin-top:8px"><span class="gi-tag">Sin gluten</span><span class="gi-tag">Mostaza</span></div>
+          </div>
+          <div class="gi-price">12,50€</div>
+        </div>
+        <span class="full-badge" style="background:var(--sage)">🌱 SG</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 02 ENSALADAS -->
+  <section class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">Ensaladas</h2>
+      <span class="sec-count">3 platos</span>
+    </div>
+
+    <div class="grid-2">
+
+      <div class="grid-item sage">
+        <div class="gi-top">
+          <div class="gi-name">Vietnam</div>
+          <div class="gi-price">13,60€</div>
+        </div>
+        <div class="gi-desc">Arroz semi integral, piñones, pasas, tomates, pepino, shitake y trigueros, con paté de anacardos y aguacate.</div>
+        <div class="gi-tags"><span class="gi-tag">Sin gluten</span><span class="gi-tag">Frutos Secos</span></div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Ceviche de Mango</div>
+          <div class="gi-price">13,60€</div>
+        </div>
+        <div class="gi-desc">Versión peruana con tofu, mango, pimiento, cebolla morada, cilantro y un toque picante, aliñada con lima y AOVE.</div>
+        <div class="gi-tags"><span class="gi-tag">Sin gluten</span></div>
+      </div>
+
+      <div class="grid-item full">
+        <div class="gi-top">
+          <div>
+            <div class="gi-name">Poke, en plan… Poke</div>
+            <div class="gi-desc" style="margin-top:6px">Quinoa, mango, anacardos, lombarda, guakame, edamame y tofu, aliñada con lima y AOVE.</div>
+            <div class="gi-tags" style="margin-top:8px"><span class="gi-tag">Sin gluten</span><span class="gi-tag">Frutos Secos</span></div>
+          </div>
+          <div class="gi-price">13,90€</div>
+        </div>
+        <span class="full-badge" style="background:var(--sage)">🌿 Fresh</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 03 SÁNDWICHES -->
+  <section class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">Sándwiches &amp; Más</h2>
+      <span class="sec-count">7 platos</span>
+    </div>
+
+    <div class="grid-2">
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Qué Vap</div>
+          <div class="gi-price">13,90€</div>
+        </div>
+        <div class="gi-desc">Durum de seitán mechado marroquí, lechuga, tomate, cebolla, salsa de yogur, hierbabuena y pepino. Con patatas.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Portobello</div>
+          <div class="gi-price">13,90€</div>
+        </div>
+        <div class="gi-desc">Portobello salteado con guacamole, cebolla morada, tomate y mozzarella en focaccia. Con patatas.</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Terranova</div>
+          <div class="gi-price">13,90€</div>
+        </div>
+        <div class="gi-desc">Berenjenas a la plancha, tomates secos, espinacas, mozzarella y pesto de albahaca en focaccia. Con patatas.</div>
+        <div class="gi-tags"><span class="gi-tag">Frutos Secos</span></div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Burrito BBQ</div>
+          <div class="gi-price">14,50€</div>
+        </div>
+        <div class="gi-desc">Proteína de soja en salsa BBQ con lombarda, cebolla y guacamole.</div>
+      </div>
+
+      <div class="grid-item full">
+        <div class="gi-top">
+          <div>
+            <div class="gi-name">El Lattrey</div>
+            <div class="gi-desc" style="margin-top:6px">Brioche de pulled en salsa de cerveza negra irlandesa, crujiente de pepino, cebolla y veganesa de kimchi. Con patatas.</div>
+            <div class="gi-tags" style="margin-top:8px"><span class="gi-tag">Gluten</span></div>
+          </div>
+          <div class="gi-price">14,20€</div>
+        </div>
+        <span class="full-badge">⭐ Top</span>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Pato Ramírez</div>
+          <div class="gi-price">14,50€</div>
+        </div>
+        <div class="gi-desc">Baos de Pulled Duck pibil con toque cítrico y cebolla encurtida.</div>
+        <div class="gi-tags"><span class="gi-tag">Gluten</span><span class="gi-tag">Soja</span></div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Arepas Andresinas</div>
+          <div class="gi-price">14,50€</div>
+        </div>
+        <div class="gi-desc">Arepas colombianas recién hechas con heura mechada, cebolla, tomate y cilantro.</div>
+        <div class="gi-tags"><span class="gi-tag">Sin gluten</span></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 04 HAMBURGUESAS -->
+  <section class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">Hamburguesas</h2>
+      <span class="sec-count">4 platos</span>
+    </div>
+
+    <div class="grid-2">
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Huella</div>
+          <div class="gi-price">14,90€</div>
+        </div>
+        <div class="gi-desc">Filete de avena, tomate, lechuga, pepinillos, cebolla caramelizada, cheddar y salsa Huella. Con patatas.</div>
+        <div class="gi-tags"><span class="gi-tag">Gluten</span></div>
+      </div>
+
+      <div class="grid-item">
+        <div class="gi-top">
+          <div class="gi-name">Pancho Villa</div>
+          <div class="gi-price">14,90€</div>
+        </div>
+        <div class="gi-desc">Filete de alubia roja y arroz con guacamole, crema agria, pico de gallo, jalapeños y cheddar. Con patatas.</div>
+      </div>
+
+      <div class="grid-item full">
+        <div class="gi-top">
+          <div>
+            <div class="gi-name">Mac Fly y Vacon</div>
+            <div class="gi-desc" style="margin-top:6px">Heura con tomate, pepinillos, lechuga, cebolla, vacon, salsa rosa especiada y mostaza. Con patatas.</div>
+            <div class="gi-tags" style="margin-top:8px"><span class="gi-tag">Gluten</span><span class="gi-tag">Soja</span><span class="gi-tag">Mostaza</span></div>
+          </div>
+          <div class="gi-price">15,50€</div>
+        </div>
+        <span class="full-badge">⭐ Best</span>
+      </div>
+
+      <div class="grid-item full">
+        <div class="gi-top">
+          <div>
+            <div class="gi-name">Happy Chicken</div>
+            <div class="gi-desc" style="margin-top:6px">No pollo crujiente con Coleslaw de col, manzana, zanahoria y mostaza dulce, tomate, lechuga y cheddar. Con patatas.</div>
+            <div class="gi-tags" style="margin-top:8px"><span class="gi-tag">Gluten</span><span class="gi-tag">Mostaza</span></div>
+          </div>
+          <div class="gi-price">15,50€</div>
+        </div>
+        <span class="full-badge" style="background:var(--sage)">🍗 New</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CALLOUT -->
+  <div class="callout">
+    <div class="callout-text">
+      <h3>Sweet Jarama</h3>
+      <p>Premio al Mejor Postre · Concurso Gastronómico de Rivas Vaciamadrid</p>
+    </div>
+    <div class="callout-badge">🏆 Tarta Premiada</div>
+  </div>
+
+
+  <!-- 05 POSTRES -->
+  <section class="section">
+    <div class="sec-head">
+      <h2 class="sec-title">Postres</h2>
+      <span class="sec-count">7 postres</span>
+    </div>
+
+    <div class="list-single">
+
+      <div class="list-item">
+        <div class="li-num">01</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Brownie Soul</div>
+            <div class="li-price">8,50€</div>
+          </div>
+          <div class="li-desc">Brownie con helado de cacahuete, chispas de chocolate y granola.</div>
+          <div class="li-tags"><span class="li-tag">Frutos Secos</span><span class="li-tag">Gluten</span></div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="li-num">02</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Sweet Jarama ⭐</div>
+            <div class="li-price">7,90€</div>
+          </div>
+          <div class="li-desc">Tarta premiada en el Concurso Gastronómico de Rivas con helado de avellanas.</div>
+          <div class="li-tags"><span class="li-tag">Frutos Secos</span><span class="li-tag">Gluten</span></div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="li-num">03</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Tarta de Zanahoria</div>
+            <div class="li-price">6,70€</div>
+          </div>
+          <div class="li-desc">Clásica de la Huella con caramelo líquido, almendra y nata montada.</div>
+          <div class="li-tags"><span class="li-tag">Frutos Secos</span><span class="li-tag">Gluten</span></div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="li-num">04</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Varadero</div>
+            <div class="li-price">7,90€</div>
+          </div>
+          <div class="li-desc">Mousse de mango con helado de maracuyá.</div>
+          <div class="li-tags"><span class="li-tag">Sin gluten</span></div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="li-num">05</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Gin Cheesecake</div>
+            <div class="li-price">6,50€</div>
+          </div>
+          <div class="li-desc">Tarta de queso fría cubierta con frambuesa en gel de ginebra.</div>
+          <div class="li-tags"><span class="li-tag">Gluten</span></div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="li-num">06</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Vegan Trillionaires</div>
+            <div class="li-price">6,50€</div>
+          </div>
+          <div class="li-desc">Tarta de chocolate vegan rellena de toffee con cobertura de chocolate.</div>
+          <div class="li-tags"><span class="li-tag">Gluten</span><span class="li-tag">Frutos Secos</span></div>
+        </div>
+      </div>
+
+      <div class="list-item">
+        <div class="li-num">07</div>
+        <div class="li-body">
+          <div class="li-top">
+            <div class="li-name">Goloso en Llamas</div>
+            <div class="li-price">8,20€</div>
+          </div>
+          <div class="li-desc">Tulipa con helado de doble chocolate, sirope, trocitos de chocolate artesano y nata montada.</div>
+          <div class="li-tags"><span class="li-tag">Gluten</span><span class="li-tag">Frutos Secos</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-name">La Huella Vegana</div>
+    <p>Av. de la Hispanidad, 11 · Rivas Vaciamadrid, Madrid</p>
+    <p>+34 916 66 12 03</p>
+    <p class="ft-note">100% vegano · Todos los alérgenos disponibles bajo petición</p>
+  </footer>
+
+</div>
+</body>
+</html>
