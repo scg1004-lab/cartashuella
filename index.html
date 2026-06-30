@@ -933,9 +933,6 @@
           <button class="btn-export" onclick="sharePortalLink()" style="flex-shrink: 0; background: var(--accent); color: var(--text);">
             🔗 Compartir enlace
           </button>
-          <button class="btn-export" onclick="exportRatings()" style="flex-shrink: 0;">
-            💾 Exportar notas
-          </button>
         </div>
       </div>
       <div
@@ -1472,20 +1469,6 @@
       });
     }
 
-    function exportRatings() {
-      const content = `// Valoraciones iniciales predeterminadas para las cartas
-const initialRatings = ${JSON.stringify(ratings, null, 2)};
-`;
-      const blob = new Blob([content], { type: 'text/javascript' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'ratings.js';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
 
     function sharePortalLink() {
       const url = window.location.href;
