@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Menú Rústico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdf6e3;
+            --text-main: #3e332a;
+            --text-muted: #6b5a4a;
+            --accent-green: #4a6c38;
+            --accent-price: #8a3b22;
+            --border-color: #d3c4a9;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.5;
+            background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: -19px -19px;
+        }
+        .menu-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(253, 246, 227, 0.95);
+            padding: 3rem;
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .typo-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .typo-la {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--text-main);
+            margin-bottom: -1.4rem;
+            margin-left: -3.5rem;
+            z-index: 2;
+        }
+        .typo-huella {
+            font-family: 'Dancing Script', cursive;
+            font-size: 6.5rem;
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+        }
+        .typo-vegana {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            letter-spacing: 4px;
+            margin-top: -0.5rem;
+            font-weight: bold;
+        }
+        .allergen-legend {
+            background: #f4ebd8;
+            padding: 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .legend-item { font-weight: bold; }
+        .category { margin-bottom: 3rem; }
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-green);
+            border-bottom: 1px solid var(--accent-green);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .menu-container { padding: 1.5rem; }
+        }
+        .item { margin-bottom: 1.5rem; }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dotted var(--border-color);
+            margin-bottom: 0.5rem;
+        }
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--text-main);
+        }
+        .item-price {
+            font-weight: bold;
+            color: var(--accent-price);
+            font-size: 1.1rem;
+        }
+        .item-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0 0 0.5rem 0;
+        }
+        .allergens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid currentColor;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .b-gl { color: #d35400; }
+        .b-so { color: #27ae60; }
+        .b-fs { color: #8e44ad; }
+        .b-mo { color: #f39c12; }
+        .b-se { color: #c0392b; }
+        .b-su { color: #2980b9; }
+        .b-gf { background: var(--accent-green); color: white; border: none; }
+        
+        .footer-extras {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px dashed var(--border-color);
+            font-style: italic;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <header>
+            <div class="typo-logo">
+                <span class="typo-la">la</span>
+                <span class="typo-huella">Huella</span>
+                <span class="typo-vegana">· VEGANA ·</span>
+            </div>
+            
+            <div class="allergen-legend">
+                <span><strong>Guía de Alérgenos:</strong></span>
+                <span class="badge b-gl">Gluten</span>
+                <span class="badge b-so">Soja</span>
+                <span class="badge b-fs">Frutos Secos</span>
+                <span class="badge b-mo">Mostaza</span>
+                <span class="badge b-se">Sésamo</span>
+                <span class="badge b-gf">** Opción Gluten Free</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="category">
+                <h2 class="category-title">Para compartir... o no!</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PATATAS GAUCHAS</h3><span class="item-price">11,90€</span></div>
+                        <p class="item-desc">Fuente de patatas con salsa Gaucha y mozzarella fundida.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PATATAS TEX MEX</h3><span class="item-price">11,50€</span></div>
+                        <p class="item-desc">Fuente de patatas gratinadas con queso, cebolla, pimiento verde y vacon.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PAD THAI</h3><span class="item-price">14,40€</span></div>
+                        <p class="item-desc">Fideos de arroz con salsa satay, verduritas salteadas y tofu.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span><span class="badge b-fs">Frutos Secos</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">GYOZAS</h3><span class="item-price">12,60€</span></div>
+                        <p class="item-desc">Empanadillas japonesas rellenas de verduras, con salsa agridulce y crema de soja y mostaza.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-mo">Mostaza</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">CROQUETAS DE MIJO</h3><span class="item-price">11,50€</span></div>
+                        <p class="item-desc">8 croquetas de mijo con calabaza asada y pimentón de la Vera (individuales 2€).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">CHILAQUILES</h3><span class="item-price">14,80€</span></div>
+                        <p class="item-desc">Totopos, guiso de frijoles negros, proteína de soja, pimientos, maíz, crema agria, guacamole y jalapeños.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PATÉ DE ALUBIAS BLANCAS</h3><span class="item-price">12,30€</span></div>
+                        <p class="item-desc">Con queso feta y zanahoria asada, acompañado de totopos.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">LENTACOS</h3><span class="item-price">14,60€</span></div>
+                        <p class="item-desc">Tres tacos de maíz con guiso de lentejas enchiladas, pico de gallo y tiras de aguacate.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">COSTILLAS DE MAÍZ</h3><span class="item-price">11,90€</span></div>
+                        <p class="item-desc">Maíz asado en tiras con salsas para dipear.</p>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">STICKY'S</h3><span class="item-price">14,60€</span></div>
+                        <p class="item-desc">Costillas de seitán en salsa teriyaki, acompañadas de boniato.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-se">Sésamo</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">ONION BHAJI</h3><span class="item-price">12,50€</span></div>
+                        <p class="item-desc">Buñuelos hindúes de cebolla, harina de garbanzos y especias, con salsa de yogur.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="category">
+                <h2 class="category-title">Ensaladas</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">CEVICHE DE MANGO</h3><span class="item-price">13,60€</span></div>
+                        <p class="item-desc">Versión peruana con lima y AOVE, base de tofu, mango, pimientos, cebolla morada, cilantro y picante.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">VIETNAM</h3><span class="item-price">13,60€</span></div>
+                        <p class="item-desc">Arroz semi integral, piñones, pasas, tomates, pepino, shitake, trigueros, paté de anacardos y aguacate.</p>
+                        <div class="allergens"><span class="badge b-fs">Frutos Secos</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">POKE, EN PLAN... POKE</h3><span class="item-price">13,90€</span></div>
+                        <p class="item-desc">Quinoa, mango, anacardos, lombarda, wakame, edamame y tofu, con lima y AOVE.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span><span class="badge b-fs">Frutos Secos</span><span class="badge b-se">Sésamo</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="category">
+                <h2 class="category-title">Sándwiches... y más</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">QUÉ VAP</h3><span class="item-price">13,90€</span></div>
+                        <p class="item-desc">Durum de seitán marroquí, lechuga, tomate, cebolla, salsa de yogur de soja, hierbabuena y pepino (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PORTOBELLO</h3><span class="item-price">13,90€</span></div>
+                        <p class="item-desc">Sándwich de portobello, guacamole, cebolla morada, tomate y mozzarella, en focaccia (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-gf">** Opción GF</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">TERRANOVA</h3><span class="item-price">13,90€</span></div>
+                        <p class="item-desc">Berenjenas a la plancha, tomates secos, espinacas, mozzarella y pesto de albahaca, en focaccia (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-fs">Frutos Secos</span><span class="badge b-gf">** Opción GF</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">EL LATTREY</h3><span class="item-price">14,20€</span></div>
+                        <p class="item-desc">Brioche de pulled en salsa de cerveza negra, crujiente de pepino y cebolla, veganesa de kimchi (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-mo">Mostaza</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">BURRITO BBQ</h3><span class="item-price">14,50€</span></div>
+                        <p class="item-desc">Relleno de proteína de soja en salsa BBQ, lombarda, cebolla y guacamole.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PATO RAMÍREZ</h3><span class="item-price">14,50€</span></div>
+                        <p class="item-desc">Baos rellenos de Pulled Duck pibil, toque cítrico y cebolla encurtida.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">AREPAS ANDRESINAS</h3><span class="item-price">14,50€</span></div>
+                        <p class="item-desc">Arepas colombianas con heura mechada, cebolla, tomate y cilantro fresco.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="category">
+                <h2 class="category-title">Hamburguesas</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">HUELLA</h3><span class="item-price">14,90€</span></div>
+                        <p class="item-desc">Filete de avena, tomate, lechuga, pepinillos, cebolla caramelizada, queso cheddar y salsa Huella (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-mo">Mostaza</span><span class="badge b-gf">** Opción GF</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">PANCHO VILLA</h3><span class="item-price">14,90€</span></div>
+                        <p class="item-desc">Filete de alubia roja y arroz, guacamole, crema agria, pico de gallo, jalapeños y queso cheddar (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span><span class="badge b-gf">** Opción GF</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">MAC FLY Y VACON</h3><span class="item-price">15,50€</span></div>
+                        <p class="item-desc">Filete de Heura, tomate, pepinillos, lechuga, cebolla y vacon, salsa rosa especiada y mostaza (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-mo">Mostaza</span><span class="badge b-gf">** Opción GF</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">HAPPY CHICKEN</h3><span class="item-price">15,50€</span></div>
+                        <p class="item-desc">Filete de No pollo crujiente, Coleeslaw (col, manzana, zanahoria, mostaza), tomate, lechuga y cheddar (con patatas fritas).</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-mo">Mostaza</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="category">
+                <h2 class="category-title">Postres</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">BROWNIE SOUL</h3><span class="item-price">8,50€</span></div>
+                        <p class="item-desc">Brownie con dos bolas de helado de cacahuete, chispas de chocolate y granola.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-fs">Frutos Secos</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">SWEET JARAMA</h3><span class="item-price">7,90€</span></div>
+                        <p class="item-desc">Espectacular tarta premiada en Rivas con delicioso helado de avellanas.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-fs">Frutos Secos</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">TARTA DE ZANAHORIA</h3><span class="item-price">6,70€</span></div>
+                        <p class="item-desc">Clásica de la Huella, caramelo líquido, granillos de almendra y nata montada.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-fs">Frutos Secos</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">VARADERO</h3><span class="item-price">7,90€</span></div>
+                        <p class="item-desc">Tarta de mousse de mango con helado de maracuyá.</p>
+                        <div class="allergens"><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">GIN CHEESECAKE</h3><span class="item-price">6,50€</span></div>
+                        <p class="item-desc">Tarta de queso fría, cubierta con trocitos de frambuesa en gel de ginebra.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">VEGAN TRILLIONAIRES</h3><span class="item-price">6,50€</span></div>
+                        <p class="item-desc">Tarta de chocolate vegan, rellena de toffee con cobertura de chocolate.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="item-header"><h3 class="item-name">GOLOSO EN LLAMAS</h3><span class="item-price">8,20€</span></div>
+                        <p class="item-desc">Tulipa con helado de doble chocolate, sirope, chocolate artesano y nata montada.</p>
+                        <div class="allergens"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span><span class="badge b-gf">** Opción GF</span></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="category" style="margin-bottom: 1rem;">
+                <h2 class="category-title" style="font-size: 1.5rem;">Menú Infantil — 11,90€</h2>
+                <div class="item" style="text-align: center;">
+                    <p class="item-desc" style="font-size: 1.1rem; color: var(--text-main);">
+                        3 Croquetas de mijo, 4 Nuggets, Patatas fritas con ketchup y Postre incluido.
+                    </p>
+                    <div class="allergens" style="justify-content: center; margin-top: 0.5rem;"><span class="badge b-gl">Gluten</span><span class="badge b-so">Soja</span></div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="footer-extras">
+            RACIÓN DE PAN 1,50€ &nbsp;|&nbsp; SUPLEMENTO BONIATO 1,75€ &nbsp;|&nbsp; INGREDIENTE EXTRA 1,50€
+            <br><br>
+            <strong>¡Pide tu opción Gluten Free al personal!</strong>
+        </footer>
+    </div>
+</body>
+</html>

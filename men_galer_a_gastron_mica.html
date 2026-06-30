@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Galería Gastronómica</title>
+    
+    <!-- Fuentes premium para un look editorial -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS para el layout responsive y utilidades -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                        'script': ['Dancing Script', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            green: '#689f38',
+                            lime: '#d4e157',
+                            dark: '#0f1115',
+                            card: '#181b21'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: theme('colors.brand.dark');
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Tipografía Logo Fiel al Original */
+        .typo-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            position: relative;
+        }
+        .typo-la {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 5vw, 4rem);
+            color: white;
+            margin-bottom: -1.8rem;
+            margin-left: -4rem;
+            z-index: 2;
+        }
+        .typo-huella {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(6rem, 12vw, 9rem);
+            color: white;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .typo-vegana {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: theme('colors.brand.green');
+            letter-spacing: 0.4em;
+            margin-top: -0.5rem;
+            font-weight: 800;
+        }
+
+        /* Efectos visuales de las tarjetas */
+        .glass-panel {
+            background: rgba(24, 27, 33, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .allergen-dot {
+            width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+        }
+
+        /* Ocultar barra de scroll para un look más limpio */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.brand.dark'); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.brand.green'); }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-green selection:text-white">
+
+    <!-- Hero Header -->
+    <header class="relative w-full py-20 flex flex-col items-center justify-center overflow-hidden">
+        <!-- Elementos decorativos de fondo -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-green/20 rounded-full mix-blend-screen filter blur-[100px] animate-pulse"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-lime/10 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <div class="relative z-10 scale-90 md:scale-100 mt-10">
+            <div class="typo-logo">
+                <span class="typo-la">la</span>
+                <span class="typo-huella">Huella</span>
+                <span class="typo-vegana">· VEGANA ·</span>
+            </div>
+        </div>
+        <p class="mt-8 font-serif text-xl md:text-2xl text-gray-400 italic text-center max-w-2xl px-4 relative z-10">
+            "El sabor de la vanguardia vegetal. Come con los ojos, disfruta con el alma."
+        </p>
+
+        <!-- Leyenda de alérgenos flotante -->
+        <div class="mt-12 glass-panel px-6 py-4 rounded-full flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs md:text-sm font-semibold tracking-wider text-gray-300 relative z-10 border-brand-green/30 shadow-[0_0_30px_rgba(104,159,56,0.15)]">
+            <span class="flex items-center gap-2"><span class="allergen-dot bg-amber-500"></span> Gluten</span>
+            <span class="flex items-center gap-2"><span class="allergen-dot bg-green-500"></span> Soja</span>
+            <span class="flex items-center gap-2"><span class="allergen-dot bg-purple-400"></span> F. Secos</span>
+            <span class="flex items-center gap-2"><span class="allergen-dot bg-yellow-400"></span> Mostaza</span>
+            <span class="flex items-center gap-2"><span class="allergen-dot bg-red-400"></span> Sésamo</span>
+            <span class="flex items-center gap-2 text-brand-lime ml-4"><span>✨</span> Opción GF</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        
+        <!-- CATEGORÍA: COMPARTIR -->
+        <section class="mb-24">
+            <div class="flex items-center justify-between mb-10">
+                <h2 class="font-serif text-4xl md:text-5xl text-white">Para compartir... <span class="italic text-gray-500 font-light">o no!</span></h2>
+                <div class="h-px bg-gradient-to-r from-brand-green/50 to-transparent flex-grow ml-8 hidden md:block"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Tarjeta Plato (Con Foto) -->
+                <article class="bg-brand-card rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:border-brand-green/50 transition-all duration-500 flex flex-col h-full shadow-lg hover:shadow-brand-green/20">
+                    <div class="relative h-56 overflow-hidden">
+                        <!-- Fotografía real del plato (URL placeholder de Unsplash para comida vegana) -->
+                        <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?q=80&w=800&auto=format&fit=crop" alt="Patatas Gauchas" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" onerror="this.src='https://placehold.co/800x600/181b21/689f38?text=Patatas+Gauchas'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent"></div>
+                        <div class="absolute top-4 right-4 glass-panel text-white px-3 py-1 rounded-full font-bold text-sm">11,90€</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow relative z-10 -mt-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-serif">Patatas Gauchas</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow leading-relaxed">Fuente de patatas con salsa Gaucha y mozzarella fundida.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-brand-card rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:border-brand-green/50 transition-all duration-500 flex flex-col h-full shadow-lg hover:shadow-brand-green/20">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?q=80&w=800&auto=format&fit=crop" alt="Chilaquiles" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" onerror="this.src='https://placehold.co/800x600/181b21/689f38?text=Chilaquiles'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent"></div>
+                        <div class="absolute top-4 right-4 glass-panel text-white px-3 py-1 rounded-full font-bold text-sm">14,80€</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow relative z-10 -mt-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-serif">Chilaquiles</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow leading-relaxed">Base de totopos, guiso de frijoles negros, proteína de soja, pimientos, maíz, crema agria, guacamole y jalapeños.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-brand-card rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:border-brand-green/50 transition-all duration-500 flex flex-col h-full shadow-lg hover:shadow-brand-green/20">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1564834724-1c668b55694c?q=80&w=800&auto=format&fit=crop" alt="Pad Thai" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" onerror="this.src='https://placehold.co/800x600/181b21/689f38?text=Pad+Thai'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent"></div>
+                        <div class="absolute top-4 right-4 glass-panel text-white px-3 py-1 rounded-full font-bold text-sm">14,40€</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow relative z-10 -mt-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-serif">Pad Thai</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow leading-relaxed">Fideos de arroz con salsa satay, verduritas salteadas y tofu ahumado.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-purple-400 w-2 h-2 mr-1"></span> F. Secos</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-brand-card rounded-2xl overflow-hidden group cursor-pointer border border-white/5 hover:border-brand-green/50 transition-all duration-500 flex flex-col h-full shadow-lg hover:shadow-brand-green/20">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=800&auto=format&fit=crop" alt="Gyozas" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out" onerror="this.src='https://placehold.co/800x600/181b21/689f38?text=Gyozas'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent"></div>
+                        <div class="absolute top-4 right-4 glass-panel text-white px-3 py-1 rounded-full font-bold text-sm">12,60€</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow relative z-10 -mt-6">
+                        <h3 class="text-xl font-bold text-white mb-2 font-serif">Gyozas</h3>
+                        <p class="text-gray-400 text-sm mb-4 flex-grow leading-relaxed">Empanadillas japonesas rellenas de verduras, salsa agridulce y crema de soja y mostaza.</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-amber-500 w-2 h-2 mr-1"></span> Gluten</span>
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                            <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md bg-white/5 text-gray-300 border border-white/10"><span class="allergen-dot bg-yellow-400 w-2 h-2 mr-1"></span> Mostaza</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tarjetas sin foto (Estilo Texto) para mantener equilibrio y no saturar -->
+                <article class="bg-transparent border-t border-white/10 pt-4 flex flex-col h-full md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Patatas Tex Mex</h3><span class="text-brand-lime font-bold">11,50€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Fuente de patatas gratinadas con queso, cebolla, pimiento verde y vacon. <span class="allergen-dot bg-green-500 w-2 h-2 inline-block ml-1"></span></p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Croquetas de Mijo</h3><span class="text-brand-lime font-bold">11,50€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">8 croquetas de semillas de mijo con calabaza asada y pimentón. <span class="allergen-dot bg-amber-500 w-2 h-2 inline-block ml-1"></span> <span class="allergen-dot bg-green-500 w-2 h-2 inline-block ml-1"></span></p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Paté de Alubias Blancas</h3><span class="text-brand-lime font-bold">12,30€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Con queso feta y zanahoria asada, acompañado de totopos. <span class="allergen-dot bg-green-500 w-2 h-2 inline-block ml-1"></span></p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Lentacos</h3><span class="text-brand-lime font-bold">14,60€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Tres tacos de maíz con guiso de lentejas enchiladas, pico de gallo y aguacate. <span class="allergen-dot bg-green-500 w-2 h-2 inline-block ml-1"></span></p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Costillas de Maíz</h3><span class="text-brand-lime font-bold">11,90€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Maíz asado en tiras con salsas para dipear.</p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Sticky's</h3><span class="text-brand-lime font-bold">14,60€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Costillas de seitán en salsa teriyaki, con boniato. <span class="allergen-dot bg-amber-500 w-2 h-2 inline-block ml-1"></span> <span class="allergen-dot bg-green-500 w-2 h-2 inline-block ml-1"></span> <span class="allergen-dot bg-red-400 w-2 h-2 inline-block ml-1"></span></p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Onion Bhaji</h3><span class="text-brand-lime font-bold">12,50€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Buñuelos hindúes de cebolla y harina de garbanzos, con yogur. <span class="allergen-dot bg-green-500 w-2 h-2 inline-block ml-1"></span></p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- CATEGORÍA: HAMBURGUESAS -->
+        <section class="mb-24">
+            <div class="flex items-center justify-between mb-10 flex-row-reverse">
+                <h2 class="font-serif text-4xl md:text-5xl text-white">Hamburguesas</h2>
+                <div class="h-px bg-gradient-to-l from-brand-green/50 to-transparent flex-grow mr-8 hidden md:block"></div>
+            </div>
+
+            <!-- Destacadas con fotos grandes -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <article class="bg-brand-card rounded-3xl overflow-hidden group border border-white/5 flex flex-col md:flex-row h-full">
+                    <div class="relative h-64 md:h-auto md:w-2/5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?q=80&w=800&auto=format&fit=crop" alt="Hamburguesa Huella" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x800/181b21/689f38?text=Huella'">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-brand-card md:block hidden"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent md:hidden block"></div>
+                    </div>
+                    <div class="p-8 flex flex-col justify-center md:w-3/5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-3xl font-bold text-white font-serif">Huella</h3>
+                            <span class="text-brand-lime font-bold text-xl">14,90€</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Filete de avena acompañado de tomate, lechuga pepinillos, cebolla caramelizada, queso cheddar y salsa Huella. <em class="text-gray-500 block mt-2 text-sm">(Incluye patatas fritas)</em></p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-gray-300"><span class="allergen-dot bg-amber-500 w-2 h-2 mr-1"></span> Gluten</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-gray-300"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-gray-300"><span class="allergen-dot bg-yellow-400 w-2 h-2 mr-1"></span> Mostaza</span>
+                            <span class="px-3 py-1 rounded-full bg-brand-green/20 text-brand-lime border border-brand-green/30 text-xs font-bold">✨ Opc. Sin Gluten</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="bg-brand-card rounded-3xl overflow-hidden group border border-white/5 flex flex-col md:flex-row h-full">
+                    <div class="relative h-64 md:h-auto md:w-2/5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1550547660-d154287c244b?q=80&w=800&auto=format&fit=crop" alt="Mac Fly y Vacon" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x800/181b21/689f38?text=Mac+Fly'">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-brand-card md:block hidden"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent md:hidden block"></div>
+                    </div>
+                    <div class="p-8 flex flex-col justify-center md:w-3/5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-3xl font-bold text-white font-serif leading-tight">Mac Fly<br>& Vacon</h3>
+                            <span class="text-brand-lime font-bold text-xl">15,50€</span>
+                        </div>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Filete de Heura con tomate, pepinillos, lechuga, cebolla y vacon, aderezada con salsa rosa especiada y mostaza. <em class="text-gray-500 block mt-2 text-sm">(Incluye patatas)</em></p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-gray-300"><span class="allergen-dot bg-amber-500 w-2 h-2 mr-1"></span> Gluten</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-gray-300"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                            <span class="px-3 py-1 rounded-full bg-brand-green/20 text-brand-lime border border-brand-green/30 text-xs font-bold">✨ Opc. Sin Gluten</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Hamburguesas formato lista -->
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="bg-transparent border border-white/10 rounded-2xl p-6 hover:bg-white/5 transition-colors">
+                        <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Pancho Villa</h3><span class="text-brand-lime font-bold">14,90€</span></div>
+                        <p class="text-gray-400 text-sm mb-4">Filete de alubia roja y arroz, guacamole, crema agria, pico de gallo, jalapeños y queso cheddar (con patatas fritas).</p>
+                        <div class="flex gap-2"><span class="text-[10px] uppercase font-bold text-gray-400"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span> <span class="text-[10px] uppercase font-bold text-brand-lime">✨ GF Opc.</span></div>
+                    </div>
+                    <div class="bg-transparent border border-white/10 rounded-2xl p-6 hover:bg-white/5 transition-colors">
+                        <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Happy Chicken</h3><span class="text-brand-lime font-bold">15,50€</span></div>
+                        <p class="text-gray-400 text-sm mb-4">Filete de No pollo crujiente con Coleeslaw (col, manzana, zanahoria y mostaza dulce), tomate, lechuga y queso cheddar (con patatas fritas).</p>
+                        <div class="flex gap-2">
+                            <span class="text-[10px] uppercase font-bold text-gray-400"><span class="allergen-dot bg-amber-500 w-2 h-2 mr-1"></span> Gluten</span>
+                            <span class="text-[10px] uppercase font-bold text-gray-400"><span class="allergen-dot bg-green-500 w-2 h-2 mr-1"></span> Soja</span>
+                            <span class="text-[10px] uppercase font-bold text-gray-400"><span class="allergen-dot bg-yellow-400 w-2 h-2 mr-1"></span> Mostaza</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DIVIDIDA: ENSALADAS Y SANDWICHES -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+            
+            <!-- ENSALADAS -->
+            <section>
+                <div class="flex items-center mb-8">
+                    <h2 class="font-serif text-3xl md:text-4xl text-white">Ensaladas</h2>
+                    <div class="h-px bg-white/20 flex-grow ml-6"></div>
+                </div>
+                
+                <div class="space-y-6">
+                    <article class="flex gap-6 items-center group">
+                        <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-transparent group-hover:border-brand-green transition-colors">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="Ensalada" onerror="this.src='https://placehold.co/400x400/181b21/689f38?text=Poke'">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Poke, en plan... Poke</h3><span class="text-brand-lime font-bold">13,90€</span></div>
+                            <p class="text-gray-400 text-sm mt-1 mb-2">Quinoa, mango, anacardos, lombarda, guakame, edamame y tofu, aliñada con lima y AOVE.</p>
+                            <span class="text-xs text-gray-500 flex gap-2"><span title="Soja">🟢</span> <span title="Frutos Secos">🟣</span> <span title="Sésamo">🔴</span></span>
+                        </div>
+                    </article>
+                    
+                    <article class="flex gap-6 items-center group">
+                        <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 bg-white/5 border-2 border-transparent group-hover:border-brand-green transition-colors">
+                             <!-- Sin foto específica, placeholder estilizado -->
+                             <div class="w-full h-full flex items-center justify-center font-serif text-2xl text-white/30 italic">C</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Ceviche de Mango</h3><span class="text-brand-lime font-bold">13,60€</span></div>
+                            <p class="text-gray-400 text-sm mt-1 mb-2">Versión peruana con lima y AOVE, tofu, mango, pimientos, cebolla, cilantro y toque picante.</p>
+                            <span class="text-xs text-gray-500 flex gap-2"><span title="Soja">🟢</span></span>
+                        </div>
+                    </article>
+
+                    <article class="flex gap-6 items-center group">
+                        <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 bg-white/5 border-2 border-transparent group-hover:border-brand-green transition-colors">
+                            <div class="w-full h-full flex items-center justify-center font-serif text-2xl text-white/30 italic">V</div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white font-serif">Vietnam</h3><span class="text-brand-lime font-bold">13,60€</span></div>
+                            <p class="text-gray-400 text-sm mt-1 mb-2">Arroz semi integral, piñones, pasas, tomates, pepino, shitake, trigueros, paté de anacardos y aguacate.</p>
+                            <span class="text-xs text-gray-500 flex gap-2"><span title="Frutos Secos">🟣</span></span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SANDWICHES -->
+            <section>
+                <div class="flex items-center mb-8 flex-row-reverse">
+                    <h2 class="font-serif text-3xl md:text-4xl text-white text-right">Sándwiches...</h2>
+                    <div class="h-px bg-white/20 flex-grow mr-6"></div>
+                </div>
+                
+                <div class="grid gap-y-6">
+                    <div class="border-b border-white/10 pb-4">
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">Qué Vap</h3><span class="text-brand-lime">13,90€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Durum de seitán marroquí, lechuga, tomate, cebolla, yogur de soja, hierbabuena y pepino. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                    </div>
+                    <div class="border-b border-white/10 pb-4">
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">Portobello <span class="text-brand-lime text-xs font-normal ml-2 tracking-widest border border-brand-lime px-2 py-0.5 rounded-full">OPC GF</span></h3><span class="text-brand-lime">13,90€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Sándwich de portobello, guacamole, cebolla morada, tomate y mozzarella en focaccia. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                    </div>
+                    <div class="border-b border-white/10 pb-4">
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">Terranova <span class="text-brand-lime text-xs font-normal ml-2 tracking-widest border border-brand-lime px-2 py-0.5 rounded-full">OPC GF</span></h3><span class="text-brand-lime">13,90€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Berenjenas plancha, tomates secos, espinacas, mozzarella y pesto albahaca en focaccia. <span class="text-[10px] ml-2">🟠 🟢 🟣</span></p>
+                    </div>
+                    <div class="border-b border-white/10 pb-4">
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">El Lattrey</h3><span class="text-brand-lime">14,20€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Brioche de pulled cocido en salsa de cerveza negra, crujiente pepino, cebolla y veganesa kimchi. <span class="text-[10px] ml-2">🟠 🟢 🟡</span></p>
+                    </div>
+                    <div class="border-b border-white/10 pb-4">
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">Burrito BBQ</h3><span class="text-brand-lime">14,50€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Relleno de proteína de soja en salsa BBQ, lombarda y cebolla con guacamole. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                    </div>
+                    <div class="border-b border-white/10 pb-4">
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">Pato Ramírez</h3><span class="text-brand-lime">14,50€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Baos rellenos de Pulled Duck pibil, toque cítrico y cebolla encurtida. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline"><h3 class="text-lg font-bold text-white">Arepas Andresinas</h3><span class="text-brand-lime">14,50€</span></div>
+                        <p class="text-gray-400 text-sm mt-1">Arepas colombianas con heura mechada, cebolla, tomate y cilantro fresco. <span class="text-[10px] ml-2">🟢</span></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CATEGORÍA: POSTRES -->
+        <section class="mb-16">
+            <div class="flex items-center justify-center mb-12">
+                <div class="h-px bg-white/20 flex-grow max-w-xs hidden md:block"></div>
+                <h2 class="font-script text-5xl md:text-7xl text-white mx-8">Postres</h2>
+                <div class="h-px bg-white/20 flex-grow max-w-xs hidden md:block"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Postre Destacado -->
+                <article class="bg-brand-card rounded-2xl overflow-hidden group border border-white/5 md:col-span-1 md:row-span-2 shadow-lg">
+                    <div class="relative h-64 md:h-1/2 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=600&auto=format&fit=crop" alt="Brownie" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" onerror="this.src='https://placehold.co/600x600/181b21/689f38?text=Brownie'">
+                        <div class="absolute top-4 right-4 bg-brand-green text-white px-3 py-1 rounded-full font-bold text-sm">8,50€</div>
+                    </div>
+                    <div class="p-6 md:h-1/2 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white font-serif mb-2">Brownie Soul</h3>
+                        <p class="text-gray-400 text-sm mb-4">Delicioso brownie, acompañado de dos bolas de helado de cacahuete, con chispas de chocolate y granola.</p>
+                        <div class="flex gap-2">
+                            <span class="allergen-dot bg-amber-500 w-3 h-3" title="Gluten"></span>
+                            <span class="allergen-dot bg-purple-400 w-3 h-3" title="Frutos Secos"></span>
+                            <span class="allergen-dot bg-green-500 w-3 h-3" title="Soja"></span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="bg-transparent border border-white/10 rounded-2xl p-6 flex flex-col justify-center hover:border-brand-green/50 transition-colors">
+                    <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Sweet Jarama</h3><span class="text-brand-lime font-bold">7,90€</span></div>
+                    <p class="text-gray-400 text-sm">Tarta premiada en el Concurso Gastronómico de Rivas con helado de avellanas. <span class="text-[10px] ml-2">🟠 🟣 🟢</span></p>
+                </div>
+                
+                <div class="bg-transparent border border-white/10 rounded-2xl p-6 flex flex-col justify-center hover:border-brand-green/50 transition-colors">
+                    <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Tarta de Zanahoria</h3><span class="text-brand-lime font-bold">6,70€</span></div>
+                    <p class="text-gray-400 text-sm">Clásica, servida con caramelo líquido, almendra y nata montada. <span class="text-[10px] ml-2">🟠 🟣 🟢</span></p>
+                </div>
+
+                <div class="bg-transparent border border-white/10 rounded-2xl p-6 flex flex-col justify-center hover:border-brand-green/50 transition-colors">
+                    <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Varadero</h3><span class="text-brand-lime font-bold">7,90€</span></div>
+                    <p class="text-gray-400 text-sm">Tarta de mousse de mango con helado de maracuyá. <span class="text-[10px] ml-2">🟢</span></p>
+                </div>
+
+                <div class="bg-transparent border border-white/10 rounded-2xl p-6 flex flex-col justify-center hover:border-brand-green/50 transition-colors">
+                    <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Gin Cheesecake</h3><span class="text-brand-lime font-bold">6,50€</span></div>
+                    <p class="text-gray-400 text-sm">Tarta de queso fría, trocitos de frambuesa en gel de ginebra. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                </div>
+
+                <div class="bg-transparent border border-white/10 rounded-2xl p-6 flex flex-col justify-center hover:border-brand-green/50 transition-colors">
+                    <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Vegan Trillionaires</h3><span class="text-brand-lime font-bold">6,50€</span></div>
+                    <p class="text-gray-400 text-sm">Tarta de chocolate vegan, rellena de toffee con cobertura de chocolate. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                </div>
+
+                <div class="bg-transparent border border-white/10 rounded-2xl p-6 flex flex-col justify-center hover:border-brand-green/50 transition-colors">
+                    <div class="flex justify-between items-baseline mb-2"><h3 class="text-xl font-bold text-white font-serif">Goloso en Llamas <span class="text-brand-lime text-xs font-normal ml-2 border border-brand-lime px-2 py-0.5 rounded-full">OPC GF</span></h3><span class="text-brand-lime font-bold">8,20€</span></div>
+                    <p class="text-gray-400 text-sm">Tulipa con helado doble chocolate, sirope, chocolate artesano y nata montada. <span class="text-[10px] ml-2">🟠 🟢</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER & EXTRAS -->
+        <footer class="mt-20">
+            <div class="bg-gradient-to-br from-brand-card to-[#0f1115] border border-white/10 rounded-3xl p-8 md:p-12 text-center shadow-2xl relative overflow-hidden">
+                <!-- Destello de fondo -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-green/10 rounded-full mix-blend-screen filter blur-[80px]"></div>
+                
+                <h3 class="text-brand-lime text-2xl md:text-3xl font-serif mb-4 relative z-10">Menú Infantil · 11,90€</h3>
+                <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto relative z-10 font-light italic">
+                    Incluye: 3 Croquetas de mijo, 4 Nuggets, Patatas fritas con ketchup y un delicioso POSTRE (Sin Gluten).
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4 md:gap-10 text-sm md:text-base font-bold tracking-widest uppercase text-white/80 relative z-10">
+                    <span>Ración de Pan 1,50€</span>
+                    <span class="hidden md:inline text-white/30">|</span>
+                    <span>Suplemento Boniato 1,75€</span>
+                    <span class="hidden md:inline text-white/30">|</span>
+                    <span>Ingrediente Extra 1,50€</span>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 text-gray-600 text-sm pb-8">
+                <p>© 2026 La Huella Vegana. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>

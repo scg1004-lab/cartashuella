@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Huella Vegana - Edición Cómic</title>
+    
+    <!-- Fuentes: Bangers (Cómic/Acción), Montserrat (Lectura macarra), Dancing Script (Logo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@600;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'comic': ['Bangers', 'cursive'],
+                        'body': ['Montserrat', 'sans-serif'],
+                        'script': ['Dancing Script', 'cursive'],
+                    },
+                    colors: {
+                        c_yellow: '#FFDE00',
+                        c_blue: '#00E5FF',
+                        c_pink: '#FF007F',
+                        c_green: '#00FF66',
+                        c_orange: '#FF5500',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            /* Fondo Halftone (puntos de cómic) */
+            background-color: theme('colors.c_yellow');
+            background-image: radial-gradient(#000000 15%, transparent 16%), radial-gradient(#000000 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            color: #000;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor principal con fondo sólido para lectura */
+        .page-wrapper {
+            background-color: theme('colors.c_yellow');
+            border-left: 6px solid #000;
+            border-right: 6px solid #000;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-shadow: 15px 0 0 rgba(0,0,0,0.1), -15px 0 0 rgba(0,0,0,0.1);
+        }
+
+        /* Logotipo adaptado a cómic con sombras duras */
+        .typo-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1;
+            position: relative;
+            transform: rotate(-3deg);
+            margin-bottom: 2rem;
+        }
+        .typo-la {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            color: #fff;
+            text-shadow: 4px 4px 0px #000;
+            -webkit-text-stroke: 2px #000;
+            margin-bottom: -1.8rem;
+            margin-left: -5rem;
+            z-index: 2;
+        }
+        .typo-huella {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(5.5rem, 11vw, 9rem);
+            color: #fff;
+            text-shadow: 6px 6px 0px #000;
+            -webkit-text-stroke: 3px #000;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+        }
+        .typo-vegana {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            color: theme('colors.c_green');
+            letter-spacing: 0.2em;
+            margin-top: -0.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000;
+            -webkit-text-stroke: 1.5px #000;
+            background: #fff;
+            padding: 0 10px;
+            border: 3px solid #000;
+            transform: skew(-10deg);
+        }
+
+        /* Sombras Macarras Neo-Brutalistas */
+        .brutal-box {
+            background: #fff;
+            border: 4px solid #000;
+            box-shadow: 8px 8px 0px #000;
+            border-radius: 0;
+            transition: all 0.15s ease-out;
+            position: relative;
+        }
+        .brutal-box:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px #000;
+        }
+        .brutal-box:active {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        .brutal-badge {
+            background: theme('colors.c_pink');
+            color: white;
+            border: 3px solid #000;
+            font-family: 'Bangers', cursive;
+            padding: 4px 12px;
+            box-shadow: 4px 4px 0px #000;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        /* Alérgenos como pegatinas / stickers */
+        .allergen-sticker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.75rem;
+            border: 2px solid #000;
+            padding: 2px 6px;
+            box-shadow: 2px 2px 0px #000;
+            text-transform: uppercase;
+            transform: rotate(-2deg);
+        }
+
+        /* Fotos con filtro pop-art / cómic retro */
+        .comic-img {
+            filter: contrast(130%) saturate(140%);
+            border-bottom: 4px solid #000;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Títulos de sección locos */
+        .section-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: #fff;
+            -webkit-text-stroke: 2px #000;
+            text-shadow: 6px 6px 0px #000;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transform: rotate(-1deg);
+        }
+        
+        .bg-pattern-dots {
+            background-image: radial-gradient(#000000 20%, transparent 20%);
+            background-size: 10px 10px;
+        }
+    </style>
+</head>
+<body class="antialiased font-body">
+
+    <div class="page-wrapper">
+        <header class="pt-16 pb-12 px-4 border-b-8 border-black bg-c_blue relative overflow-hidden">
+            <!-- Trama de fondo azul -->
+            <div class="absolute inset-0 bg-pattern-dots opacity-20 pointer-events-none"></div>
+            
+            <!-- Elementos decorativos (Burbujas) -->
+            <div class="absolute top-10 left-10 md:left-20 bg-c_yellow border-4 border-black box-shadow: 4px 4px 0 #000 px-4 py-2 font-comic text-2xl rotate-[-15deg] shadow-[4px_4px_0_#000]">¡BOOM!</div>
+            <div class="absolute bottom-10 right-10 md:right-20 bg-c_pink text-white border-4 border-black box-shadow: 4px 4px 0 #000 px-4 py-2 font-comic text-2xl rotate-[10deg] shadow-[4px_4px_0_#000]">100% VEGAN!</div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="typo-logo">
+                    <span class="typo-la">la</span>
+                    <span class="typo-huella">Huella</span>
+                    <span class="typo-vegana">· VEGANA ·</span>
+                </div>
+            </div>
+
+            <!-- Leyenda de alérgenos brutalista -->
+            <div class="max-w-4xl mx-auto mt-12 bg-white border-4 border-black shadow-[8px_8px_0_#000] p-6 relative z-10">
+                <h3 class="font-comic text-3xl mb-4 uppercase text-center bg-black text-white py-1">Códigos Secretos (Alérgenos)</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="allergen-sticker bg-[#FF9800] rotate-[2deg]">Gluten</span>
+                    <span class="allergen-sticker bg-[#4CAF50] rotate-[-3deg]">Soja</span>
+                    <span class="allergen-sticker bg-[#9C27B0] text-white rotate-[1deg]">F. Secos</span>
+                    <span class="allergen-sticker bg-[#FFC107] rotate-[-2deg]">Mostaza</span>
+                    <span class="allergen-sticker bg-[#F44336] text-white rotate-[4deg]">Sésamo</span>
+                    <span class="allergen-sticker bg-[#00E5FF] shadow-[4px_4px_0_#000] text-xl px-4 py-1 ml-4 border-4 rotate-[-5deg]">💥 OPCIÓN GF!</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="px-4 sm:px-6 lg:px-12 py-16 bg-white">
+            
+            <!-- COMPARTIR -->
+            <section class="mb-24">
+                <div class="text-center mb-8 relative">
+                    <div class="absolute top-1/2 left-0 w-full h-2 bg-black -translate-y-1/2 z-0"></div>
+                    <h2 class="section-title bg-c_orange px-8 z-10 relative inline-block border-4 border-black">Para compartir... ¡O NO!</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+                    <!-- Destacado con Foto -->
+                    <article class="brutal-box flex flex-col xl:col-span-2 group">
+                        <div class="h-64 overflow-hidden relative border-b-4 border-black bg-c_pink">
+                            <img src="https://images.unsplash.com/photo-1541832676-9b763b0239ab?q=80&w=800&auto=format&fit=crop" alt="Gauchas" class="comic-img transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/800x400/FF007F/000?text=PATATAS+GAUCHAS&font=Bangers'">
+                            <div class="absolute top-4 right-4 brutal-badge rotate-[10deg]">11,90€</div>
+                        </div>
+                        <div class="p-6 bg-white flex flex-col flex-grow">
+                            <h3 class="font-comic text-4xl mb-2 uppercase">Patatas Gauchas</h3>
+                            <p class="font-body font-bold text-gray-700 mb-4 flex-grow">Fuente de patatas con salsa Gaucha y mozzarella fundida. ¡Un clásico que te vuela la cabeza!</p>
+                            <div class="flex gap-2 mt-auto">
+                                <span class="allergen-sticker bg-[#4CAF50]">Soja</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Destacado con Foto 2 -->
+                    <article class="brutal-box flex flex-col group">
+                        <div class="h-64 overflow-hidden relative border-b-4 border-black bg-c_yellow">
+                            <img src="https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?q=80&w=800&auto=format&fit=crop" alt="Chilaquiles" class="comic-img transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/800x400/FFDE00/000?text=CHILAQUILES&font=Bangers'">
+                            <div class="absolute top-4 right-4 brutal-badge rotate-[-5deg] bg-c_blue">14,80€</div>
+                        </div>
+                        <div class="p-6 bg-white flex flex-col flex-grow">
+                            <h3 class="font-comic text-4xl mb-2 uppercase">Chilaquiles</h3>
+                            <p class="font-body font-bold text-gray-700 mb-4 flex-grow">Base de totopos, frijoles negros, soja, pimientos, maíz, crema agria, guacamole y jalapeños. ¡Fuego!</p>
+                            <div class="flex gap-2 mt-auto">
+                                <span class="allergen-sticker bg-[#4CAF50]">Soja</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Viñetas solo texto -->
+                    <article class="brutal-box p-6 bg-c_yellow">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Patatas Tex Mex</h3>
+                            <span class="font-comic text-2xl bg-white border-2 border-black px-2 shadow-[2px_2px_0_#000]">11,50€</span>
+                        </div>
+                        <p class="font-body font-bold text-black mb-3">Fuente de patatas gratinadas con queso, cebolla, pimiento verde y vacon.</p>
+                        <span class="allergen-sticker bg-[#4CAF50]">Soja</span>
+                    </article>
+                    
+                    <article class="brutal-box p-6 bg-c_green">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Pad Thai</h3>
+                            <span class="font-comic text-2xl bg-white border-2 border-black px-2 shadow-[2px_2px_0_#000]">14,40€</span>
+                        </div>
+                        <p class="font-body font-bold text-black mb-3">Fideos de arroz con salsa satay, verduritas salteadas y tofu.</p>
+                        <div class="flex gap-2"><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#9C27B0] text-white">F. Secos</span></div>
+                    </article>
+
+                    <article class="brutal-box p-6 bg-white">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Gyozas</h3>
+                            <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2 shadow-[2px_2px_0_#000]">12,60€</span>
+                        </div>
+                        <p class="font-body font-bold text-black mb-3">Empanadillas japonesas de verduras, salsa agridulce, crema de soja y mostaza.</p>
+                        <div class="flex gap-2 flex-wrap"><span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#FFC107]">Mostaza</span></div>
+                    </article>
+
+                    <article class="brutal-box p-6 bg-white">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase text-c_pink">Croquetas Mijo</h3>
+                            <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2 shadow-[2px_2px_0_#000]">11,50€</span>
+                        </div>
+                        <p class="font-body font-bold text-black mb-3">8 ud. semillas de mijo con calabaza asada y pimentón.</p>
+                        <div class="flex gap-2"><span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span></div>
+                    </article>
+
+                    <article class="brutal-box p-6 bg-c_blue">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Sticky's</h3>
+                            <span class="font-comic text-2xl bg-white border-2 border-black px-2 shadow-[2px_2px_0_#000]">14,60€</span>
+                        </div>
+                        <p class="font-body font-bold text-black mb-3">Costillas de seitán en salsa teriyaki, con boniato.</p>
+                        <div class="flex gap-2"><span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#F44336] text-white">Sésamo</span></div>
+                    </article>
+
+                    <article class="brutal-box p-6 bg-white">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Lentacos</h3>
+                            <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2 shadow-[2px_2px_0_#000]">14,60€</span>
+                        </div>
+                        <p class="font-body font-bold text-black mb-3">Tres tacos de maíz con guiso de lentejas enchiladas, pico de gallo y aguacate.</p>
+                        <div class="flex gap-2"><span class="allergen-sticker bg-[#4CAF50]">Soja</span></div>
+                    </article>
+
+                    <!-- Resumen rápido de otros -->
+                    <article class="brutal-box p-6 bg-black text-white xl:col-span-3">
+                        <h3 class="font-comic text-4xl uppercase text-c_yellow mb-4">¡TAMBIÉN TENEMOS!</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div><strong class="font-body text-xl">Paté de Alubias Blancas (12,30€)</strong><br><span class="text-gray-300">Con queso feta, zanahoria y totopos.</span></div>
+                            <div><strong class="font-body text-xl">Costillas de Maíz (11,90€)</strong><br><span class="text-gray-300">Maíz asado en tiras con salsas.</span></div>
+                            <div><strong class="font-body text-xl">Onion Bhaji (12,50€)</strong><br><span class="text-gray-300">Buñuelos hindúes de cebolla.</span></div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- HAMBURGUESAS -->
+            <section class="mb-24 relative p-8 md:p-12 border-8 border-black bg-c_pink mt-32">
+                <!-- Efecto visual roto / offset -->
+                <div class="absolute -top-6 -left-6 w-full h-full border-8 border-black bg-c_yellow -z-10"></div>
+
+                <div class="text-center mb-12">
+                    <h2 class="font-comic text-6xl md:text-8xl text-white -webkit-text-stroke: 3px #000 text-shadow-[8px_8px_0_#000] rotate-[-2deg] tracking-wider">HAMBURGUESAS</h2>
+                    <p class="font-body font-black text-2xl bg-white border-4 border-black inline-block px-6 py-2 mt-4 shadow-[4px_4px_0_#000]">¡Todas incluyen patatas!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Mac Fly -->
+                    <article class="brutal-box flex flex-col group bg-white">
+                        <div class="h-64 overflow-hidden border-b-4 border-black relative">
+                             <img src="https://images.unsplash.com/photo-1550547660-d154287c244b?q=80&w=800&auto=format&fit=crop" class="comic-img w-full h-full object-cover" alt="Mac Fly" onerror="this.src='https://placehold.co/800x400/00E5FF/000?text=MAC+FLY+BURGER&font=Bangers'">
+                             <!-- Pegatina Explosiva para precio -->
+                             <div class="absolute top-4 right-4 bg-c_yellow border-4 border-black w-24 h-24 rounded-full flex items-center justify-center font-comic text-3xl shadow-[4px_4px_0_#000] rotate-[15deg]">15,50€</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-comic text-5xl uppercase mb-3 text-c_blue text-shadow-[3px_3px_0_#000] -webkit-text-stroke: 1px #000">Mac Fly & Vacon</h3>
+                            <p class="font-body font-bold text-xl mb-4">Filete de Heura con tomate, pepinillos, lechuga, cebolla y vacon, salsa rosa especiada y mostaza.</p>
+                            <div class="flex flex-wrap gap-2 items-center">
+                                <span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#FFC107]">Mostaza</span>
+                                <span class="allergen-sticker bg-black text-c_yellow text-lg ml-auto px-3 border-c_yellow">💥 OPCIÓN GF</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Huella -->
+                    <article class="brutal-box flex flex-col group bg-white">
+                        <div class="h-64 overflow-hidden border-b-4 border-black relative">
+                             <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?q=80&w=800&auto=format&fit=crop" class="comic-img w-full h-full object-cover" alt="Huella" onerror="this.src='https://placehold.co/800x400/00FF66/000?text=HUELLA+BURGER&font=Bangers'">
+                             <div class="absolute top-4 right-4 bg-c_yellow border-4 border-black w-24 h-24 rounded-full flex items-center justify-center font-comic text-3xl shadow-[4px_4px_0_#000] rotate-[-10deg]">14,90€</div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-comic text-5xl uppercase mb-3 text-c_green text-shadow-[3px_3px_0_#000] -webkit-text-stroke: 1px #000">La Huella</h3>
+                            <p class="font-body font-bold text-xl mb-4">Filete de avena, tomate, lechuga pepinillos, cebolla caramelizada, cheddar y salsa Huella.</p>
+                            <div class="flex flex-wrap gap-2 items-center">
+                                <span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#FFC107]">Mostaza</span>
+                                <span class="allergen-sticker bg-black text-c_yellow text-lg ml-auto px-3 border-c_yellow">💥 OPCIÓN GF</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Formato Compacto -->
+                    <article class="brutal-box p-6 bg-c_blue lg:col-span-2 grid md:grid-cols-2 gap-8 items-center border-t-8 border-black">
+                        <div class="bg-white border-4 border-black p-4 shadow-[4px_4px_0_#000] rotate-[-1deg]">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-comic text-4xl uppercase">Pancho Villa</h3>
+                                <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2">14,90€</span>
+                            </div>
+                            <p class="font-body font-bold text-black mb-3">Filete de alubia roja y arroz, guacamole, crema agria, pico de gallo, jalapeños y cheddar.</p>
+                            <div class="flex gap-2"><span class="allergen-sticker bg-[#4CAF50]">Soja</span> <span class="allergen-sticker bg-black text-white">💥 GF</span></div>
+                        </div>
+
+                        <div class="bg-white border-4 border-black p-4 shadow-[4px_4px_0_#000] rotate-[1deg]">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-comic text-4xl uppercase">Happy Chicken</h3>
+                                <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2">15,50€</span>
+                            </div>
+                            <p class="font-body font-bold text-black mb-3">No pollo crujiente, Coleeslaw (col, manzana, zanahoria, mostaza dulce), tomate, lechuga y cheddar.</p>
+                            <div class="flex gap-2"><span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#FFC107]">Mostaza</span></div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- MIXTO -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
+                
+                <!-- SÁNDWICHES -->
+                <section>
+                    <h2 class="section-title bg-c_blue px-6 border-4 border-black rotate-[2deg]">Sándwiches & Co.</h2>
+                    <div class="flex flex-col gap-6">
+                        
+                        <div class="brutal-box bg-white p-5 flex justify-between items-center">
+                            <div>
+                                <h3 class="font-comic text-3xl uppercase">Qué Vap <span class="allergen-sticker bg-[#FF9800] ml-2">Gluten</span> <span class="allergen-sticker bg-[#4CAF50]">Soja</span></h3>
+                                <p class="font-body font-bold mt-1">Durum de seitán, ensalada, salsa yogur soja, hierbabuena.</p>
+                            </div>
+                            <div class="font-comic text-3xl bg-c_yellow border-2 border-black px-3 py-1 shadow-[3px_3px_0_#000]">13,90€</div>
+                        </div>
+
+                        <div class="brutal-box bg-white p-5 flex justify-between items-center">
+                            <div>
+                                <h3 class="font-comic text-3xl uppercase text-c_pink">Portobello <span class="allergen-sticker bg-black text-c_yellow ml-2">💥 GF OPC.</span></h3>
+                                <p class="font-body font-bold mt-1">Portobello, guacamole, tomate, mozzarella en focaccia.</p>
+                            </div>
+                            <div class="font-comic text-3xl bg-c_yellow border-2 border-black px-3 py-1 shadow-[3px_3px_0_#000]">13,90€</div>
+                        </div>
+
+                        <div class="brutal-box bg-white p-5 flex justify-between items-center">
+                            <div>
+                                <h3 class="font-comic text-3xl uppercase">Terranova <span class="allergen-sticker bg-black text-c_yellow ml-2">💥 GF OPC.</span></h3>
+                                <p class="font-body font-bold mt-1">Berenjenas, tomates secos, espinacas, mozzarella, pesto.</p>
+                            </div>
+                            <div class="font-comic text-3xl bg-c_yellow border-2 border-black px-3 py-1 shadow-[3px_3px_0_#000]">13,90€</div>
+                        </div>
+
+                        <div class="brutal-box bg-white p-5 flex justify-between items-center">
+                            <div>
+                                <h3 class="font-comic text-3xl uppercase">El Lattrey</h3>
+                                <p class="font-body font-bold mt-1">Brioche de pulled (salsa cerveza negra), pepino, veganesa kimchi.</p>
+                            </div>
+                            <div class="font-comic text-3xl bg-c_yellow border-2 border-black px-3 py-1 shadow-[3px_3px_0_#000]">14,20€</div>
+                        </div>
+
+                        <div class="brutal-box bg-black text-white p-5">
+                            <h3 class="font-comic text-3xl uppercase text-c_green border-b-2 border-white pb-2 mb-2">¡Y OTROS ÉPICOS A 14,50€!</h3>
+                            <ul class="font-body font-bold space-y-2">
+                                <li>👉 <strong class="text-c_yellow">BURRITO BBQ:</strong> Soja en salsa BBQ, lombarda y guacamole.</li>
+                                <li>👉 <strong class="text-c_yellow">PATO RAMÍREZ:</strong> Baos Pulled Duck pibil y cebolla encurtida.</li>
+                                <li>👉 <strong class="text-c_yellow">AREPAS ANDRESINAS:</strong> Arepas, heura mechada y cilantro fresco.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ENSALADAS -->
+                <section>
+                    <h2 class="section-title bg-c_green px-6 border-4 border-black rotate-[-2deg]">Ensaladas Verdes</h2>
+                    
+                    <div class="brutal-box bg-white p-6 mb-8 group overflow-hidden relative">
+                        <div class="absolute -right-10 -bottom-10 bg-c_pink w-32 h-32 rounded-full border-4 border-black opacity-20 group-hover:scale-150 transition-transform"></div>
+                        <div class="relative z-10 flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-4xl uppercase">Poke, en plan... Poke</h3>
+                            <span class="font-comic text-3xl bg-c_yellow border-2 border-black px-2 shadow-[2px_2px_0_#000]">13,90€</span>
+                        </div>
+                        <p class="font-body font-black text-xl mb-3 relative z-10">Quinoa, mango, anacardos, lombarda, guakame, edamame y tofu. (Lima y AOVE).</p>
+                        <div class="flex gap-2 relative z-10"><span class="allergen-sticker bg-[#4CAF50]">Soja</span><span class="allergen-sticker bg-[#9C27B0] text-white">F. Secos</span><span class="allergen-sticker bg-[#F44336] text-white">Sésamo</span></div>
+                    </div>
+
+                    <div class="brutal-box bg-white p-6 mb-8">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Ceviche de Mango</h3>
+                            <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2 shadow-[2px_2px_0_#000]">13,60€</span>
+                        </div>
+                        <p class="font-body font-bold text-lg mb-3">Base de tofu, mango, pimientos, cebolla morada, cilantro y toque picante.</p>
+                        <span class="allergen-sticker bg-[#4CAF50]">Soja</span>
+                    </div>
+
+                    <div class="brutal-box bg-white p-6">
+                        <div class="flex justify-between items-start mb-2 border-b-4 border-black pb-2">
+                            <h3 class="font-comic text-3xl uppercase">Vietnam</h3>
+                            <span class="font-comic text-2xl bg-c_yellow border-2 border-black px-2 shadow-[2px_2px_0_#000]">13,60€</span>
+                        </div>
+                        <p class="font-body font-bold text-lg mb-3">Arroz, piñones, pasas, tomates, pepino, shitake y trigueros, con paté de anacardos.</p>
+                        <span class="allergen-sticker bg-[#9C27B0] text-white">F. Secos</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- POSTRES -->
+            <section class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="font-comic text-7xl uppercase bg-white border-4 border-black inline-block px-8 py-2 shadow-[8px_8px_0_#000]">POSTRES (FINISH HIM!)</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Destacado -->
+                    <article class="brutal-box bg-c_yellow border-4 border-black lg:col-span-2 grid md:grid-cols-2 p-0 overflow-hidden">
+                         <div class="h-48 md:h-full border-b-4 md:border-b-0 md:border-r-4 border-black relative bg-c_pink">
+                             <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=600&auto=format&fit=crop" class="comic-img w-full h-full object-cover" alt="Brownie" onerror="this.src='https://placehold.co/600x400/FF007F/000?text=BROWNIE+SOUL&font=Bangers'">
+                         </div>
+                         <div class="p-8 flex flex-col justify-center bg-white">
+                             <div class="flex justify-between items-center mb-4">
+                                 <h3 class="font-comic text-5xl uppercase">Brownie Soul</h3>
+                                 <span class="font-comic text-3xl bg-c_blue border-4 border-black px-3 py-1 shadow-[4px_4px_0_#000] rotate-[5deg]">8,50€</span>
+                             </div>
+                             <p class="font-body font-bold text-xl mb-4">Acompañado de 2 bolas de helado de cacahuete, chispas choco y granola.</p>
+                             <div class="flex flex-wrap gap-2 mt-auto">
+                                 <span class="allergen-sticker bg-[#FF9800]">Gluten</span><span class="allergen-sticker bg-[#9C27B0] text-white">F. Secos</span><span class="allergen-sticker bg-[#4CAF50]">Soja</span>
+                             </div>
+                         </div>
+                    </article>
+
+                    <!-- Lista rápida de postres -->
+                    <div class="flex flex-col gap-6">
+                        <div class="brutal-box bg-white p-4">
+                            <div class="flex justify-between items-center border-b-2 border-black pb-1 mb-2">
+                                <h3 class="font-comic text-2xl uppercase">Sweet Jarama</h3><span class="font-comic text-xl">7,90€</span>
+                            </div>
+                            <p class="font-body font-bold text-sm">Tarta premiada con helado avellanas.</p>
+                        </div>
+                        <div class="brutal-box bg-white p-4">
+                            <div class="flex justify-between items-center border-b-2 border-black pb-1 mb-2">
+                                <h3 class="font-comic text-2xl uppercase">Tarta Zanahoria</h3><span class="font-comic text-xl">6,70€</span>
+                            </div>
+                            <p class="font-body font-bold text-sm">Caramelo, almendra y nata.</p>
+                        </div>
+                        <div class="brutal-box bg-white p-4">
+                            <div class="flex justify-between items-center border-b-2 border-black pb-1 mb-2">
+                                <h3 class="font-comic text-2xl uppercase text-c_blue">Goloso en Llamas <span class="bg-black text-c_yellow text-xs px-1 rotate-[-5deg] inline-block">GF</span></h3><span class="font-comic text-xl">8,20€</span>
+                            </div>
+                            <p class="font-body font-bold text-sm">Tulipa, helado doble chocolate, nata.</p>
+                        </div>
+                        <div class="brutal-box bg-black text-white p-4">
+                            <h3 class="font-comic text-2xl uppercase text-c_green">Varadero (7,90€)</h3>
+                            <h3 class="font-comic text-2xl uppercase text-c_pink mt-2">Gin Cheesecake (6,50€)</h3>
+                            <h3 class="font-comic text-2xl uppercase text-c_yellow mt-2">Vegan Trillionaires (6,50€)</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER / MENÚ INFANTIL -->
+        <footer class="bg-c_orange border-t-8 border-black p-8 md:p-12 text-center relative overflow-hidden">
+            <!-- Trama de fondo amarillo -->
+            <div class="absolute inset-0 bg-c_yellow bg-pattern-dots opacity-30 pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <div class="brutal-box bg-white border-8 border-black p-8 md:p-12 rotate-[-1deg]">
+                    <h2 class="font-comic text-5xl md:text-7xl uppercase text-c_pink text-shadow-[4px_4px_0_#000] -webkit-text-stroke: 2px #000 mb-4">MENÚ INFANTIL (11,90€)</h2>
+                    <p class="font-body font-black text-2xl md:text-3xl">3 Croquetas Mijo, 4 Nuggets, Patatas fritas (ketchup) y <span class="text-c_blue underline decoration-8">POSTRE GF</span>.</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6 mt-12 font-comic text-3xl uppercase bg-black text-white p-6 border-4 border-white shadow-[8px_8px_0_#000] rotate-[1deg]">
+                    <span>🍞 PAN: 1,50€</span>
+                    <span class="hidden md:inline text-c_green">|</span>
+                    <span>🍠 BONIATO: 1,75€</span>
+                    <span class="hidden md:inline text-c_green">|</span>
+                    <span>✨ EXTRA: 1,50€</span>
+                </div>
+            </div>
+            
+            <p class="mt-16 font-body font-bold text-black relative z-10 bg-white inline-block px-4 border-2 border-black">© 2026 LA HUELLA VEGANA. DISEÑO DE CÓMIC NEO-BRUTALISTA.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
